@@ -51,13 +51,13 @@
   font-size: clamp(2rem, 3.5vw, 3.25rem);
   font-weight: 300;
   line-height: 1.15;
-  color: var(--color-charcoal);
+  color: var(--color-black);
   letter-spacing: -0.01em;
 }
 
 .heading em {
   font-style: italic;
-  color: var(--color-lavender-mid);
+  color: var(--color-orange-mid);
 }
 
 .intro {
@@ -87,7 +87,7 @@
   font-family: var(--font-serif);
   font-size: var(--text-xl);
   font-weight: 300;
-  color: var(--color-lavender-mid);
+  color: var(--color-orange-mid);
   flex-shrink: 0;
   line-height: 1;
   margin-top: 2px;
@@ -98,7 +98,7 @@
   font-size: var(--text-sm);
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: var(--color-charcoal);
+  color: var(--color-black);
   text-transform: uppercase;
   margin-bottom: 4px;
 }

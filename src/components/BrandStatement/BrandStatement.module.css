@@ -24,7 +24,7 @@
   font-size: clamp(2.25rem, 5vw, 4.5rem);
   font-weight: 300;
   line-height: 1.15;
-  color: var(--color-charcoal);
+  color: var(--color-black);
   letter-spacing: -0.01em;
   max-width: 900px;
   position: relative;
@@ -35,12 +35,12 @@
 
 .quote em {
   font-style: italic;
-  color: var(--color-lavender-mid);
+  color: var(--color-orange-mid);
 }
 
 .quoteMark {
   font-size: 1.2em;
-  color: var(--color-lavender-light);
+  color: var(--color-orange-light);
   line-height: 0;
   vertical-align: -0.2em;
   user-select: none;
@@ -57,7 +57,7 @@
 .divLine {
   width: 60px;
   height: 1px;
-  background: var(--color-lavender-mid);
+  background: var(--color-orange-mid);
 }
 
 .body {

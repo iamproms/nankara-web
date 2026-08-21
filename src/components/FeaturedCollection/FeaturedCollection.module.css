@@ -22,13 +22,13 @@
   font-size: clamp(2rem, 3.5vw, 3.5rem);
   font-weight: 300;
   line-height: 1.15;
-  color: var(--color-charcoal);
+  color: var(--color-black);
   letter-spacing: -0.01em;
 }
 
 .heading em {
   font-style: italic;
-  color: var(--color-lavender-mid);
+  color: var(--color-orange-mid);
 }
 
 /* Grid */
@@ -109,7 +109,7 @@
   font-size: var(--text-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-orange);
   margin-bottom: 6px;
 }
 

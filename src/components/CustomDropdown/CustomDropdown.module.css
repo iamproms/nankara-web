@@ -30,7 +30,7 @@
 }
 
 .arrow {
-  color: var(--color-lavender-mid);
+  color: var(--color-orange-mid);
   transition: transform var(--duration-fast) ease;
   display: flex;
   align-items: center;
@@ -62,7 +62,7 @@
   padding: var(--space-xs) var(--space-sm);
   font-family: var(--font-sans);
   font-size: var(--text-sm);
-  color: var(--color-charcoal);
+  color: var(--color-black);
   cursor: pointer;
   transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
 }
@@ -72,8 +72,8 @@
 }
 
 .selected {
-  background: var(--color-lavender-light);
-  color: var(--color-charcoal);
+  background: var(--color-orange-light);
+  color: var(--color-black);
   font-weight: 500;
 }
 

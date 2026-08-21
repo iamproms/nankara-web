@@ -45,7 +45,7 @@
   font-size: var(--text-xl);
   font-weight: 400;
   letter-spacing: 0.06em;
-  color: var(--color-charcoal);
+  color: var(--color-black);
   white-space: nowrap;
 }
 
@@ -66,7 +66,7 @@
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-charcoal);
+  color: var(--color-black);
   text-decoration: none;
   position: relative;
   padding-bottom: 2px;
@@ -80,7 +80,7 @@
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--color-charcoal);
+  background: var(--color-black);
   transition: width var(--duration-base) var(--ease-out);
 }
 
@@ -105,16 +105,16 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-white);
-  background: var(--color-charcoal);
+  background: var(--color-black);
   padding: 0.5rem 1.25rem;
   text-decoration: none;
   transition: all var(--duration-fast) ease;
-  border: 1px solid var(--color-charcoal);
+  border: 1px solid var(--color-black);
 }
 
 .navLinkStore:hover {
   background: transparent;
-  color: var(--color-charcoal);
+  color: var(--color-black);
 }
 
 .transparent .navLinkStore {
@@ -125,7 +125,7 @@
 
 .transparent .navLinkStore:hover {
   background: var(--color-white);
-  color: var(--color-charcoal);
+  color: var(--color-black);
   border-color: var(--color-white);
 }
 
@@ -144,7 +144,7 @@
   display: block;
   width: 24px;
   height: 1.5px;
-  background: var(--color-charcoal);
+  background: var(--color-black);
   transition: all var(--duration-base) var(--ease-out);
   transform-origin: center;
 }
@@ -191,18 +191,18 @@
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-charcoal);
+  color: var(--color-black);
   text-decoration: none;
   padding-bottom: var(--space-sm);
   border-bottom: 1px solid var(--color-gray-muted);
   transition: color var(--duration-fast) ease;
 }
 
-.mobileNavLink:hover { color: var(--color-lavender-mid); }
+.mobileNavLink:hover { color: var(--color-orange-mid); }
 
 .mobileNavLinkStore {
-  color: var(--color-lavender-mid);
-  border-color: var(--color-lavender-light);
+  color: var(--color-orange-mid);
+  border-color: var(--color-orange-light);
 }
 
 /* Responsive */

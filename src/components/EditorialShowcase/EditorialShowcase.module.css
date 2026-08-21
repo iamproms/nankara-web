@@ -19,12 +19,12 @@
   font-size: clamp(2.5rem, 4vw, 4rem);
   font-weight: 300;
   line-height: 1.1;
-  color: var(--color-charcoal);
+  color: var(--color-black);
 }
 
 .heading em {
   font-style: italic;
-  color: var(--color-lavender-mid);
+  color: var(--color-orange-mid);
 }
 
 /* Grid */

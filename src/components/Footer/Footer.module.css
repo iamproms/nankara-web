@@ -1,5 +1,5 @@
 .footer {
-  background: var(--color-charcoal);
+  background: var(--color-black);
   color: var(--color-white);
   padding: var(--space-3xl) 0 var(--space-xl);
 }
@@ -54,8 +54,8 @@
 }
 
 .socialLink:hover {
-  border-color: var(--color-lavender);
-  color: var(--color-lavender);
+  border-color: var(--color-orange);
+  color: var(--color-orange);
   transform: translateY(-2px);
 }
 
@@ -78,7 +78,7 @@
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-orange);
   margin-bottom: var(--space-sm);
 }
 

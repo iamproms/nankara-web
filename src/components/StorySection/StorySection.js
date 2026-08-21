@@ -26,7 +26,7 @@ export default function StorySection() {
           <p className={styles.body}>
             So we built a brand for her. For the woman who is multidimensional, ambitious, tender, fierce, and elegantly complex. Each collection is a conversation with that woman — asking not what is trending, but what is true.
           </p>
-          <Link href="/about" className="btn btn-lavender" id="story-learn-more">
+          <Link href="/about" className="btn btn-orange" id="story-learn-more">
             Our Full Story
           </Link>
         </div>

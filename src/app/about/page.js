@@ -92,7 +92,7 @@ export default function AboutPage() {
                 I didn&apos;t want to choose. I wanted garments that held the same complexity as the women wearing them. So, I built a brand that doesn&apos;t just make clothes, but crafts armor for the modern woman.
               </p>
               <div style={{ marginTop: 'var(--space-md)' }}>
-                <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--color-charcoal)' }}>
+                <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--color-black)' }}>
                   <em>— Nankara</em>
                 </p>
               </div>
@@ -151,7 +151,7 @@ export default function AboutPage() {
             <div className={styles.valuesGrid}>
               {values.map((v, i) => (
                 <div key={i} className={styles.valueCard} style={{ color: 'var(--color-white)' }}>
-                  <div className={styles.valueLine} style={{ background: 'var(--color-lavender-mid)' }} />
+                  <div className={styles.valueLine} style={{ background: 'var(--color-orange-mid)' }} />
                   <h3 className={styles.valueTitle}>{v.title}</h3>
                   <p className={styles.valueBody}>{v.body}</p>
                 </div>
@@ -187,7 +187,7 @@ export default function AboutPage() {
         </section>
 
         {/* Future Direction */}
-        <section className={`${styles.section} ${styles.sectionLavender}`} id="future">
+        <section className={`${styles.section} ${styles.sectionOrange}`} id="future">
           <div className={`${styles.inner} ${styles.innerNarrow} ${styles.textCenter}`}>
             <p className={`section-label ${styles.labelCenter}`}>Looking Forward</p>
             <h2 className={styles.sectionHeading}>
@@ -199,7 +199,7 @@ export default function AboutPage() {
             </p>
             <div className={styles.futureCtas}>
               <Link href="/store" className="btn btn-dark" id="about-shop-now">Shop the Current Collection</Link>
-              <Link href="/contact" className="btn btn-lavender" id="about-get-in-touch">Get in Touch</Link>
+              <Link href="/contact" className="btn btn-orange" id="about-get-in-touch">Get in Touch</Link>
             </div>
           </div>
         </section>

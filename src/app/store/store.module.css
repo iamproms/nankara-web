@@ -41,7 +41,7 @@
   font-size: var(--text-xs);
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--color-lavender);
+  color: var(--color-orange);
 }
 
 .heading {
@@ -55,13 +55,13 @@
 
 .heading em {
   font-style: italic;
-  color: var(--color-lavender-light);
+  color: var(--color-orange-light);
 }
 
 .divider {
   width: 48px;
   height: 1px;
-  background: var(--color-lavender-mid);
+  background: var(--color-orange-mid);
 }
 
 .body {
@@ -78,7 +78,7 @@
   font-size: var(--text-sm);
   font-weight: 400;
   letter-spacing: 0.08em;
-  color: var(--color-lavender);
+  color: var(--color-orange);
   text-transform: uppercase;
 }
 
@@ -115,7 +115,7 @@
   letter-spacing: 0.2em;
   text-transform: uppercase;
   background: var(--color-white);
-  color: var(--color-charcoal);
+  color: var(--color-black);
   border: none;
   cursor: pointer;
   white-space: nowrap;
@@ -124,7 +124,7 @@
 }
 
 .notifyBtn:hover {
-  background: var(--color-lavender-light);
+  background: var(--color-orange-light);
 }
 
 .backLink {

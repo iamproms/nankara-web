@@ -69,19 +69,19 @@ export default function ContactPage() {
             {/* Info column */}
             <div className={styles.infoCol}>
               <div className={styles.infoBlock}>
-                <p className="section-label" style={{ color: 'var(--color-lavender)' }}>Email</p>
+                <p className="section-label" style={{ color: 'var(--color-orange)' }}>Email</p>
                 <a href="mailto:hello@nankara.com" className={styles.infoLink} id="contact-email-link">
                   hello@nankara.com
                 </a>
               </div>
               <div className={styles.infoBlock}>
-                <p className="section-label" style={{ color: 'var(--color-lavender)' }}>Business Inquiries</p>
+                <p className="section-label" style={{ color: 'var(--color-orange)' }}>Business Inquiries</p>
                 <a href="mailto:partnerships@nankara.com" className={styles.infoLink} id="contact-biz-link">
                   partnerships@nankara.com
                 </a>
               </div>
               <div className={styles.infoBlock}>
-                <p className="section-label" style={{ color: 'var(--color-lavender)' }}>Follow Us</p>
+                <p className="section-label" style={{ color: 'var(--color-orange)' }}>Follow Us</p>
                 <div className={styles.socialLinks}>
                   <a href="https://www.instagram.com/nankara" target="_blank" rel="noopener noreferrer" className={styles.socialLink} id="contact-instagram">Instagram</a>
                   <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink} id="contact-pinterest">Pinterest</a>
@@ -89,7 +89,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className={styles.infoBlock}>
-                <p className="section-label" style={{ color: 'var(--color-lavender)' }}>Response Time</p>
+                <p className="section-label" style={{ color: 'var(--color-orange)' }}>Response Time</p>
                 <p className={styles.infoText}>As a private client, you will receive a response from our concierge team within 24 hours. For urgent styling needs, email us directly.</p>
               </div>
             </div>

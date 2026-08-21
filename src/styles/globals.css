@@ -6,17 +6,17 @@
 
 /* ── CSS Custom Properties ── */
 :root {
-  /* Palette */
-  --color-white:       #F5F1E7;
-  --color-off-white:   #EAE5DA;
-  --color-lavender:    #9B8EC4;
-  --color-lavender-light: #EBE6F5;
-  --color-lavender-mid: #685785;
-  --color-charcoal:    #2A1F30;     /* Deep eggplant purple replacing stark black */
-  --color-charcoal-soft: #3D2D45;
-  --color-gray:        #787082;     /* Purple-tinted gray */
-  --color-gray-light:  #C4BCCF;
-  --color-gray-muted:  #E8E3EE;
+  /* Palette — Primary: Black & White. Secondary: Orange. */
+  --color-white:       #FFFFFF;
+  --color-off-white:   #F2F2F2;
+  --color-orange:      #E8590C;
+  --color-orange-light: #FBE3D0;
+  --color-orange-mid:  #B8460A;
+  --color-black:       #0F0F0F;
+  --color-black-soft:  #242424;
+  --color-gray:        #6B6B6B;
+  --color-gray-light:  #C9C9C9;
+  --color-gray-muted:  #EAEAEA;
 
   /* Typography scale */
   --font-serif:  'Cormorant Garamond', Georgia, serif;
@@ -73,7 +73,7 @@ html {
 body {
   font-family: var(--font-sans);
   font-size: var(--text-base);
-  color: var(--color-charcoal);
+  color: var(--color-black);
   background: var(--color-white);
   line-height: 1.7;
   overflow-x: hidden;
@@ -142,14 +142,14 @@ input, textarea, select {
 
 /* ── Color Utilities ── */
 .text-white    { color: var(--color-white); }
-.text-charcoal { color: var(--color-charcoal); }
+.text-black { color: var(--color-black); }
 .text-gray     { color: var(--color-gray); }
-.text-lavender { color: var(--color-lavender-mid); }
+.text-orange { color: var(--color-orange-mid); }
 
 .bg-white     { background: var(--color-white); }
 .bg-off-white { background: var(--color-off-white); }
-.bg-charcoal  { background: var(--color-charcoal); }
-.bg-lavender  { background: var(--color-lavender-light); }
+.bg-black  { background: var(--color-black); }
+.bg-orange  { background: var(--color-orange-light); }
 
 /* ── Layout Utilities ── */
 .container {
@@ -205,7 +205,7 @@ input, textarea, select {
   font-weight: 500;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--color-lavender-mid);
+  color: var(--color-orange-mid);
   margin-bottom: var(--space-md);
 }
 
@@ -226,7 +226,7 @@ input, textarea, select {
 
 .btn-light {
   background: var(--color-white);
-  color: var(--color-charcoal);
+  color: var(--color-black);
   border: 1px solid var(--color-white);
 }
 .btn-light:hover {
@@ -241,27 +241,27 @@ input, textarea, select {
 }
 .btn-outline:hover {
   background: var(--color-white);
-  color: var(--color-charcoal);
+  color: var(--color-black);
   border-color: var(--color-white);
 }
 
 .btn-dark {
-  background: var(--color-charcoal);
+  background: var(--color-black);
   color: var(--color-white);
-  border: 1px solid var(--color-charcoal);
+  border: 1px solid var(--color-black);
 }
 .btn-dark:hover {
   background: transparent;
-  color: var(--color-charcoal);
+  color: var(--color-black);
 }
 
-.btn-lavender {
+.btn-orange {
   background: transparent;
-  color: var(--color-charcoal);
-  border: 1px solid var(--color-lavender-mid);
+  color: var(--color-black);
+  border: 1px solid var(--color-orange-mid);
 }
-.btn-lavender:hover {
-  background: var(--color-lavender-mid);
+.btn-orange:hover {
+  background: var(--color-orange-mid);
   color: var(--color-white);
 }
 
@@ -269,7 +269,7 @@ input, textarea, select {
 .divider {
   width: 48px;
   height: 1px;
-  background: var(--color-lavender-mid);
+  background: var(--color-orange-mid);
   margin: var(--space-md) 0;
 }
 

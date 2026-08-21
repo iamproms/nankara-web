@@ -1,5 +1,5 @@
 .section {
-  background: var(--color-charcoal);
+  background: var(--color-black);
   padding: var(--space-4xl) 0;
   position: relative;
   overflow: hidden;
@@ -48,7 +48,7 @@
 
 .heading em {
   font-style: italic;
-  color: var(--color-lavender);
+  color: var(--color-orange);
 }
 
 .subtitle {
@@ -76,12 +76,12 @@
 }
 
 .pillar:hover {
-  border-color: var(--color-lavender-mid);
+  border-color: var(--color-orange-mid);
 }
 
 .icon {
   font-size: var(--text-xl);
-  color: var(--color-lavender);
+  color: var(--color-orange);
   line-height: 1;
 }
 
