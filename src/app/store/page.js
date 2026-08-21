@@ -18,7 +18,7 @@ export default function StorePage() {
         <div className={styles.bg}>
           <Image
             src="/images/2f6c4df545a18059affea02ef38815da.jpg"
-            alt="Clothie Dynasty collection — coming soon"
+            alt="Nankara collection — coming soon"
             fill
             sizes="100vw"
             style={{ objectFit: 'cover', objectPosition: 'center top' }}

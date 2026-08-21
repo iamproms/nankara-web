@@ -6,8 +6,8 @@ import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import styles from './about.module.css';
 
 export const metadata = {
-  title: 'About — Clothie Dynasty',
-  description: 'The story, mission, and values behind Clothie Dynasty — a luxury women\'s fashion brand built for women who lead with confidence.',
+  title: 'About — Nankara',
+  description: 'The story, mission, and values behind Nankara — a luxury women\'s fashion brand built for women who lead with confidence.',
 };
 
 const values = [
@@ -28,7 +28,7 @@ export default function AboutPage() {
           <div className={styles.heroImage}>
             <Image
               src="/images/277007a13070b1691976e3ff5a2d8f62.jpg"
-              alt="Clothie Dynasty — About the brand"
+              alt="Nankara — About the brand"
               fill
               sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
@@ -37,7 +37,7 @@ export default function AboutPage() {
             <div className={styles.heroOverlay} />
           </div>
           <div className={styles.heroContent}>
-            <p className={styles.heroLabel}>About Clothie Dynasty</p>
+            <p className={styles.heroLabel}>About Nankara</p>
             <h1 className={styles.heroHeading}>
               A brand built on<br />
               the truth that<br />
@@ -71,7 +71,7 @@ export default function AboutPage() {
               remembers as their own.
             </h2>
             <p className={`${styles.body} ${styles.bodyLight}`}>
-              We are building toward a future where Clothie Dynasty is not simply a brand women wear — it is a brand women belong to. Where our name is spoken in the same breath as legacy. Where the women who wore us first say: &quot;We knew before the world did.&quot;
+              We are building toward a future where Nankara is not simply a brand women wear — it is a brand women belong to. Where our name is spoken in the same breath as legacy. Where the women who wore us first say: &quot;We knew before the world did.&quot;
             </p>
           </div>
         </section>
@@ -86,14 +86,14 @@ export default function AboutPage() {
                 <em>refuse to compromise.</em>
               </h2>
               <p className={`${styles.body} ${styles.dropCap}`}>
-                Clothie Dynasty was born from a personal frustration. As a woman navigating both corporate boardrooms and creative spaces, I found that the fashion industry often asked me to choose between elegance and power, between femininity and authority.
+                Nankara was born from a personal frustration. As a woman navigating both corporate boardrooms and creative spaces, I found that the fashion industry often asked me to choose between elegance and power, between femininity and authority.
               </p>
               <p className={styles.body}>
                 I didn&apos;t want to choose. I wanted garments that held the same complexity as the women wearing them. So, I built a brand that doesn&apos;t just make clothes, but crafts armor for the modern woman.
               </p>
               <div style={{ marginTop: 'var(--space-md)' }}>
                 <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--color-charcoal)' }}>
-                  <em>— Clothie Dynasty</em>
+                  <em>— Nankara</em>
                 </p>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function AboutPage() {
               <div className={styles.founderImage}>
                 <Image
                   src="/images/4a207cc720306c5746f18995287a3e6a.jpg"
-                  alt="Clothie Dynasty Founder"
+                  alt="Nankara Founder"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
@@ -130,7 +130,7 @@ export default function AboutPage() {
               and for the lifetime.
             </h2>
             <p className={`${styles.body} ${styles.dropCap}`}>
-              Every Clothie Dynasty piece is designed to exist beyond its season. We resist the tyranny of the trend cycle and instead ask: will this garment feel important five years from now? Will the woman who wears it remember how it made her feel? If the answer is yes — we make it.
+              Every Nankara piece is designed to exist beyond its season. We resist the tyranny of the trend cycle and instead ask: will this garment feel important five years from now? Will the woman who wears it remember how it made her feel? If the answer is yes — we make it.
             </p>
             <p className={styles.body}>
               Our aesthetic is rooted in quiet luxury — the kind that does not announce itself but is unmistakably present. Clean lines, considered structure, and materials that reward closeness. We believe in restraint as a form of sophistication.
@@ -165,7 +165,7 @@ export default function AboutPage() {
           <div className={styles.craftImage}>
             <Image
               src="/images/35a04a2a5c90122f1754f2b1198c7d6f.jpg"
-              alt="Clothie Dynasty craftsmanship and material quality"
+              alt="Nankara craftsmanship and material quality"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
               style={{ objectFit: 'cover', objectPosition: 'center' }}
@@ -181,7 +181,7 @@ export default function AboutPage() {
               We partner with skilled artisans who share our values. Every seam is finished. Every lining is considered. Every button is chosen with intention. We believe the interior of a garment reveals the integrity of the brand that made it.
             </p>
             <p className={styles.body}>
-              Clothie Dynasty garments are built to last — not just physically, but emotionally. The kind of pieces that get passed down. That carry memory. That become part of the story.
+              Nankara garments are built to last — not just physically, but emotionally. The kind of pieces that get passed down. That carry memory. That become part of the story.
             </p>
           </div>
         </section>
@@ -195,7 +195,7 @@ export default function AboutPage() {
               <em>just beginning.</em>
             </h2>
             <p className={`${styles.body} ${styles.bodyCenter}`}>
-              We are expanding thoughtfully — new collections, new categories, and new ways to bring the Clothie Dynasty experience to more women around the world. But our core will never change: premium quality, emotional design, and a deep respect for the woman who chooses to wear us.
+              We are expanding thoughtfully — new collections, new categories, and new ways to bring the Nankara experience to more women around the world. But our core will never change: premium quality, emotional design, and a deep respect for the woman who chooses to wear us.
             </p>
             <div className={styles.futureCtas}>
               <Link href="/store" className="btn btn-dark" id="about-shop-now">Shop the Current Collection</Link>

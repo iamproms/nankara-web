@@ -18,7 +18,7 @@ export default function TheWomanWeDesignFor() {
       <div className={styles.photoSide}>
         <Image
           src="/images/ab113bab993dbd7c4ee2f40b9dfc9802.jpg"
-          alt="The Clothie Dynasty woman — confident, elegant, intentional"
+          alt="The Nankara woman — confident, elegant, intentional"
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
           style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
@@ -38,7 +38,7 @@ export default function TheWomanWeDesignFor() {
           She is a <em>force.</em>
         </h2>
         <p className={styles.intro}>
-          Clothie Dynasty exists for the woman who knows that elegance is not about following rules — it is about setting them. She is the professional who closes deals in silk. The creative who paints her world in texture and form. The leader who speaks before she opens her mouth.
+          Nankara exists for the woman who knows that elegance is not about following rules — it is about setting them. She is the professional who closes deals in silk. The creative who paints her world in texture and form. The leader who speaks before she opens her mouth.
         </p>
         <div className={styles.traits}>
           {traits.map((t) => (

@@ -45,7 +45,7 @@ export default function ContactPage() {
           <div className={styles.heroImage}>
             <Image
               src="/images/68e8b5bbf8b80424ec098964b1ebe7f8.jpg"
-              alt="Clothie Dynasty — Contact"
+              alt="Nankara — Contact"
               fill
               sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
@@ -70,20 +70,20 @@ export default function ContactPage() {
             <div className={styles.infoCol}>
               <div className={styles.infoBlock}>
                 <p className="section-label" style={{ color: 'var(--color-lavender)' }}>Email</p>
-                <a href="mailto:hello@clothiedynasty.com" className={styles.infoLink} id="contact-email-link">
-                  hello@clothiedynasty.com
+                <a href="mailto:hello@nankara.com" className={styles.infoLink} id="contact-email-link">
+                  hello@nankara.com
                 </a>
               </div>
               <div className={styles.infoBlock}>
                 <p className="section-label" style={{ color: 'var(--color-lavender)' }}>Business Inquiries</p>
-                <a href="mailto:partnerships@clothiedynasty.com" className={styles.infoLink} id="contact-biz-link">
-                  partnerships@clothiedynasty.com
+                <a href="mailto:partnerships@nankara.com" className={styles.infoLink} id="contact-biz-link">
+                  partnerships@nankara.com
                 </a>
               </div>
               <div className={styles.infoBlock}>
                 <p className="section-label" style={{ color: 'var(--color-lavender)' }}>Follow Us</p>
                 <div className={styles.socialLinks}>
-                  <a href="https://www.instagram.com/clothie_dynasty?igsh=Z29scG5wN3Ayam50" target="_blank" rel="noopener noreferrer" className={styles.socialLink} id="contact-instagram">Instagram</a>
+                  <a href="https://www.instagram.com/nankara" target="_blank" rel="noopener noreferrer" className={styles.socialLink} id="contact-instagram">Instagram</a>
                   <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink} id="contact-pinterest">Pinterest</a>
                   <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" className={styles.socialLink} id="contact-tiktok">TikTok</a>
                 </div>

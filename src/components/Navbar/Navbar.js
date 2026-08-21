@@ -36,7 +36,7 @@ export default function Navbar() {
       <div className={styles.inner}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoMain}>Clothie Dynasty</span>
+          <span className={styles.logoMain}>Nankara</span>
         </Link>
 
         {/* Desktop nav */}

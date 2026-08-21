@@ -21,7 +21,7 @@ export default function StorySection() {
           </h2>
           <div className={styles.divider} />
           <p className={styles.body}>
-            Clothie Dynasty was founded on a simple but powerful belief: that fashion, when done right, is not decoration — it is transformation. We saw a gap between the woman who exists and the woman who the fashion industry designed for.
+            Nankara was founded on a simple but powerful belief: that fashion, when done right, is not decoration — it is transformation. We saw a gap between the woman who exists and the woman who the fashion industry designed for.
           </p>
           <p className={styles.body}>
             So we built a brand for her. For the woman who is multidimensional, ambitious, tender, fierce, and elegantly complex. Each collection is a conversation with that woman — asking not what is trending, but what is true.
@@ -36,7 +36,7 @@ export default function StorySection() {
           <div className={styles.photoMain}>
             <Image
               src="/images/1e7204cbacd7d8aa19636470d1857c85.jpg"
-              alt="Clothie Dynasty brand story — elegance in motion"
+              alt="Nankara brand story — elegance in motion"
               fill
               sizes="(max-width: 768px) 100vw, 45vw"
               style={{ objectFit: 'cover', objectPosition: 'center' }}
@@ -45,7 +45,7 @@ export default function StorySection() {
           <div className={styles.photoAccent}>
             <Image
               src="/images/3659b2c83be723a1b7ff166860b3533d.jpg"
-              alt="Clothie Dynasty craftsmanship detail"
+              alt="Nankara craftsmanship detail"
               fill
               sizes="(max-width: 768px) 60vw, 25vw"
               style={{ objectFit: 'cover', objectPosition: 'center top' }}

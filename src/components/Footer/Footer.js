@@ -10,12 +10,12 @@ export default function Footer() {
         {/* Top: brand + nav columns */}
         <div className={styles.top}>
           <div className={styles.brand}>
-            <h2 className={styles.logo}>Clothie Dynasty</h2>
+            <h2 className={styles.logo}>Nankara</h2>
             <p className={styles.tagline}>
               Designed for women who lead with confidence, dress with intention, and embrace their authentic elegance.
             </p>
             <div className={styles.socials}>
-              <a href="https://www.instagram.com/clothie_dynasty?igsh=Z29scG5wN3Ayam50" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className={styles.socialLink} id="footer-instagram">
+              <a href="https://www.instagram.com/nankara" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className={styles.socialLink} id="footer-instagram">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
               </a>
               <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" className={styles.socialLink} id="footer-pinterest">
@@ -44,7 +44,7 @@ export default function Footer() {
             </div>
             <div className={styles.navCol}>
               <h3 className={styles.colTitle}>Contact</h3>
-              <a href="mailto:hello@clothiedynasty.com" className={styles.footerLink} id="footer-email">hello@clothiedynasty.com</a>
+              <a href="mailto:hello@nankara.com" className={styles.footerLink} id="footer-email">hello@nankara.com</a>
               <Link href="/contact" className={styles.footerLink}>Business Inquiries</Link>
               <Link href="/store" className={styles.footerLink}>Shop Collection</Link>
             </div>
@@ -56,7 +56,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className={styles.bottom}>
-          <p className={styles.copy}>© {year} Clothie Dynasty. All rights reserved.</p>
+          <p className={styles.copy}>© {year} Nankara. All rights reserved.</p>
           <p className={styles.copy}>Designed with elegance. Crafted with purpose.</p>
         </div>
       </div>

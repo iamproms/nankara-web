@@ -14,7 +14,7 @@ const pillars = [
   {
     icon: '◇',
     title: 'Intentional Detail',
-    body: 'The details are where Clothie Dynasty lives. A subtly turned hem. A perfectly placed dart. Hidden structure that gives confidence. Beauty that reveals itself slowly.',
+    body: 'The details are where Nankara lives. A subtly turned hem. A perfectly placed dart. Hidden structure that gives confidence. Beauty that reveals itself slowly.',
   },
   {
     icon: '◉',
@@ -34,7 +34,7 @@ export default function CraftsmanshipSection() {
             <em>It is our standard.</em>
           </h2>
           <p className={styles.subtitle}>
-            Every Clothie Dynasty piece begins as an idea and becomes a garment through a process that respects time, material, and the woman who will wear it.
+            Every Nankara piece begins as an idea and becomes a garment through a process that respects time, material, and the woman who will wear it.
           </p>
         </div>
 

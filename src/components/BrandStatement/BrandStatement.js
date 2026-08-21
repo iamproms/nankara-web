@@ -18,7 +18,7 @@ export default function BrandStatement() {
         <div className={styles.supporting}>
           <div className={styles.divLine} />
           <p className={styles.body}>
-            At Clothie Dynasty, every piece is a declaration. We create for the woman who knows that how she dresses shapes how she moves through the world — with purpose, with grace, with an unshakeable sense of self.
+            At Nankara, every piece is a declaration. We create for the woman who knows that how she dresses shapes how she moves through the world — with purpose, with grace, with an unshakeable sense of self.
           </p>
         </div>
       </div>

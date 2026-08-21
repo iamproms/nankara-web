@@ -14,7 +14,7 @@ export default function HeroVideo() {
           <iframe
             className={styles.youtubeIframe}
             src="https://www.youtube.com/embed/YRrvVR_zB2w?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&modestbranding=1&loop=1&playlist=YRrvVR_zB2w&playsinline=1"
-            title="Clothie Dynasty Background Video"
+            title="Nankara Background Video"
             frameBorder="0"
             allow="autoplay; encrypted-media"
             tabIndex="-1"
@@ -47,7 +47,7 @@ export default function HeroVideo() {
           </h1>
           <p className={styles.description}>
             Where elegance is not a choice, it is a language. <br />
-            Clothie Dynasty — luxury reimagined for the intentional woman.
+            Nankara — luxury reimagined for the intentional woman.
           </p>
           <div className={styles.ctas}>
             <Link href="/store" className={`btn btn-light ${styles.cta}`} id="hero-explore-collection">

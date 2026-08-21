@@ -27,7 +27,7 @@ export default function NewsletterSection() {
           <p className={styles.preLabel}>The Edit</p>
           <h2 className={styles.heading}>
             Join the world of<br />
-            <em>Clothie Dynasty.</em>
+            <em>Nankara.</em>
           </h2>
           <p className={styles.body}>
             Be first to discover new collections, editorial features, and exclusive access — delivered with the same elegance as the clothes themselves.
