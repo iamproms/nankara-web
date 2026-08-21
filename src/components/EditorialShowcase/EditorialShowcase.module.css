@@ -1,0 +1,113 @@
+.section {
+  background: var(--color-white);
+  padding: var(--space-4xl) 0;
+  overflow: hidden;
+}
+
+.header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 4vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--color-charcoal);
+}
+
+.heading em {
+  font-style: italic;
+  color: var(--color-lavender-mid);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 220px;
+  gap: var(--space-sm);
+  padding: 0 var(--space-xl);
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.item {
+  position: relative;
+  overflow: hidden;
+  grid-column: span 4;
+  grid-row: span 2;
+  cursor: pointer;
+}
+
+.itemWide {
+  grid-column: span 6;
+}
+
+.itemTall {
+  grid-column: span 3;
+  grid-row: span 3;
+}
+
+.item:hover img {
+  transform: scale(1.05);
+}
+
+.itemOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,12,0.6) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity var(--duration-base) ease;
+  z-index: 1;
+}
+
+.item:hover .itemOverlay {
+  opacity: 1;
+}
+
+.caption {
+  position: absolute;
+  bottom: var(--space-md);
+  left: var(--space-md);
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-white);
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.item:hover .caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .header { padding: 0 var(--space-lg); }
+  .grid { padding: 0 var(--space-lg); grid-auto-rows: 180px; }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 260px;
+    padding: 0 var(--space-md);
+    gap: var(--space-xs);
+  }
+  .item, .itemWide, .itemTall {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+  .header { padding: 0 var(--space-md); }
+}

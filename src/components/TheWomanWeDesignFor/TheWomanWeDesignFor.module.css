@@ -1,0 +1,119 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 90vh;
+  overflow: hidden;
+}
+
+/* Photo side */
+.photoSide {
+  position: relative;
+  overflow: hidden;
+}
+
+.photoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(10,10,12,0.3) 0%, transparent 60%);
+  z-index: 1;
+}
+
+.photoLabel {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: var(--space-lg);
+  z-index: 2;
+}
+
+.photoLabelText {
+  font-family: var(--font-serif);
+  font-size: var(--text-5xl);
+  font-weight: 300;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* Content side */
+.contentSide {
+  background: var(--color-off-white);
+  padding: var(--space-3xl) var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--color-charcoal);
+  letter-spacing: -0.01em;
+}
+
+.heading em {
+  font-style: italic;
+  color: var(--color-lavender-mid);
+}
+
+.intro {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--color-gray);
+  max-width: 500px;
+}
+
+/* Traits */
+.traits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.trait {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+}
+
+.traitNum {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 300;
+  color: var(--color-lavender-mid);
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.traitTitle {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-charcoal);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.traitBody {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-gray);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .section { grid-template-columns: 1fr; min-height: auto; }
+  .photoSide { height: 60vh; }
+  .contentSide { padding: var(--space-2xl) var(--space-lg); }
+}

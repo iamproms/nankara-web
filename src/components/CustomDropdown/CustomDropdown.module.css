@@ -1,0 +1,89 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-white);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) ease;
+  text-align: left;
+}
+
+.trigger:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.triggerOpen {
+  border-color: var(--color-white);
+}
+
+.arrow {
+  color: var(--color-lavender-mid);
+  transition: transform var(--duration-fast) ease;
+  display: flex;
+  align-items: center;
+}
+
+.triggerOpen .arrow {
+  transform: rotate(180deg);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--color-white);
+  border: 1px solid var(--color-off-white);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: var(--space-xs) 0;
+  margin: 0;
+  z-index: 50;
+  max-height: 250px;
+  overflow-y: auto;
+  opacity: 0;
+  animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.option {
+  padding: var(--space-xs) var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--color-charcoal);
+  cursor: pointer;
+  transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.option:hover {
+  background: var(--color-off-white);
+}
+
+.selected {
+  background: var(--color-lavender-light);
+  color: var(--color-charcoal);
+  font-weight: 500;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

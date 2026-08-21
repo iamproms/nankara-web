@@ -1,0 +1,189 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 680px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+/* Wrapper fills the section */
+.videoWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.youtubeContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Aspect ratio handling to simulate background-size: cover for iframes */
+@media (max-aspect-ratio: 16/9) {
+  .youtubeContainer {
+    width: 177.77vh;
+  }
+}
+@media (min-aspect-ratio: 16/9) {
+  .youtubeContainer {
+    height: 56.25vw;
+  }
+}
+
+.youtubeIframe {
+  width: 100%;
+  height: 100%;
+  transform: scale(1.4); /* Scaled up to hide YouTube borders and titles */
+  opacity: 0;
+  animation: fadeIn 2s ease 1.5s forwards; /* Slow fade in once loaded */
+}
+
+/* Ken Burns cinematic image (Fallback) */
+.kenBurns {
+  position: absolute;
+  inset: -5%; /* extra room so the zoom doesn't clip edges */
+  animation: kenBurns 20s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+
+@keyframes kenBurns {
+  0%   { transform: scale(1)    translateX(0)    translateY(0); }
+  33%  { transform: scale(1.06) translateX(-1%)  translateY(-1%); }
+  66%  { transform: scale(1.1)  translateX(1%)   translateY(-0.5%); }
+  100% { transform: scale(1.06) translateX(-0.5%) translateY(1%); }
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 10, 12, 0.72) 0%,
+    rgba(10, 10, 12, 0.45) 50%,
+    rgba(10, 10, 12, 0.35) 100%
+  );
+}
+
+/* Content */
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  padding-top: var(--nav-height);
+}
+
+.contentInner {
+  max-width: 760px;
+  animation: fadeUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.preLabel {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-lavender);
+  margin-bottom: var(--space-md);
+}
+
+.headline {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.02;
+  color: var(--color-white);
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.01em;
+}
+
+.headline em {
+  font-style: italic;
+  color: var(--color-lavender-light);
+}
+
+.description {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: var(--space-xl);
+  max-width: 520px;
+}
+
+.ctas {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.cta {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  padding: 1rem 2.25rem;
+}
+
+/* Scroll indicator */
+.scrollIndicator {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 1;
+  animation: fadeIn 1.5s ease 1.5s both;
+}
+
+.scrollLine {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,0.4);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.4; }
+  50% { transform: scaleY(0.6); opacity: 0.8; }
+}
+
+.scrollText {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content { padding: 0 var(--space-md); padding-top: var(--nav-height); }
+  .ctas { flex-direction: column; align-items: flex-start; }
+  .cta { width: 100%; justify-content: center; }
+}
