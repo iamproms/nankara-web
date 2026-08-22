@@ -84,9 +84,9 @@
 }
 
 .innerNarrow {
-  max-width: 800px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-lg);
 }
 
@@ -117,7 +117,6 @@
   color: var(--color-gray);
 }
 
-.bodyLight { color: rgba(255,255,255,0.6); }
 .bodyCenter { max-width: 560px; margin: 0 auto; }
 
 .labelLight { color: var(--color-orange); }

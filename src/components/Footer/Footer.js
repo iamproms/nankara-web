@@ -41,7 +41,6 @@ export default function Footer() {
               <Link href="/about#mission" className={styles.footerLink}>Our Mission</Link>
               <Link href="/about#founder" className={styles.footerLink}>Founder Story</Link>
               <Link href="/about#craftsmanship" className={styles.footerLink}>Craftsmanship</Link>
-              <Link href="/about#philosophy" className={styles.footerLink}>Design Philosophy</Link>
             </div>
             <div className={styles.navCol}>
               <h3 className={styles.colTitle}>Contact</h3>

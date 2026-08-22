@@ -25,13 +25,6 @@ const tiers = [
   },
 ];
 
-const benefits = [
-  { num: '01', title: 'Early Access', body: 'See and shop new collections before they reach the public.' },
-  { num: '02', title: 'Private Styling', body: 'One-on-one sessions with our styling team, in person or virtually.' },
-  { num: '03', title: 'Members-Only Pieces', body: 'Limited runs and archive re-releases reserved exclusively for the Circle.' },
-  { num: '04', title: 'Signature Gifting', body: 'Thoughtful gifts on your birthday and Circle anniversary, chosen with you in mind.' },
-];
-
 export default function QueensCirclePage() {
   return (
     <>
@@ -69,28 +62,8 @@ export default function QueensCirclePage() {
               <em>women who wear us first.</em>
             </h2>
             <p className={`${styles.body} ${styles.bodyCenter}`}>
-              Queens Circle is Nankara&apos;s membership for our most valued clients: the women who return season after season. It is our way of saying thank you, and of keeping you closer to the brand than anyone else.
+              Queens Circle is Nankara&apos;s membership for our most valued clients: early access, private styling, and members-only pieces for the women who return season after season.
             </p>
-          </ScrollReveal>
-        </section>
-
-        {/* Benefits */}
-        <section className={styles.section} id="benefits">
-          <ScrollReveal className={styles.inner}>
-            <p className="section-label">Member Benefits</p>
-            <h2 className={styles.sectionHeading}>
-              What you receive<br />
-              <em>as a Queen.</em>
-            </h2>
-            <div className={styles.benefitsGrid}>
-              {benefits.map((b) => (
-                <div key={b.num} className={styles.benefitCard}>
-                  <span className={styles.benefitNum}>{b.num}</span>
-                  <h3 className={styles.benefitTitle}>{b.title}</h3>
-                  <p className={styles.benefitBody}>{b.body}</p>
-                </div>
-              ))}
-            </div>
           </ScrollReveal>
         </section>
 

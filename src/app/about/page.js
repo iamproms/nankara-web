@@ -49,31 +49,16 @@ export default function AboutPage() {
 
         {/* Mission */}
         <section className={styles.section} id="mission">
-          <ScrollReveal className={`${styles.inner} ${styles.innerNarrow}`}>
+          <ScrollReveal className={`${styles.inner} ${styles.innerNarrow} ${styles.textCenter}`}>
             <p className="section-label">Our Mission</p>
             <h2 className={styles.sectionHeading}>
               To create fashion that speaks<br />
               <em>before a word is said.</em>
             </h2>
-            <p className={`${styles.body} ${styles.dropCap}`}>
-              Our mission is to design clothing that empowers women to walk into any room, any room, and be seen, not because they demand attention, but because their presence commands it naturally. We achieve this through a relentless commitment to quality, beauty, and the belief that fashion is a form of self-expression that deserves to be taken seriously.
+            <p className={`${styles.body} ${styles.bodyCenter}`}>
+              We design clothing that empowers women to walk into any room and be seen, not because they demand attention, but because their presence commands it naturally.
             </p>
           </ScrollReveal>
-        </section>
-
-        {/* Vision */}
-        <section className={`${styles.section} ${styles.sectionDark}`} id="vision">
-          <div className={`${styles.inner} ${styles.innerNarrow}`}>
-            <p className={`section-label ${styles.labelLight}`}>Our Vision</p>
-            <h2 className={`${styles.sectionHeading} ${styles.headingLight}`}>
-              To become the fashion house<br />
-              that<em> this generation of women</em><br />
-              remembers as their own.
-            </h2>
-            <p className={`${styles.body} ${styles.bodyLight}`}>
-              We are building toward a future where Nankara is not simply a brand women wear. It is a brand women belong to. Where our name is spoken in the same breath as legacy. Where the women who wore us first say: &quot;We knew before the world did.&quot;
-            </p>
-          </div>
         </section>
 
         {/* Founder Story */}
@@ -121,23 +106,6 @@ export default function AboutPage() {
           </ScrollReveal>
         </section>
 
-        {/* Design Philosophy */}
-        <section className={styles.section} id="philosophy">
-          <div className={`${styles.inner} ${styles.innerNarrow}`}>
-            <p className="section-label">Design Philosophy</p>
-            <h2 className={styles.sectionHeading}>
-              We design for<em> the moment</em><br />
-              and for the lifetime.
-            </h2>
-            <p className={`${styles.body} ${styles.dropCap}`}>
-              Every Nankara piece is designed to exist beyond its season. We resist the tyranny of the trend cycle and instead ask: will this garment feel important five years from now? Will the woman who wears it remember how it made her feel? If the answer is yes, we make it.
-            </p>
-            <p className={styles.body}>
-              Our aesthetic is rooted in quiet luxury: the kind that does not announce itself but is unmistakably present. Clean lines, considered structure, and materials that reward closeness. We believe in restraint as a form of sophistication.
-            </p>
-          </div>
-        </section>
-
         {/* Values */}
         <section className={`${styles.valuesSection} ${styles.sectionDark} text-white`} id="values">
           <ScrollReveal className={styles.inner}>
@@ -178,10 +146,7 @@ export default function AboutPage() {
               <em>Worn forever.</em>
             </h2>
             <p className={styles.body}>
-              We partner with skilled artisans who share our values. Every seam is finished. Every lining is considered. Every button is chosen with intention. We believe the interior of a garment reveals the integrity of the brand that made it.
-            </p>
-            <p className={styles.body}>
-              Nankara garments are built to last, not just physically, but emotionally. The kind of pieces that get passed down. That carry memory. That become part of the story.
+              Our aesthetic is rooted in quiet luxury: clean lines, considered structure, and materials that reward closeness. Every seam is finished and every button chosen with intention, because Nankara garments are built to last, not just physically, but emotionally.
             </p>
           </div>
         </section>
@@ -195,7 +160,7 @@ export default function AboutPage() {
               <em>just beginning.</em>
             </h2>
             <p className={`${styles.body} ${styles.bodyCenter}`}>
-              We are expanding thoughtfully: new collections, new categories, and new ways to bring the Nankara experience to more women around the world. But our core will never change: premium quality, emotional design, and a deep respect for the woman who chooses to wear us.
+              We are expanding thoughtfully, but our core will never change: premium quality, emotional design, and a deep respect for the woman who chooses to wear us.
             </p>
             <div className={styles.futureCtas}>
               <Link href="/shop" className="btn btn-dark" id="about-shop-now">Shop the Current Collection</Link>
