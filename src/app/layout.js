@@ -2,7 +2,7 @@ import SmoothScroll from '../components/SmoothScroll/SmoothScroll';
 import '../styles/globals.css';
 
 export const metadata = {
-  title: 'Nankara — Luxury Women\'s Fashion',
+  title: 'Nankara | Luxury Women\'s Fashion',
   description: 'A luxury women\'s fashion brand crafted for women who dress intentionally, value quality, and lead with confidence.',
   keywords: 'Luxury Women\'s Fashion, Designer Dresses, Elegant Women\'s Clothing, Premium Fashion Brand',
   openGraph: {

@@ -6,14 +6,14 @@ import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import styles from './about.module.css';
 
 export const metadata = {
-  title: 'About — Nankara',
-  description: 'The story, mission, and values behind Nankara — a luxury women\'s fashion brand built for women who lead with confidence.',
+  title: 'About | Nankara',
+  description: 'The story, mission, and values behind Nankara, a luxury women\'s fashion brand built for women who lead with confidence.',
 };
 
 const values = [
   { title: 'Individuality', body: 'We celebrate the woman who refuses to be defined by trends. Her style is her signature.' },
   { title: 'Purpose', body: 'Every collection has intention behind it. We ask why before we ask how.' },
-  { title: 'Confidence', body: 'Our garments are built to amplify what is already within — not to create a costume.' },
+  { title: 'Confidence', body: 'Our garments are built to amplify what is already within, not to create a costume.' },
   { title: 'Authenticity', body: 'We do not follow the industry. We follow the woman. The rest falls into place.' },
 ];
 
@@ -28,7 +28,7 @@ export default function AboutPage() {
           <div className={styles.heroImage}>
             <Image
               src="/images/277007a13070b1691976e3ff5a2d8f62.jpg"
-              alt="Nankara — About the brand"
+              alt="About the Nankara brand"
               fill
               sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
@@ -56,7 +56,7 @@ export default function AboutPage() {
               <em>before a word is said.</em>
             </h2>
             <p className={`${styles.body} ${styles.dropCap}`}>
-              Our mission is to design clothing that empowers women to walk into any room — any room — and be seen, not because they demand attention, but because their presence commands it naturally. We achieve this through a relentless commitment to quality, beauty, and the belief that fashion is a form of self-expression that deserves to be taken seriously.
+              Our mission is to design clothing that empowers women to walk into any room, any room, and be seen, not because they demand attention, but because their presence commands it naturally. We achieve this through a relentless commitment to quality, beauty, and the belief that fashion is a form of self-expression that deserves to be taken seriously.
             </p>
           </ScrollReveal>
         </section>
@@ -71,7 +71,7 @@ export default function AboutPage() {
               remembers as their own.
             </h2>
             <p className={`${styles.body} ${styles.bodyLight}`}>
-              We are building toward a future where Nankara is not simply a brand women wear — it is a brand women belong to. Where our name is spoken in the same breath as legacy. Where the women who wore us first say: &quot;We knew before the world did.&quot;
+              We are building toward a future where Nankara is not simply a brand women wear. It is a brand women belong to. Where our name is spoken in the same breath as legacy. Where the women who wore us first say: &quot;We knew before the world did.&quot;
             </p>
           </div>
         </section>
@@ -93,7 +93,7 @@ export default function AboutPage() {
               </p>
               <div style={{ marginTop: 'var(--space-md)' }}>
                 <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--color-black)' }}>
-                  <em>— Nankara</em>
+                  <em>Founder, Nankara</em>
                 </p>
               </div>
             </div>
@@ -130,10 +130,10 @@ export default function AboutPage() {
               and for the lifetime.
             </h2>
             <p className={`${styles.body} ${styles.dropCap}`}>
-              Every Nankara piece is designed to exist beyond its season. We resist the tyranny of the trend cycle and instead ask: will this garment feel important five years from now? Will the woman who wears it remember how it made her feel? If the answer is yes — we make it.
+              Every Nankara piece is designed to exist beyond its season. We resist the tyranny of the trend cycle and instead ask: will this garment feel important five years from now? Will the woman who wears it remember how it made her feel? If the answer is yes, we make it.
             </p>
             <p className={styles.body}>
-              Our aesthetic is rooted in quiet luxury — the kind that does not announce itself but is unmistakably present. Clean lines, considered structure, and materials that reward closeness. We believe in restraint as a form of sophistication.
+              Our aesthetic is rooted in quiet luxury: the kind that does not announce itself but is unmistakably present. Clean lines, considered structure, and materials that reward closeness. We believe in restraint as a form of sophistication.
             </p>
           </div>
         </section>
@@ -181,7 +181,7 @@ export default function AboutPage() {
               We partner with skilled artisans who share our values. Every seam is finished. Every lining is considered. Every button is chosen with intention. We believe the interior of a garment reveals the integrity of the brand that made it.
             </p>
             <p className={styles.body}>
-              Nankara garments are built to last — not just physically, but emotionally. The kind of pieces that get passed down. That carry memory. That become part of the story.
+              Nankara garments are built to last, not just physically, but emotionally. The kind of pieces that get passed down. That carry memory. That become part of the story.
             </p>
           </div>
         </section>
@@ -195,7 +195,7 @@ export default function AboutPage() {
               <em>just beginning.</em>
             </h2>
             <p className={`${styles.body} ${styles.bodyCenter}`}>
-              We are expanding thoughtfully — new collections, new categories, and new ways to bring the Nankara experience to more women around the world. But our core will never change: premium quality, emotional design, and a deep respect for the woman who chooses to wear us.
+              We are expanding thoughtfully: new collections, new categories, and new ways to bring the Nankara experience to more women around the world. But our core will never change: premium quality, emotional design, and a deep respect for the woman who chooses to wear us.
             </p>
             <div className={styles.futureCtas}>
               <Link href="/shop" className="btn btn-dark" id="about-shop-now">Shop the Current Collection</Link>

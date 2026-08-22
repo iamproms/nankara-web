@@ -6,8 +6,8 @@ import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import styles from './nankara-silhouette.module.css';
 
 export const metadata = {
-  title: 'Nankara Silhouette — Nankara',
-  description: 'Nankara Silhouette is our signature line — the pieces that define the shape of the brand, built around structure, restraint, and the woman who wears them.',
+  title: 'Nankara Silhouette | Nankara',
+  description: 'Nankara Silhouette is our signature line: the pieces that define the shape of the brand, built around structure, restraint, and the woman who wears them.',
 };
 
 const pieces = [
@@ -42,7 +42,7 @@ export default function NankaraSilhouettePage() {
           <div className={styles.heroImage}>
             <Image
               src="/images/9b6153bcde944c6cb838426e066ec8cc.jpg"
-              alt="Nankara Silhouette — signature collection"
+              alt="Nankara Silhouette signature collection"
               fill
               sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
@@ -68,7 +68,7 @@ export default function NankaraSilhouettePage() {
               <em>This one is ours.</em>
             </h2>
             <p className={`${styles.body} ${styles.bodyCenter}`}>
-              Nankara Silhouette is our founding collection — the pieces that define how we cut, structure, and drape. Where every other collection borrows a season, this one is permanent.
+              Nankara Silhouette is our founding collection: the pieces that define how we cut, structure, and drape. Where every other collection borrows a season, this one is permanent.
             </p>
           </ScrollReveal>
         </section>
@@ -87,7 +87,7 @@ export default function NankaraSilhouettePage() {
                   <div className={styles.imageWrap}>
                     <Image
                       src={p.image}
-                      alt={`${p.title} — ${p.subtitle}`}
+                      alt={`${p.title}: ${p.subtitle}`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
@@ -122,7 +122,7 @@ export default function NankaraSilhouettePage() {
               <em>Not the trend.</em>
             </h2>
             <p className={styles.body}>
-              The Silhouette line is designed first around structure — where a seam sits, how a shoulder falls, the way fabric moves with you rather than around you. Every piece in this collection is refined across multiple fittings before it ever reaches you.
+              The Silhouette line is designed first around structure: where a seam sits, how a shoulder falls, the way fabric moves with you rather than around you. Every piece in this collection is refined across multiple fittings before it ever reaches you.
             </p>
           </div>
         </section>

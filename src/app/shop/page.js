@@ -18,7 +18,7 @@ export default function ShopPage() {
         <div className={styles.bg}>
           <Image
             src="/images/2f6c4df545a18059affea02ef38815da.jpg"
-            alt="Nankara collection — coming soon"
+            alt="Nankara collection, coming soon"
             fill
             sizes="100vw"
             style={{ objectFit: 'cover', objectPosition: 'center top' }}
@@ -44,7 +44,7 @@ export default function ShopPage() {
           </p>
 
           <p className={styles.launchNote}>
-            Launching soon — be the first to know.
+            Launching soon. Be the first to know.
           </p>
 
           {/* Inline newsletter just for this page */}

@@ -30,7 +30,7 @@ export default function NewsletterSection() {
             <em>Nankara.</em>
           </h2>
           <p className={styles.body}>
-            Be first to discover new collections, editorial features, and exclusive access — delivered with the same elegance as the clothes themselves.
+            Be first to discover new collections, editorial features, and exclusive access, delivered with the same elegance as the clothes themselves.
           </p>
         </div>
         <div className={styles.formWrap}>
@@ -67,7 +67,7 @@ export default function NewsletterSection() {
                 <p className={styles.errorText} role="alert">Please enter a valid email address.</p>
               )}
               <p className={styles.privacy}>
-                By subscribing you agree to receive our curated communications. No spam — ever.
+                By subscribing you agree to receive our curated communications. No spam, ever.
               </p>
             </form>
           )}

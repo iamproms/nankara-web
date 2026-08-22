@@ -1,12 +1,12 @@
 /* ============================================================
-   NANKARA — GLOBAL DESIGN SYSTEM
+   NANKARA GLOBAL DESIGN SYSTEM
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 
 /* ── CSS Custom Properties ── */
 :root {
-  /* Palette — Primary: Black & White. Secondary: Orange. */
+  /* Palette. Primary: Black & White. Secondary: Orange. */
   --color-white:       #FFFFFF;
   --color-off-white:   #F2F2F2;
   --color-orange:      #E8590C;

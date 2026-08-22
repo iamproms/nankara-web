@@ -6,8 +6,8 @@ import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import styles from './queens-circle.module.css';
 
 export const metadata = {
-  title: 'Queens Circle — Nankara',
-  description: 'Queens Circle is Nankara\'s private membership for the women who wear us first — early access, private styling, and a seat at the table.',
+  title: 'Queens Circle | Nankara',
+  description: 'Queens Circle is Nankara\'s private membership for the women who wear us first: early access, private styling, and a seat at the table.',
 };
 
 const tiers = [
@@ -43,7 +43,7 @@ export default function QueensCirclePage() {
           <div className={styles.heroImage}>
             <Image
               src="/images/3c6444ef3bc0352765233d1d7cdafabe.jpg"
-              alt="Queens Circle — Nankara"
+              alt="Nankara Queens Circle"
               fill
               sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
@@ -69,7 +69,7 @@ export default function QueensCirclePage() {
               <em>women who wear us first.</em>
             </h2>
             <p className={`${styles.body} ${styles.bodyCenter}`}>
-              Queens Circle is Nankara&apos;s membership for our most valued clients — the women who return season after season. It is our way of saying thank you, and of keeping you closer to the brand than anyone else.
+              Queens Circle is Nankara&apos;s membership for our most valued clients: the women who return season after season. It is our way of saying thank you, and of keeping you closer to the brand than anyone else.
             </p>
           </ScrollReveal>
         </section>

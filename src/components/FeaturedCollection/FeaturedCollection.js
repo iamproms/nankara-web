@@ -64,7 +64,7 @@ export default function FeaturedCollection() {
             <div className={styles.imageWrap}>
               <Image
                 src={col.image}
-                alt={`${col.title} — ${col.subtitle}`}
+                alt={`${col.title}: ${col.subtitle}`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{ objectFit: 'cover', objectPosition: 'center 15%', transition: 'transform 0.8s cubic-bezier(0.16,1,0.3,1)' }}

@@ -12,13 +12,13 @@ export default function BrandStatement() {
         <blockquote className={styles.quote}>
           <span className={styles.quoteMark}>&ldquo;</span>
           Fashion is not what you wear.<br />
-          It is<em> who you are</em> — made visible.
+          It is<em> who you are</em>, made visible.
           <span className={styles.quoteMark}>&rdquo;</span>
         </blockquote>
         <div className={styles.supporting}>
           <div className={styles.divLine} />
           <p className={styles.body}>
-            At Nankara, every piece is a declaration. We create for the woman who knows that how she dresses shapes how she moves through the world — with purpose, with grace, with an unshakeable sense of self.
+            At Nankara, every piece is a declaration. We create for the woman who knows that how she dresses shapes how she moves through the world: with purpose, with grace, with an unshakeable sense of self.
           </p>
         </div>
       </div>

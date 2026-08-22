@@ -45,7 +45,7 @@ export default function ContactPage() {
           <div className={styles.heroImage}>
             <Image
               src="/images/68e8b5bbf8b80424ec098964b1ebe7f8.jpg"
-              alt="Nankara — Contact"
+              alt="Contact Nankara"
               fill
               sizes="100vw"
               style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
