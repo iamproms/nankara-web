@@ -31,6 +31,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# raw source assets (already copied into public/)
+/nankara_original_images
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

@@ -17,7 +17,7 @@ export default function ShopPage() {
         {/* Background image */}
         <div className={styles.bg}>
           <Image
-            src="/images/2f6c4df545a18059affea02ef38815da.jpg"
+            src="/images/nankara-06.jpg"
             alt="Nankara collection, coming soon"
             fill
             sizes="100vw"

@@ -15,19 +15,19 @@ const pieces = [
     id: 'the-line',
     title: 'The Line',
     subtitle: 'Signature Silhouette',
-    image: '/images/1e7204cbacd7d8aa19636470d1857c85.jpg',
+    image: '/images/nankara-01.jpg',
   },
   {
     id: 'the-structure',
     title: 'The Structure',
     subtitle: 'Tailored Edit',
-    image: '/images/260975f13f8e0b7639005c2b230c799a.jpg',
+    image: '/images/nankara-02.jpg',
   },
   {
     id: 'the-form',
     title: 'The Form',
     subtitle: 'Draped Edit',
-    image: '/images/347b9487d84b8b0afee9359ae46d3603.jpg',
+    image: '/images/nankara-05.jpg',
   },
 ];
 
@@ -41,7 +41,7 @@ export default function NankaraSilhouettePage() {
         <section className={styles.hero} id="silhouette-hero">
           <div className={styles.heroImage}>
             <Image
-              src="/images/9b6153bcde944c6cb838426e066ec8cc.jpg"
+              src="/images/nankara-06.jpg"
               alt="Nankara Silhouette signature collection"
               fill
               sizes="100vw"
@@ -108,7 +108,7 @@ export default function NankaraSilhouettePage() {
         <section className={styles.fitSection} id="fit-philosophy">
           <div className={styles.fitImage}>
             <Image
-              src="/images/4f93702c791decbe30d156e56b2d2368.jpg"
+              src="/images/nankara-09.jpg"
               alt="Nankara Silhouette fit and structure"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"

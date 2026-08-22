@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Navbar.module.css';
 
@@ -11,6 +12,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const isHome = pathname === '/';
+  const isSolid = scrolled || !isHome;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,7 +38,14 @@ export default function Navbar() {
       <div className={styles.inner}>
         {/* Logo */}
         <Link href="/" className={styles.logo}>
-          <span className={styles.logoMain}>Nankara</span>
+          <Image
+            src={isSolid ? '/logo/nankara-wordmark-black.svg' : '/logo/nankara-wordmark-white.png'}
+            alt="Nankara"
+            width={140}
+            height={33}
+            className={styles.logoMark}
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}

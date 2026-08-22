@@ -27,7 +27,7 @@ export default function AboutPage() {
         <section className={styles.hero} id="about-hero">
           <div className={styles.heroImage}>
             <Image
-              src="/images/277007a13070b1691976e3ff5a2d8f62.jpg"
+              src="/images/nankara-03.jpg"
               alt="About the Nankara brand"
               fill
               sizes="100vw"
@@ -86,7 +86,7 @@ export default function AboutPage() {
             <div className={styles.founderImageWrap} style={{ position: 'relative' }}>
               <div className={styles.founderImage}>
                 <Image
-                  src="/images/4a207cc720306c5746f18995287a3e6a.jpg"
+                  src="/images/nankara-04.jpg"
                   alt="Nankara Founder"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
@@ -95,7 +95,7 @@ export default function AboutPage() {
               </div>
               <div className={styles.founderImageAccent}>
                 <Image
-                  src="/images/0481794db27e2a26c0c9270a1390a116.jpg"
+                  src="/images/nankara-01.jpg"
                   alt="Founder Accent"
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
@@ -132,7 +132,7 @@ export default function AboutPage() {
         <section className={styles.craftSection} id="craftsmanship">
           <div className={styles.craftImage}>
             <Image
-              src="/images/35a04a2a5c90122f1754f2b1198c7d6f.jpg"
+              src="/images/nankara-05.jpg"
               alt="Nankara craftsmanship and material quality"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"

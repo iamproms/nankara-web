@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -10,7 +11,13 @@ export default function Footer() {
         {/* Top: brand + nav columns */}
         <div className={styles.top}>
           <div className={styles.brand}>
-            <h2 className={styles.logo}>Nankara</h2>
+            <Image
+              src="/logo/nankara-wordmark-white.png"
+              alt="Nankara"
+              width={160}
+              height={38}
+              className={styles.logo}
+            />
             <p className={styles.tagline}>
               Designed for women who lead with confidence, dress with intention, and embrace their authentic elegance.
             </p>

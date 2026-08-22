@@ -10,7 +10,7 @@ export default function HeroVideo() {
       <div className={styles.videoWrapper}>
         <div className={styles.kenBurns}>
           <Image
-            src="/images/260975f13f8e0b7639005c2b230c799a.jpg"
+            src="/images/nankara-10.jpg"
             alt=""
             fill
             sizes="100vw"

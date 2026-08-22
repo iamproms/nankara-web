@@ -10,7 +10,7 @@ const collections = [
     title: 'Silk Reverie',
     subtitle: 'The Evening Collection',
     tag: 'New Arrival',
-    image: '/images/68e8b5bbf8b80424ec098964b1ebe7f8.jpg',
+    image: '/images/nankara-07.jpg',
     pieces: '12 Pieces',
   },
   {
@@ -18,7 +18,7 @@ const collections = [
     title: 'Quiet Power',
     subtitle: 'Day to Evening',
     tag: 'Editor’s Pick',
-    image: '/images/6599626fe631593ac1d1b74f1f053257.jpg',
+    image: '/images/nankara-02.jpg',
     pieces: '8 Pieces',
   },
   {
@@ -26,7 +26,7 @@ const collections = [
     title: 'Soft Authority',
     subtitle: 'The Power Dressing Edit',
     tag: 'Bestseller',
-    image: '/images/0481794db27e2a26c0c9270a1390a116.jpg',
+    image: '/images/nankara-08.jpg',
     pieces: '10 Pieces',
   },
   {
@@ -34,7 +34,7 @@ const collections = [
     title: 'Luminous',
     subtitle: 'The Bridal Edit',
     tag: 'Limited',
-    image: '/images/ede8cddc9a34ad48ec667fd182136c85.jpg',
+    image: '/images/nankara-11.jpg',
     pieces: '6 Pieces',
   },
 ];
