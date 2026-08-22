@@ -31,7 +31,7 @@ export default function AboutPage() {
               alt="About the Nankara brand"
               fill
               sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
+              style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)' }}
               priority
             />
             <div className={styles.heroOverlay} />
@@ -105,7 +105,7 @@ export default function AboutPage() {
                   alt="Nankara Founder"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
+                  style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)' }}
                 />
               </div>
               <div className={styles.founderImageAccent}>
@@ -114,7 +114,7 @@ export default function AboutPage() {
                   alt="Founder Accent"
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
-                  style={{ objectFit: 'cover', objectPosition: 'center top' }}
+                  style={{ objectFit: 'cover', objectPosition: 'center top', filter: 'var(--photo-tone)' }}
                 />
               </div>
             </div>
@@ -168,7 +168,7 @@ export default function AboutPage() {
               alt="Nankara craftsmanship and material quality"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              style={{ objectFit: 'cover', objectPosition: 'center', filter: 'var(--photo-tone)' }}
             />
           </div>
           <div className={styles.craftContent}>

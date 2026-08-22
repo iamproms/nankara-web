@@ -7,29 +7,14 @@ export default function HeroVideo() {
   return (
     <section className={styles.hero} id="hero">
       {/* Cinematic image background with Ken Burns slow-zoom animation */}
-      {/* Video Background (Pinterest Download) */}
       <div className={styles.videoWrapper}>
-        {/* YouTube Background Video */}
-        <div className={styles.youtubeContainer}>
-          <iframe
-            className={styles.youtubeIframe}
-            src="https://www.youtube.com/embed/YRrvVR_zB2w?autoplay=1&mute=1&controls=0&disablekb=1&fs=0&modestbranding=1&loop=1&playlist=YRrvVR_zB2w&playsinline=1"
-            title="Nankara Background Video"
-            frameBorder="0"
-            allow="autoplay; encrypted-media"
-            tabIndex="-1"
-            aria-hidden="true"
-          />
-        </div>
-        
-        {/* Fallback Cinematic Image if video fails to load */}
         <div className={styles.kenBurns}>
           <Image
             src="/images/260975f13f8e0b7639005c2b230c799a.jpg"
             alt=""
             fill
             sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+            style={{ objectFit: 'cover', objectPosition: 'center 20%', filter: 'var(--photo-tone)' }}
             priority
             aria-hidden="true"
           />

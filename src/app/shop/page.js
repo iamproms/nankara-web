@@ -21,7 +21,7 @@ export default function ShopPage() {
             alt="Nankara collection, coming soon"
             fill
             sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'center top' }}
+            style={{ objectFit: 'cover', objectPosition: 'center top', filter: 'var(--photo-tone)' }}
             priority
           />
           <div className={styles.overlay} />

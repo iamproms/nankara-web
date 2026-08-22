@@ -45,7 +45,7 @@ export default function NankaraSilhouettePage() {
               alt="Nankara Silhouette signature collection"
               fill
               sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
+              style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)' }}
               priority
             />
             <div className={styles.heroOverlay} />
@@ -90,7 +90,7 @@ export default function NankaraSilhouettePage() {
                       alt={`${p.title}: ${p.subtitle}`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      style={{ objectFit: 'cover', objectPosition: 'center 15%' }}
+                      style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)' }}
                     />
                   </div>
                   <div className={styles.cardOverlay} />
@@ -112,7 +112,7 @@ export default function NankaraSilhouettePage() {
               alt="Nankara Silhouette fit and structure"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              style={{ objectFit: 'cover', objectPosition: 'center', filter: 'var(--photo-tone)' }}
             />
           </div>
           <div className={styles.fitContent}>

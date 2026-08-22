@@ -9,6 +9,7 @@ const collections = [
     id: 'silk-reverie',
     title: 'Silk Reverie',
     subtitle: 'The Evening Collection',
+    tag: 'New Arrival',
     image: '/images/68e8b5bbf8b80424ec098964b1ebe7f8.jpg',
     pieces: '12 Pieces',
   },
@@ -16,6 +17,7 @@ const collections = [
     id: 'quiet-power',
     title: 'Quiet Power',
     subtitle: 'Day to Evening',
+    tag: 'Editor’s Pick',
     image: '/images/6599626fe631593ac1d1b74f1f053257.jpg',
     pieces: '8 Pieces',
   },
@@ -23,6 +25,7 @@ const collections = [
     id: 'soft-authority',
     title: 'Soft Authority',
     subtitle: 'The Power Dressing Edit',
+    tag: 'Bestseller',
     image: '/images/0481794db27e2a26c0c9270a1390a116.jpg',
     pieces: '10 Pieces',
   },
@@ -30,6 +33,7 @@ const collections = [
     id: 'luminous',
     title: 'Luminous',
     subtitle: 'The Bridal Edit',
+    tag: 'Limited',
     image: '/images/ede8cddc9a34ad48ec667fd182136c85.jpg',
     pieces: '6 Pieces',
   },
@@ -40,17 +44,13 @@ export default function FeaturedCollection() {
 
   return (
     <section className={styles.section} id="featured-collection">
+      <div className={styles.rule} />
       <div className={`${styles.header} ${isVisible ? 'reveal-visible' : 'reveal-hidden'}`} ref={revealRef}>
-        <div className={styles.headerInner}>
-          <p className="section-label">The Collections</p>
-          <h2 className={styles.heading}>
-            Curated for the<br />
-            <em>seasons of your life.</em>
-          </h2>
-        </div>
-        <Link href="/shop" className="btn btn-dark" id="collection-view-all">
-          View All
-        </Link>
+        <p className="section-label">Shop Nankara</p>
+        <h2 className={styles.heading}>
+          Pieces worth<br />
+          <em>returning to.</em>
+        </h2>
       </div>
 
       <div className={styles.grid}>
@@ -61,13 +61,14 @@ export default function FeaturedCollection() {
             className={`${styles.card} ${i === 0 ? styles.cardLarge : ''}`}
             id={`collection-card-${col.id}`}
           >
+            <span className={styles.cardTag}>{col.tag}</span>
             <div className={styles.imageWrap}>
               <Image
                 src={col.image}
                 alt={`${col.title}: ${col.subtitle}`}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                style={{ objectFit: 'cover', objectPosition: 'center 15%', transition: 'transform 0.8s cubic-bezier(0.16,1,0.3,1)' }}
+                style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)', transition: 'transform 0.8s cubic-bezier(0.16,1,0.3,1)' }}
               />
             </div>
             <div className={styles.cardOverlay} />
@@ -75,9 +76,16 @@ export default function FeaturedCollection() {
               <p className={styles.cardSubtitle}>{col.subtitle}</p>
               <h3 className={styles.cardTitle}>{col.title}</h3>
               <p className={styles.cardPieces}>{col.pieces}</p>
+              <span className={styles.cardViewLink}>View Piece &rarr;</span>
             </div>
           </Link>
         ))}
+      </div>
+
+      <div className={styles.ctaWrap}>
+        <Link href="/shop" className="btn btn-dark" id="collection-view-all">
+          Enter the Shop
+        </Link>
       </div>
     </section>
   );

@@ -41,12 +41,23 @@
 .logo:hover { opacity: 0.75; }
 
 .logoMain {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
   font-family: var(--font-serif);
   font-size: var(--text-xl);
   font-weight: 400;
   letter-spacing: 0.06em;
   color: var(--color-black);
   white-space: nowrap;
+}
+
+.logoMain::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: var(--color-orange);
 }
 
 .transparent .logoMain {
