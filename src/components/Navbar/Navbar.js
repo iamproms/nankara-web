@@ -43,8 +43,9 @@ export default function Navbar() {
         <nav className={styles.desktopNav} aria-label="Main navigation">
           <Link href="/" className={`${styles.navLink} ${pathname === '/' ? styles.active : ''}`}>Home</Link>
           <Link href="/about" className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>About</Link>
-          <Link href="/contact" className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`}>Contact</Link>
-          <Link href="/store" className={styles.navLinkStore} id="nav-store">Store</Link>
+          <Link href="/queens-circle" className={`${styles.navLink} ${pathname === '/queens-circle' ? styles.active : ''}`} id="nav-queens-circle">Queens Circle</Link>
+          <Link href="/nankara-silhouette" className={`${styles.navLink} ${pathname === '/nankara-silhouette' ? styles.active : ''}`} id="nav-silhouette">Nankara Silhouette</Link>
+          <Link href="/shop" className={styles.navLinkShop} id="nav-shop">Shop</Link>
         </nav>
 
         {/* Hamburger */}
@@ -66,8 +67,9 @@ export default function Navbar() {
         <nav className={styles.mobileNav} aria-label="Mobile navigation">
           <Link href="/" className={styles.mobileNavLink} id="mobile-nav-home">Home</Link>
           <Link href="/about" className={styles.mobileNavLink} id="mobile-nav-about">About</Link>
-          <Link href="/contact" className={styles.mobileNavLink} id="mobile-nav-contact">Contact</Link>
-          <Link href="/store" className={`${styles.mobileNavLink} ${styles.mobileNavLinkStore}`} id="mobile-nav-store">Store</Link>
+          <Link href="/queens-circle" className={styles.mobileNavLink} id="mobile-nav-queens-circle">Queens Circle</Link>
+          <Link href="/nankara-silhouette" className={styles.mobileNavLink} id="mobile-nav-silhouette">Nankara Silhouette</Link>
+          <Link href="/shop" className={`${styles.mobileNavLink} ${styles.mobileNavLinkShop}`} id="mobile-nav-shop">Shop</Link>
         </nav>
       </div>
     </header>

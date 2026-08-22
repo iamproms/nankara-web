@@ -48,7 +48,7 @@ export default function FeaturedCollection() {
             <em>seasons of your life.</em>
           </h2>
         </div>
-        <Link href="/store" className="btn btn-dark" id="collection-view-all">
+        <Link href="/shop" className="btn btn-dark" id="collection-view-all">
           View All
         </Link>
       </div>
@@ -57,7 +57,7 @@ export default function FeaturedCollection() {
         {collections.map((col, i) => (
           <Link
             key={col.id}
-            href="/store"
+            href="/shop"
             className={`${styles.card} ${i === 0 ? styles.cardLarge : ''}`}
             id={`collection-card-${col.id}`}
           >

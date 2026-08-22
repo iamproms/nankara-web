@@ -32,8 +32,9 @@ export default function Footer() {
               <h3 className={styles.colTitle}>Navigate</h3>
               <Link href="/" className={styles.footerLink} id="footer-home">Home</Link>
               <Link href="/about" className={styles.footerLink} id="footer-about">About</Link>
-              <Link href="/contact" className={styles.footerLink} id="footer-contact">Contact</Link>
-              <Link href="/store" className={styles.footerLink} id="footer-store">Store</Link>
+              <Link href="/queens-circle" className={styles.footerLink} id="footer-queens-circle">Queens Circle</Link>
+              <Link href="/nankara-silhouette" className={styles.footerLink} id="footer-silhouette">Nankara Silhouette</Link>
+              <Link href="/shop" className={styles.footerLink} id="footer-shop">Shop</Link>
             </div>
             <div className={styles.navCol}>
               <h3 className={styles.colTitle}>The Brand</h3>
@@ -41,12 +42,13 @@ export default function Footer() {
               <Link href="/about#founder" className={styles.footerLink}>Founder Story</Link>
               <Link href="/about#craftsmanship" className={styles.footerLink}>Craftsmanship</Link>
               <Link href="/about#philosophy" className={styles.footerLink}>Design Philosophy</Link>
+              <Link href="/contact" className={styles.footerLink} id="footer-contact">Contact</Link>
             </div>
             <div className={styles.navCol}>
               <h3 className={styles.colTitle}>Contact</h3>
               <a href="mailto:hello@nankara.com" className={styles.footerLink} id="footer-email">hello@nankara.com</a>
               <Link href="/contact" className={styles.footerLink}>Business Inquiries</Link>
-              <Link href="/store" className={styles.footerLink}>Shop Collection</Link>
+              <Link href="/shop" className={styles.footerLink}>Shop Collection</Link>
             </div>
           </div>
         </div>

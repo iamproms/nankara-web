@@ -37,7 +37,7 @@ export default function NewsletterSection() {
           {status === 'success' ? (
             <div className={styles.success}>
               <span className={styles.successIcon}>✓</span>
-              <p className={styles.successText}>You are now part of the Dynasty.</p>
+              <p className={styles.successText}>You are now part of Nankara.</p>
               <p className={styles.successSub}>Watch your inbox for something beautiful.</p>
             </div>
           ) : (

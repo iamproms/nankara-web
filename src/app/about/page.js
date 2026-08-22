@@ -145,7 +145,7 @@ export default function AboutPage() {
               <p className={`section-label ${styles.labelLight}`}>Core Values</p>
               <h2 className={`${styles.sectionHeading} ${styles.headingLight}`}>
                 The pillars of<br />
-                <em>our dynasty.</em>
+                <em>who we are.</em>
               </h2>
             </div>
             <div className={styles.valuesGrid}>
@@ -191,14 +191,14 @@ export default function AboutPage() {
           <div className={`${styles.inner} ${styles.innerNarrow} ${styles.textCenter}`}>
             <p className={`section-label ${styles.labelCenter}`}>Looking Forward</p>
             <h2 className={styles.sectionHeading}>
-              The dynasty is<br />
+              Nankara is<br />
               <em>just beginning.</em>
             </h2>
             <p className={`${styles.body} ${styles.bodyCenter}`}>
               We are expanding thoughtfully — new collections, new categories, and new ways to bring the Nankara experience to more women around the world. But our core will never change: premium quality, emotional design, and a deep respect for the woman who chooses to wear us.
             </p>
             <div className={styles.futureCtas}>
-              <Link href="/store" className="btn btn-dark" id="about-shop-now">Shop the Current Collection</Link>
+              <Link href="/shop" className="btn btn-dark" id="about-shop-now">Shop the Current Collection</Link>
               <Link href="/contact" className="btn btn-orange" id="about-get-in-touch">Get in Touch</Link>
             </div>
           </div>

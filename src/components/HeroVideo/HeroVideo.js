@@ -50,7 +50,7 @@ export default function HeroVideo() {
             Nankara — luxury reimagined for the intentional woman.
           </p>
           <div className={styles.ctas}>
-            <Link href="/store" className={`btn btn-light ${styles.cta}`} id="hero-explore-collection">
+            <Link href="/shop" className={`btn btn-light ${styles.cta}`} id="hero-explore-collection">
               Explore Collection
             </Link>
             <Link href="/about" className={`btn btn-outline ${styles.cta}`} id="hero-discover-story">

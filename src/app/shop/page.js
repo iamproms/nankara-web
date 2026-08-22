@@ -4,16 +4,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
-import styles from './store.module.css';
+import styles from './shop.module.css';
 
 
 
 
-export default function StorePage() {
+export default function ShopPage() {
   return (
     <>
       <Navbar />
-      <main id="store-main" className={styles.main}>
+      <main id="shop-main" className={styles.main}>
         {/* Background image */}
         <div className={styles.bg}>
           <Image
@@ -29,7 +29,7 @@ export default function StorePage() {
 
         {/* Content */}
         <div className={styles.content}>
-          <p className={styles.label}>The Store</p>
+          <p className={styles.label}>The Shop</p>
 
           <h1 className={styles.heading}>
             Something<br />
@@ -52,22 +52,22 @@ export default function StorePage() {
             <form
               className={styles.notifyForm}
               onSubmit={(e) => e.preventDefault()}
-              id="store-notify-form"
+              id="shop-notify-form"
             >
               <input
                 type="email"
                 className={styles.notifyInput}
                 placeholder="Your email address"
-                id="store-notify-email"
-                aria-label="Email to be notified when store launches"
+                id="shop-notify-email"
+                aria-label="Email to be notified when shop launches"
               />
-              <button type="submit" className={styles.notifyBtn} id="store-notify-submit">
+              <button type="submit" className={styles.notifyBtn} id="shop-notify-submit">
                 Notify Me
               </button>
             </form>
           </div>
 
-          <Link href="/" className={styles.backLink} id="store-back-home">
+          <Link href="/" className={styles.backLink} id="shop-back-home">
             ← Return Home
           </Link>
         </div>
