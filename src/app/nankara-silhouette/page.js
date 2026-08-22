@@ -41,7 +41,7 @@ export default function NankaraSilhouettePage() {
         <section className={styles.hero} id="silhouette-hero">
           <div className={styles.heroImage}>
             <Image
-              src="/images/nankara-06.jpg"
+              src="/images/nankara-03.jpg"
               alt="Nankara Silhouette signature collection"
               fill
               sizes="100vw"

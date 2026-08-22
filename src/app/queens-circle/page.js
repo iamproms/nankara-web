@@ -35,7 +35,7 @@ export default function QueensCirclePage() {
         <section className={styles.hero} id="queens-circle-hero">
           <div className={styles.heroImage}>
             <Image
-              src="/images/nankara-08.jpg"
+              src="/images/nankara-03.jpg"
               alt="Nankara Queens Circle"
               fill
               sizes="100vw"
