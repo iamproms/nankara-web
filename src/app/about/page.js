@@ -31,7 +31,7 @@ export default function AboutPage() {
               alt="About the Nankara brand"
               fill
               sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)' }}
+              style={{ objectFit: 'cover', objectPosition: 'center 55%', filter: 'var(--photo-tone)' }}
               priority
             />
             <div className={styles.heroOverlay} />

@@ -39,7 +39,7 @@ export default function QueensCirclePage() {
               alt="Nankara Queens Circle"
               fill
               sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)' }}
+              style={{ objectFit: 'cover', objectPosition: 'center 48%', filter: 'var(--photo-tone)' }}
               priority
             />
             <div className={styles.heroOverlay} />

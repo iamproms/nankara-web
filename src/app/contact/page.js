@@ -48,7 +48,7 @@ export default function ContactPage() {
               alt="Contact Nankara"
               fill
               sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 75%', filter: 'var(--photo-tone)' }}
+              style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)' }}
               priority
             />
             <div className={styles.heroOverlay} />
