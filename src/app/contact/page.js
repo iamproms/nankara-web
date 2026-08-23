@@ -44,11 +44,11 @@ export default function ContactPage() {
         <section className={styles.pageHeader}>
           <div className={styles.heroImage}>
             <Image
-              src="/images/nankara-07.jpg"
+              src="/images/nankara-16.jpg"
               alt="Contact Nankara"
               fill
               sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 20%', filter: 'var(--photo-tone)' }}
+              style={{ objectFit: 'cover', objectPosition: 'center 75%', filter: 'var(--photo-tone)' }}
               priority
             />
             <div className={styles.heroOverlay} />

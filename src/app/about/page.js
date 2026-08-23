@@ -27,7 +27,7 @@ export default function AboutPage() {
         <section className={styles.hero} id="about-hero">
           <div className={styles.heroImage}>
             <Image
-              src="/images/nankara-08.jpg"
+              src="/images/nankara-12.jpg"
               alt="About the Nankara brand"
               fill
               sizes="100vw"
@@ -86,7 +86,7 @@ export default function AboutPage() {
             <div className={styles.founderImageWrap} style={{ position: 'relative' }}>
               <div className={styles.founderImage}>
                 <Image
-                  src="/images/nankara-04.jpg"
+                  src="/images/nankara-13.jpg"
                   alt="Nankara Founder"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
