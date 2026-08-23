@@ -136,7 +136,7 @@ export default function AboutPage() {
               alt="Nankara craftsmanship and material quality"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: 'cover', objectPosition: 'center', filter: 'var(--photo-tone)' }}
+              style={{ objectFit: 'cover', objectPosition: 'center top', filter: 'var(--photo-tone)' }}
             />
           </div>
           <div className={styles.craftContent}>

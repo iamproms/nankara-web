@@ -54,6 +54,7 @@ export default function Navbar() {
           <Link href="/about" className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>About</Link>
           <Link href="/queens-circle" className={`${styles.navLink} ${pathname === '/queens-circle' ? styles.active : ''}`} id="nav-queens-circle">Queens Circle</Link>
           <Link href="/nankara-silhouette" className={`${styles.navLink} ${pathname === '/nankara-silhouette' ? styles.active : ''}`} id="nav-silhouette">Nankara Silhouette</Link>
+          <Link href="/contact" className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`} id="nav-contact">Contact</Link>
           <Link href="/shop" className={styles.navLinkShop} id="nav-shop">Shop</Link>
         </nav>
 
@@ -78,6 +79,7 @@ export default function Navbar() {
           <Link href="/about" className={styles.mobileNavLink} id="mobile-nav-about">About</Link>
           <Link href="/queens-circle" className={styles.mobileNavLink} id="mobile-nav-queens-circle">Queens Circle</Link>
           <Link href="/nankara-silhouette" className={styles.mobileNavLink} id="mobile-nav-silhouette">Nankara Silhouette</Link>
+          <Link href="/contact" className={styles.mobileNavLink} id="mobile-nav-contact">Contact</Link>
           <Link href="/shop" className={`${styles.mobileNavLink} ${styles.mobileNavLinkShop}`} id="mobile-nav-shop">Shop</Link>
         </nav>
       </div>
