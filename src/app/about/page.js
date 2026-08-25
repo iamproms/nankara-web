@@ -58,6 +58,25 @@ export default function AboutPage() {
             <p className={`${styles.body} ${styles.bodyCenter}`}>
               We design clothing that empowers women to walk into any room and be seen, not because they demand attention, but because their presence commands it naturally.
             </p>
+            <p className={`${styles.body} ${styles.bodyCenter}`} style={{ marginTop: 'var(--space-md)' }}>
+              We aspire to always curate style as a powerful extension of women, delivering a splendid experience that leaves long-lasting memories for our clients, with excellent service and quality products, whilst engaging endlessly in activities that better our community.
+            </p>
+          </ScrollReveal>
+        </section>
+
+        {/* Nankara Woman Affirmation */}
+        <section className={styles.affirmationSection} id="affirmation">
+          <ScrollReveal className={`${styles.inner} ${styles.innerNarrow} ${styles.textCenter}`}>
+            <p className="section-label">Nankara Woman Affirmation</p>
+            <ul className={styles.affirmationList}>
+              <li>I know who I am</li>
+              <li>I love who I am and who I am becoming</li>
+              <li>I am rooted in my <em>identity</em></li>
+              <li>I am committed to my purpose</li>
+              <li>I am worthy</li>
+              <li>I am empowered</li>
+              <li>I am designed for exploits</li>
+            </ul>
           </ScrollReveal>
         </section>
 
@@ -71,15 +90,16 @@ export default function AboutPage() {
                 <em>refuse to compromise.</em>
               </h2>
               <p className={`${styles.body} ${styles.dropCap}`}>
-                Nankara was born from a personal frustration. As a woman navigating both corporate boardrooms and creative spaces, I found that the fashion industry often asked me to choose between elegance and power, between femininity and authority.
+                Princess Ogbonnia is an excellent fashion designer who hails from Enugu, Nigeria. She has always been a vocational entrepreneur from a very young age, with an eye and a love for distinctive fashion styling, restyling outfits and creating stylish purse bags, dresses, and headrests with simple tailoring tools, gifting and selling them to friends at school.
               </p>
               <p className={styles.body}>
-                I didn&apos;t want to choose. I wanted garments that held the same complexity as the women wearing them. So, I built a brand that doesn&apos;t just make clothes, but crafts armor for the modern woman.
+                Inspired by her creative parents, notably her father, a naturally talented stylist and designer who owned a chain of boutiques, Princess had the opportunity to learn the art of styling and design, later attending a sewing academy shortly before university. Though she never planned to pursue fashion as a career, her love for it grew naturally as she evolved into a sought-after designer for unique, personalized pieces, fueled by her entrepreneurial spirit and her passion for authenticity, creativity, and purposefulness.
               </p>
               <div style={{ marginTop: 'var(--space-md)' }}>
                 <p style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--color-black)' }}>
-                  <em>Founder, Nankara</em>
+                  <em>Princess Ogbonnia</em>
                 </p>
+                <p className="section-label" style={{ marginTop: '0.25rem' }}>CEO &amp; Creative Director</p>
               </div>
             </div>
             
@@ -87,7 +107,7 @@ export default function AboutPage() {
               <div className={styles.founderImage}>
                 <Image
                   src="/images/nankara-13.jpg"
-                  alt="Nankara Founder"
+                  alt="Princess Ogbonnia, Nankara Founder"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)' }}

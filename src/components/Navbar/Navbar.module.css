@@ -90,6 +90,67 @@
   background: var(--color-white);
 }
 
+/* Identity Consultation dropdown */
+.navDropdown {
+  position: relative;
+}
+
+.navDropdownTrigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.navDropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--duration-fast) ease, visibility var(--duration-fast) ease;
+  z-index: 10;
+}
+
+.navDropdown:hover .navDropdownMenu,
+.navDropdown:focus-within .navDropdownMenu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.navDropdownLinks {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  border: 1px solid var(--color-gray-light);
+}
+
+.navDropdownLink {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  text-decoration: none;
+  padding: var(--space-sm) var(--space-md);
+  white-space: nowrap;
+  transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.navDropdownLink:hover {
+  background: var(--color-off-white);
+  color: var(--color-orange-mid);
+}
+
 /* Shop CTA */
 .navLinkShop {
   font-family: var(--font-sans);
@@ -197,6 +258,21 @@
 .mobileNavLinkShop {
   color: var(--color-orange-mid);
   border-color: var(--color-orange-light);
+}
+
+.mobileNavGroupLabel {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  margin-top: var(--space-xs);
+}
+
+.mobileNavSubLink {
+  padding-left: var(--space-md);
+  font-size: var(--text-xs);
 }
 
 /* Responsive */

@@ -29,7 +29,7 @@ export default function ShopPage() {
 
         {/* Content */}
         <div className={styles.content}>
-          <p className={styles.label}>The Shop</p>
+          <p className={styles.label}>The Identity Collection #1</p>
 
           <h1 className={styles.heading}>
             Something<br />
@@ -40,7 +40,7 @@ export default function ShopPage() {
           <div className={styles.divider} />
 
           <p className={styles.body}>
-            Our collection is being carefully curated for you. Each piece chosen with intention, crafted with care, and designed for the woman who deserves nothing less than extraordinary.
+            You haven&apos;t just found a piece of clothing, you&apos;ve discovered an expression of your unique story, identity and purpose. Meet The Bold Statement Queen, The Power Queen, The Soft Elegant Queen, The Luminous Queen, and The Quiet Power Queen: five identities, curated with intention and crafted with care.
           </p>
 
           <p className={styles.launchNote}>

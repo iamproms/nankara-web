@@ -33,6 +33,7 @@ yarn-error.log*
 
 # raw source assets (already copied into public/)
 /nankara_original_images
+/lessons
 
 # typescript
 *.tsbuildinfo

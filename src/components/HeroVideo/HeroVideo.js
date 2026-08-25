@@ -25,14 +25,13 @@ export default function HeroVideo() {
       {/* Content */}
       <div className={styles.content}>
         <div className={styles.contentInner}>
-          <p className={styles.preLabel}>The New Collection</p>
+          <p className={styles.preLabel}>The Identity Collection #1</p>
           <h1 className={styles.headline}>
-            Dressed for the<br />
-            <em>Woman You Are</em>
+            Experience the<br />
+            <em>Dress That Is You</em>
           </h1>
           <p className={styles.description}>
-            Where elegance is not a choice, it is a language. <br />
-            Nankara: luxury reimagined for the intentional woman.
+            Curated for the woman you are and becoming.
           </p>
           <div className={styles.ctas}>
             <Link href="/shop" className={`btn btn-light ${styles.cta}`} id="hero-explore-collection">
