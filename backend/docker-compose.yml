@@ -1,0 +1,16 @@
+# Local Postgres for development. Run: docker compose up -d
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: nankara
+      POSTGRES_PASSWORD: nankara
+      POSTGRES_DB: nankara
+    ports:
+      # Host 5433 to avoid clashing with any Postgres already on 5432.
+      - "5433:5432"
+    volumes:
+      - nankara_pgdata:/var/lib/postgresql/data
+
+volumes:
+  nankara_pgdata:
