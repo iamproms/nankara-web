@@ -1,0 +1,39 @@
+.price {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.15em;
+  font-family: var(--font-sans);
+  color: var(--color-black);
+}
+
+.ngn {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.usd {
+  font-size: 0.78em;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--color-gray);
+}
+
+/* Product card — sits under the name, understated */
+.card .ngn {
+  font-size: var(--text-sm);
+}
+
+/* Product detail — the headline price */
+.detail .ngn {
+  font-size: var(--text-2xl);
+  font-weight: 300;
+  letter-spacing: 0;
+}
+.detail .usd {
+  font-size: var(--text-sm);
+}
+
+/* Inline (drawer / cart line / subtotal) */
+.inline .ngn {
+  font-size: var(--text-base);
+}

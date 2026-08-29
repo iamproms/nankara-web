@@ -1,4 +1,6 @@
 import SmoothScroll from '../components/SmoothScroll/SmoothScroll';
+import CartProvider from '../components/CartProvider/CartProvider';
+import CartDrawer from '../components/CartDrawer/CartDrawer';
 import '../styles/globals.css';
 
 export const metadata = {
@@ -21,9 +23,12 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body>
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+        <CartProvider>
+          <SmoothScroll>
+            {children}
+            <CartDrawer />
+          </SmoothScroll>
+        </CartProvider>
       </body>
     </html>
   );

@@ -1,0 +1,41 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.button {
+  flex: 1;
+  min-width: 180px;
+  justify-content: center;
+  min-height: 44px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.note {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-gray);
+}
+
+@media (max-width: 480px) {
+  .row {
+    flex-direction: column;
+  }
+  .button {
+    width: 100%;
+  }
+}

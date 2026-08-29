@@ -4,12 +4,15 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useCart } from '../../hooks/useCart';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { totalQuantity, isReady, openDrawer } = useCart();
+  const bagLabel = isReady && totalQuantity > 0 ? `Bag (${totalQuantity})` : 'Bag';
 
   const isHome = pathname === '/';
   const isSolid = scrolled || !isHome;
@@ -72,6 +75,15 @@ export default function Navbar() {
             </div>
           </div>
           <Link href="/shop" className={styles.navLinkShop} id="nav-shop">Shop</Link>
+          <button
+            type="button"
+            className={styles.navCart}
+            onClick={openDrawer}
+            id="nav-cart-trigger"
+            aria-label={`Open bag, ${isReady ? totalQuantity : 0} item${totalQuantity === 1 ? '' : 's'}`}
+          >
+            {bagLabel}
+          </button>
         </nav>
 
         {/* Hamburger */}
@@ -99,6 +111,14 @@ export default function Navbar() {
           <Link href="/identity-consultation" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`} id="mobile-nav-book-consultation">Book a Consultation</Link>
           <Link href="/contact" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`} id="mobile-nav-general-contact">General Contact</Link>
           <Link href="/shop" className={`${styles.mobileNavLink} ${styles.mobileNavLinkShop}`} id="mobile-nav-shop">Shop</Link>
+          <button
+            type="button"
+            className={`${styles.mobileNavLink} ${styles.mobileNavCart}`}
+            onClick={() => { setMenuOpen(false); openDrawer(); }}
+            id="mobile-nav-cart-trigger"
+          >
+            {bagLabel}
+          </button>
         </nav>
       </div>
     </header>

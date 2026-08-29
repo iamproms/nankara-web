@@ -1,0 +1,23 @@
+.note {
+  padding: var(--space-md);
+  border: 1px solid var(--color-gray-muted);
+  background: var(--color-off-white);
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-orange-mid);
+  margin-bottom: var(--space-xs);
+}
+
+.body {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-gray);
+}

@@ -1,0 +1,58 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  text-decoration: none;
+  color: inherit;
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-off-white);
+}
+
+.imageWrap :global(img) {
+  transition: transform 0.8s var(--ease-out);
+}
+
+.card:hover .imageWrap :global(img) {
+  transform: scale(1.04);
+}
+
+.imagePlaceholder {
+  position: absolute;
+  inset: 0;
+  background: var(--color-gray-muted);
+}
+
+.outOfStock {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  padding: 0.35rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  background: rgba(15, 15, 15, 0.85);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--color-black);
+}

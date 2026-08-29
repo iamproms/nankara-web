@@ -50,6 +50,9 @@ alembic upgrade head
 python -m app.cli create-admin --email you@nankara.com --password 'a-strong-password'
 python -m app.cli seed-categories
 
+# optional: a development-only sample catalogue for exercising the storefront
+python -m app.cli seed-demo-products
+
 # run
 uvicorn app.main:app --reload --port 8000
 ```
