@@ -10,7 +10,10 @@ import AddToBag from '../../../components/AddToBag/AddToBag';
 import { getProduct } from '../../../lib/api';
 import styles from './product.module.css';
 
-export const revalidate = 60;
+// Server-rendered per request (like /shop) so admin publishes, price edits and
+// stock changes appear on the storefront immediately. The catalogue is tiny and
+// the API is fast; a CDN cache layer can come later (Milestone 5).
+export const dynamic = 'force-dynamic';
 
 function trimDescription(text, max = 155) {
   if (!text) return 'A made-to-measure Nankara piece from The Identity Collection.';
@@ -20,7 +23,7 @@ function trimDescription(text, max = 155) {
 
 export async function generateMetadata({ params }) {
   try {
-    const product = await getProduct(params.slug);
+    const product = await getProduct(params.slug, { fresh: true });
     const description = trimDescription(product.description);
     const image = product.primary_image?.url;
     return {
@@ -48,7 +51,7 @@ export async function generateMetadata({ params }) {
 export default async function ProductPage({ params }) {
   let product;
   try {
-    product = await getProduct(params.slug);
+    product = await getProduct(params.slug, { fresh: true });
   } catch (err) {
     if (err?.status === 404) notFound();
     throw err;

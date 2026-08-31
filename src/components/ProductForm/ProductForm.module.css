@@ -1,0 +1,126 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 620px;
+  font-family: var(--font-sans);
+}
+
+.banner {
+  font-size: 0.85rem;
+  color: #7a2318;
+  background: #fbeae7;
+  border: 1px solid #edc9c2;
+  padding: 0.6rem 0.8rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray);
+}
+
+.input {
+  width: 100%;
+  padding: 0.55rem 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-black);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-light);
+  border-radius: 0;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-black);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--color-gray);
+}
+
+.errorMsg {
+  font-size: 0.75rem;
+  color: #c0392b;
+}
+
+.inlineAdd {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.inlineAdd .input {
+  flex: 1;
+}
+
+.smallBtn {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--color-black);
+  background: var(--color-black);
+  color: var(--color-white);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.linkBtn {
+  border: none;
+  background: none;
+  color: var(--color-gray);
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.linkBtn:hover {
+  color: var(--color-black);
+}
+
+.checkRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+.actions button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (max-width: 600px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

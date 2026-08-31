@@ -15,7 +15,10 @@ export const metadata = {
 export const dynamic = 'force-dynamic';
 
 export default async function ShopPage() {
-  const [products, categories] = await Promise.all([getProducts(), getCategories()]);
+  const [products, categories] = await Promise.all([
+    getProducts({ fresh: true }),
+    getCategories({ fresh: true }),
+  ]);
 
   return (
     <>
