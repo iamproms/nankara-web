@@ -31,6 +31,25 @@ async function apiGet(path, { revalidate = 60, fresh = false } = {}) {
   return res.json();
 }
 
+async function apiPost(path, body) {
+  const res = await fetch(`${baseUrl()}/api/v1${path}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', accept: 'application/json' },
+    body: JSON.stringify(body),
+  });
+
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok) {
+    const error = new Error(`API ${res.status} for ${path}`);
+    error.status = res.status;
+    error.data = data; // FastAPI { detail: ... }
+    throw error;
+  }
+
+  return data;
+}
+
 export function getProducts(opts) {
   return apiGet('/products', opts);
 }
@@ -41,4 +60,19 @@ export function getProduct(slug, opts) {
 
 export function getCategories(opts) {
   return apiGet('/categories', opts);
+}
+
+export function requestShippingQuote({ countryCode, stateRegion }) {
+  return apiPost('/shipping/quote', {
+    country_code: countryCode,
+    state_region: stateRegion || null,
+  });
+}
+
+export function createOrder(payload) {
+  return apiPost('/orders', payload);
+}
+
+export function getOrderConfirmation(reference) {
+  return apiGet(`/orders/${encodeURIComponent(reference)}/confirmation`, { fresh: true });
 }

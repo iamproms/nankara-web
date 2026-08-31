@@ -9,8 +9,11 @@ from app.categories.admin_router import router as admin_categories_router
 from app.categories.router import router as categories_router
 from app.core.config import settings
 from app.media.router import router as media_router
+from app.orders.router import router as orders_router
 from app.products.admin_router import router as admin_products_router
 from app.products.router import router as products_router
+from app.shipping.admin_router import router as admin_shipping_router
+from app.shipping.router import router as shipping_router
 
 logging.basicConfig(level=logging.INFO)
 
@@ -29,6 +32,8 @@ API_V1 = "/api/v1"
 # Public storefront
 app.include_router(products_router, prefix=f"{API_V1}/products", tags=["products"])
 app.include_router(categories_router, prefix=f"{API_V1}/categories", tags=["categories"])
+app.include_router(shipping_router, prefix=f"{API_V1}/shipping", tags=["shipping"])
+app.include_router(orders_router, prefix=f"{API_V1}/orders", tags=["orders"])
 
 # Admin
 app.include_router(auth_router, prefix=f"{API_V1}/admin/auth", tags=["admin: auth"])
@@ -43,6 +48,11 @@ app.include_router(
 )
 app.include_router(
     media_router, prefix=f"{API_V1}/admin/media", tags=["admin: media"]
+)
+app.include_router(
+    admin_shipping_router,
+    prefix=f"{API_V1}/admin/shipping-zones",
+    tags=["admin: shipping"],
 )
 
 

@@ -5,6 +5,7 @@ Usage:
     python -m app.cli list-admins
     python -m app.cli seed-categories
     python -m app.cli seed-demo-products
+    python -m app.cli seed-shipping-zones
 """
 
 import argparse
@@ -16,9 +17,31 @@ from sqlalchemy import select
 from app.core.database import SessionLocal
 from app.core.security import hash_password
 from app.core.slugs import ensure_unique_slug, slugify_text
-from app.models import Admin, Availability, Category, Product, ProductImage
+from app.models import (
+    Admin,
+    Availability,
+    Category,
+    Product,
+    ProductImage,
+    ShippingZone,
+)
 
 DEFAULT_CATEGORIES = ["Dresses", "Two-Piece Sets", "Gowns", "Separates"]
+
+# Dummy shipping rates (whole Naira) — spec §11. MUST be replaced or explicitly
+# approved before accepting real customer orders (Milestone 5). Editable in the
+# admin dashboard at /admin/shipping.
+DEFAULT_SHIPPING_ZONES = [
+    ("rivers", "Rivers", "nigeria", 5000),
+    ("lagos", "Lagos", "nigeria", 8000),
+    ("abuja-fct", "Abuja / FCT", "nigeria", 9000),
+    ("other-nigeria", "Other Nigeria", "nigeria", 10000),
+    ("west-africa", "West Africa", "international", 25000),
+    ("rest-of-africa", "Rest of Africa", "international", 40000),
+    ("united-kingdom", "United Kingdom", "international", 55000),
+    ("us-canada", "United States / Canada", "international", 60000),
+    ("rest-of-world", "Rest of World", "international", 70000),
+]
 
 
 def _pexels(photo_id: int) -> str:
@@ -187,6 +210,28 @@ def seed_demo_products() -> None:
     )
 
 
+def seed_shipping_zones() -> None:
+    """Insert the starter shipping zones with dummy rates. Idempotent by code."""
+    with SessionLocal() as db:
+        created = 0
+        for code, name, region_type, rate in DEFAULT_SHIPPING_ZONES:
+            if db.scalar(select(ShippingZone).where(ShippingZone.code == code)):
+                continue
+            db.add(
+                ShippingZone(
+                    code=code, name=name, region_type=region_type, rate=rate
+                )
+            )
+            created += 1
+        db.commit()
+    print(
+        f"Seeded {created} new shipping zone(s). Rates are DUMMY figures — "
+        "replace before launch."
+        if created
+        else "Shipping zones already seeded."
+    )
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="app.cli")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -200,6 +245,9 @@ def main() -> None:
     sub.add_parser(
         "seed-demo-products", help="Insert a development-only sample catalogue"
     )
+    sub.add_parser(
+        "seed-shipping-zones", help="Insert the starter shipping zones (dummy rates)"
+    )
 
     args = parser.parse_args()
     if args.command == "create-admin":
@@ -210,6 +258,8 @@ def main() -> None:
         seed_categories()
     elif args.command == "seed-demo-products":
         seed_demo_products()
+    elif args.command == "seed-shipping-zones":
+        seed_shipping_zones()
 
 
 if __name__ == "__main__":
