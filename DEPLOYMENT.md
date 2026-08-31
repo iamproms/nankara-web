@@ -18,8 +18,16 @@ root, the API is in `backend/`.
 | **Resend** | Transactional email — account verification + password reset (order emails later) | Free tier ≈ 3k emails/mo. You must **verify a sending domain** (add the DNS records Resend gives you) before `RESEND_FROM` can be `orders@nankara.com`; until then use `onboarding@resend.dev`. |
 | **Domain registrar** (nankara.com) | The public site + the email sending domain | If you don't already own it. Needed for a proper `RESEND_FROM`, and recommended for the site + API (see §6). |
 
-Optional: **Neon** or **Supabase** if you'd rather not use Render's Postgres
-(both have generous free tiers; the app just needs a connection string).
+**Database — use Render Postgres.** The backend runs on Render, so a Render PG
+instance gives you private same-region networking (~1 ms, no egress), one
+platform and one bill. The app is plain Postgres (SQLAlchemy + psycopg3 +
+Alembic, no extensions), so **Neon** or **Supabase** also work — pick one of
+those only if you specifically want point-in-time recovery, a built-in
+connection pooler (you'll run multiple backend instances or go serverless), or
+you already use it. Supabase's auth/storage/realtime are dead weight here (this
+app has its own auth). Whichever you pick, you'll be on a **paid plan** for
+launch — the free tiers expire (Render deletes after 90 days) or pause on idle
+(Supabase after 7 days).
 
 ---
 
