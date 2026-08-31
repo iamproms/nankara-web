@@ -114,8 +114,9 @@ Interactive docs: <http://localhost:8000/docs>
    `nk_admin` session cookie** (`HttpOnly; Secure` in prod; `SameSite=Lax`). The
    response body is just the admin record — no token is exposed to JavaScript.
 2. The browser sends the cookie automatically on every same-origin `/api/v1/*`
-   call. State-changing requests are additionally checked against an allowed
-   `Origin` (a lightweight same-origin CSRF guard).
+   call. On a state-changing request, **if** an `Origin`/`Referer` is present it
+   must be in `CORS_ORIGINS` (a same-origin CSRF guard); origin-less requests
+   like `curl` / server-to-server are allowed.
 3. The session JWT carries `aud` (`nankara-admin`) and `tv` (the admin's
    `token_version`). `POST /api/v1/admin/auth/password` and
    `python -m app.cli reset-admin-password` bump `token_version`, which
