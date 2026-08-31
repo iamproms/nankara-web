@@ -86,6 +86,13 @@
   cursor: default;
 }
 
+.payError {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: #7a2318;
+}
+
 .measure {
   margin-top: var(--space-md);
   padding: var(--space-md);

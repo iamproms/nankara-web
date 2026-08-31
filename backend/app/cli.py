@@ -6,11 +6,13 @@ Usage:
     python -m app.cli seed-categories
     python -m app.cli seed-demo-products
     python -m app.cli seed-shipping-zones
+    python -m app.cli seed-demo-orders
 """
 
 import argparse
 import getpass
 import sys
+from datetime import datetime, timezone
 
 from sqlalchemy import select
 
@@ -21,10 +23,16 @@ from app.models import (
     Admin,
     Availability,
     Category,
+    Order,
+    OrderItem,
+    OrderStatus,
+    Payment,
+    PaymentStatus,
     Product,
     ProductImage,
     ShippingZone,
 )
+from app.orders.reference import generate_reference
 
 DEFAULT_CATEGORIES = ["Dresses", "Two-Piece Sets", "Gowns", "Separates"]
 
@@ -232,6 +240,86 @@ def seed_shipping_zones() -> None:
     )
 
 
+# Sentinel so the seed is idempotent and easy to spot / clear.
+_DEMO_ORDER_EMAIL = "demo-order@nankara.example"
+
+_DEMO_ORDERS = [
+    ("Amara", "Bold Statement", OrderStatus.PENDING_PAYMENT, None),
+    ("Zainab", "Power Queen", OrderStatus.PAID, PaymentStatus.SUCCESS),
+    ("Ngozi", "Soft Elegant", OrderStatus.IN_PRODUCTION, PaymentStatus.SUCCESS),
+    ("Folake", "Luminous Queen", OrderStatus.SHIPPED, PaymentStatus.SUCCESS),
+]
+
+
+def seed_demo_orders() -> None:
+    """Insert a few orders across statuses so the admin orders UI has content.
+
+    Development-only. Idempotent — clears and re-inserts the sentinel orders.
+    """
+    with SessionLocal() as db:
+        product = db.scalar(select(Product).where(Product.is_published.is_(True)))
+        zone = db.scalar(
+            select(ShippingZone).where(ShippingZone.is_active.is_(True))
+        )
+        if product is None or zone is None:
+            sys.exit(
+                "Need at least one published product and one active shipping zone. "
+                "Run seed-demo-products and seed-shipping-zones first."
+            )
+
+        existing = db.scalars(
+            select(Order).where(Order.customer_email == _DEMO_ORDER_EMAIL)
+        ).all()
+        for order in existing:
+            db.delete(order)
+        db.flush()
+
+        for first_name, last_name, status, pay_status in _DEMO_ORDERS:
+            subtotal = product.price_ngn
+            total = subtotal + zone.rate
+            order = Order(
+                reference=generate_reference(),
+                customer_first_name=first_name,
+                customer_last_name=last_name,
+                customer_email=_DEMO_ORDER_EMAIL,
+                customer_phone="+2348000000000",
+                delivery_country="Nigeria",
+                delivery_address_1="1 Demo Street",
+                delivery_city="Lagos",
+                delivery_state_region="Lagos",
+                shipping_zone_id=zone.id,
+                shipping_zone_name=zone.name,
+                shipping_amount=zone.rate,
+                subtotal=subtotal,
+                total=total,
+                currency="NGN",
+                status=status,
+                items=[
+                    OrderItem(
+                        product_id=product.id,
+                        product_name=product.name,
+                        product_slug=product.slug,
+                        unit_price=product.price_ngn,
+                        quantity=1,
+                        subtotal=subtotal,
+                    )
+                ],
+            )
+            if pay_status is not None:
+                order.payments.append(
+                    Payment(
+                        provider_reference=f"{order.reference}",
+                        amount=total * 100,
+                        currency="NGN",
+                        status=pay_status,
+                        verified_at=datetime.now(timezone.utc),
+                    )
+                )
+            db.add(order)
+        db.commit()
+    print(f"Seeded {len(_DEMO_ORDERS)} demo orders ({_DEMO_ORDER_EMAIL}).")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="app.cli")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -248,6 +336,9 @@ def main() -> None:
     sub.add_parser(
         "seed-shipping-zones", help="Insert the starter shipping zones (dummy rates)"
     )
+    sub.add_parser(
+        "seed-demo-orders", help="Insert development-only demo orders across statuses"
+    )
 
     args = parser.parse_args()
     if args.command == "create-admin":
@@ -260,6 +351,8 @@ def main() -> None:
         seed_demo_products()
     elif args.command == "seed-shipping-zones":
         seed_shipping_zones()
+    elif args.command == "seed-demo-orders":
+        seed_demo_orders()
 
 
 if __name__ == "__main__":

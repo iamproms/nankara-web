@@ -1,0 +1,48 @@
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.wait {
+  color: #7a5a12;
+  background: #fbf1dc;
+  border-color: #ecd9ac;
+}
+
+.go {
+  color: #1c5c34;
+  background: #e2f2e7;
+  border-color: #b9ddc5;
+}
+
+.work {
+  color: #1f4d7a;
+  background: #e2edf7;
+  border-color: #b9d1e6;
+}
+
+.done {
+  color: #3a3a3a;
+  background: #ececec;
+  border-color: #d3d3d3;
+}
+
+.stop {
+  color: #7a2318;
+  background: #fbeae7;
+  border-color: #edc9c2;
+}
+
+.muted {
+  color: var(--color-gray);
+  background: #f2f2f2;
+  border-color: #e0e0e0;
+}

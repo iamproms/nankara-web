@@ -1,5 +1,5 @@
-// Minimal client for the admin API. Milestone 3 uses it for the shipping-zone
-// editor; Milestone 4 reuses the same token + fetch pattern for /admin/orders.
+// Client for the admin API — products, categories, media, shipping zones, orders,
+// dashboard overview.
 //
 // The JWT lives in localStorage (single-admin MVP, admin-only surface). Every call
 // goes through the same-origin /api/v1 proxy, so the backend host is never shipped.
@@ -54,17 +54,73 @@ export async function adminLogin(email, password) {
 
 async function adminFetch(path, { method = 'GET', body } = {}) {
   const token = getAdminToken();
+  const hasBody = body !== undefined;
   const res = await fetch(`/api/v1${path}`, {
     method,
     headers: {
       accept: 'application/json',
-      ...(body ? { 'content-type': 'application/json' } : {}),
+      ...(hasBody ? { 'content-type': 'application/json' } : {}),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
-    ...(body ? { body: JSON.stringify(body) } : {}),
+    ...(hasBody ? { body: JSON.stringify(body) } : {}),
   });
   return parse(res);
 }
+
+// Multipart upload — adminFetch can't do this (it forces JSON). The browser sets
+// the multipart boundary, so we must NOT set content-type ourselves.
+async function adminUpload(path, formData) {
+  const token = getAdminToken();
+  const res = await fetch(`/api/v1${path}`, {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: formData,
+  });
+  return parse(res);
+}
+
+// ── Products ──────────────────────────────────────────────────────────────────
+
+export function getAdminProducts() {
+  return adminFetch('/admin/products');
+}
+
+export function getAdminProduct(id) {
+  return adminFetch(`/admin/products/${id}`);
+}
+
+export function createProduct(body) {
+  return adminFetch('/admin/products', { method: 'POST', body });
+}
+
+export function updateProduct(id, body) {
+  return adminFetch(`/admin/products/${id}`, { method: 'PATCH', body });
+}
+
+// The backend expects a bare JSON array of {url, public_id, alt_text, is_primary};
+// list order becomes sort order, and it replaces the whole set.
+export function replaceProductImages(id, images) {
+  return adminFetch(`/admin/products/${id}/images`, { method: 'PUT', body: images });
+}
+
+export function getAdminCategories() {
+  return adminFetch('/admin/categories');
+}
+
+export function createCategory(body) {
+  return adminFetch('/admin/categories', { method: 'POST', body });
+}
+
+export function uploadMedia(file) {
+  const fd = new FormData();
+  fd.append('file', file);
+  return adminUpload('/admin/media/upload', fd);
+}
+
+// ── Shipping ──────────────────────────────────────────────────────────────────
 
 export function getShippingZones() {
   return adminFetch('/admin/shipping-zones');
@@ -72,4 +128,24 @@ export function getShippingZones() {
 
 export function updateShippingZone(id, body) {
   return adminFetch(`/admin/shipping-zones/${id}`, { method: 'PATCH', body });
+}
+
+export function getOverview() {
+  return adminFetch('/admin/overview');
+}
+
+export function getAdminOrders({ status } = {}) {
+  const qs = status ? `?status=${encodeURIComponent(status)}` : '';
+  return adminFetch(`/admin/orders${qs}`);
+}
+
+export function getAdminOrder(id) {
+  return adminFetch(`/admin/orders/${id}`);
+}
+
+export function updateAdminOrderStatus(id, status) {
+  return adminFetch(`/admin/orders/${id}/status`, {
+    method: 'PATCH',
+    body: { status },
+  });
 }

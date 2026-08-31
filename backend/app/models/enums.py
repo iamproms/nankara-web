@@ -16,3 +16,12 @@ class OrderStatus(str, enum.Enum):
     SHIPPED = "SHIPPED"
     DELIVERED = "DELIVERED"
     CANCELLED = "CANCELLED"
+
+
+class PaymentStatus(str, enum.Enum):
+    """Lifecycle of a single payment attempt against an order (spec §13, §20)."""
+
+    PENDING = "PENDING"      # transaction initialised, awaiting Paystack
+    SUCCESS = "SUCCESS"      # verified charge — the order moves to PAID
+    FAILED = "FAILED"        # Paystack reported failure, or the amount didn't match
+    ABANDONED = "ABANDONED"  # customer left the hosted page without paying

@@ -27,6 +27,14 @@ class Settings(BaseSettings):
     cloudinary_api_secret: str | None = None
     cloudinary_upload_folder: str = "nankara/products"
 
+    # Paystack — the only MVP payment gateway (spec §13). Secret key stays
+    # server-side; the browser never sees it.
+    paystack_secret_key: str | None = None
+    paystack_public_key: str | None = None  # kept for symmetry / a future inline flow
+    paystack_base_url: str = "https://api.paystack.co"
+    # Used to build the Paystack callback_url the customer returns to.
+    frontend_origin: str = "http://localhost:3000"
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def _split_origins(cls, value: object) -> object:
@@ -47,6 +55,10 @@ class Settings(BaseSettings):
                 self.cloudinary_api_secret,
             )
         )
+
+    @property
+    def paystack_configured(self) -> bool:
+        return bool(self.paystack_secret_key)
 
 
 settings = Settings()

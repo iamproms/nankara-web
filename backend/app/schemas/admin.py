@@ -18,3 +18,8 @@ class OverviewOut(BaseModel):
     draft_products: int
     out_of_stock_products: int
     total_categories: int
+    # Order operations (spec §17)
+    pending_payment_orders: int
+    paid_orders: int
+    in_production_orders: int
+    awaiting_shipment_orders: int

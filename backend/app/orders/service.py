@@ -3,12 +3,57 @@ from sqlalchemy.orm import Session
 
 from app.models import Availability, Order, OrderItem, OrderStatus, Product
 from app.orders.reference import unique_reference
-from app.schemas.order import OrderCreate
+from app.schemas.order import (
+    OrderConfirmationOut,
+    OrderCreate,
+    OrderCustomerSummary,
+    OrderDeliverySummary,
+    OrderItemOut,
+)
 from app.shipping.service import quote_shipping
+
+
+def to_confirmation(order: Order) -> OrderConfirmationOut:
+    """Public-safe view of an order (spec §14, §22) — no phone, no street address."""
+    return OrderConfirmationOut(
+        reference=order.reference,
+        status=order.status,
+        currency=order.currency,
+        subtotal=order.subtotal,
+        shipping_amount=order.shipping_amount,
+        total=order.total,
+        items=[OrderItemOut.model_validate(item) for item in order.items],
+        delivery=OrderDeliverySummary(
+            city=order.delivery_city,
+            state_region=order.delivery_state_region,
+            country=order.delivery_country,
+        ),
+        customer=OrderCustomerSummary(
+            first_name=order.customer_first_name,
+            email=order.customer_email,
+        ),
+    )
+
+
+# Forward-only fulfilment transitions the admin may make (spec §19). PAID is
+# reached only via a verified payment; PENDING_PAYMENT is never set by hand.
+ALLOWED_STATUS_TRANSITIONS: dict[OrderStatus, set[OrderStatus]] = {
+    OrderStatus.PENDING_PAYMENT: {OrderStatus.CANCELLED},
+    OrderStatus.PAID: {OrderStatus.IN_PRODUCTION, OrderStatus.CANCELLED},
+    OrderStatus.IN_PRODUCTION: {OrderStatus.READY, OrderStatus.CANCELLED},
+    OrderStatus.READY: {OrderStatus.SHIPPED, OrderStatus.CANCELLED},
+    OrderStatus.SHIPPED: {OrderStatus.DELIVERED},
+    OrderStatus.DELIVERED: set(),
+    OrderStatus.CANCELLED: set(),
+}
 
 
 class EmptyCartError(Exception):
     """The order has no line items."""
+
+
+class IllegalStatusTransition(Exception):
+    """The requested order-status change isn't an allowed forward move."""
 
 
 class OrderValidationError(Exception):
@@ -103,6 +148,22 @@ def create_order(db: Session, payload: OrderCreate) -> Order:
         items=order_items,
     )
     db.add(order)
+    db.commit()
+    db.refresh(order)
+    return order
+
+
+def transition_order_status(
+    db: Session, order: Order, new_status: OrderStatus
+) -> Order:
+    """Move an order to `new_status` if it's an allowed forward step (spec §19)."""
+    if new_status == order.status:
+        return order
+    if new_status not in ALLOWED_STATUS_TRANSITIONS.get(order.status, set()):
+        raise IllegalStatusTransition(
+            f"Cannot move a {order.status.value} order to {new_status.value}."
+        )
+    order.status = new_status
     db.commit()
     db.refresh(order)
     return order

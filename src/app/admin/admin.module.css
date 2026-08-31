@@ -86,6 +86,166 @@
   font-size: 0.8rem;
 }
 
+.link {
+  color: var(--color-black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.backLink {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--color-gray);
+  margin-bottom: 1rem;
+}
+
+.backLink:hover {
+  color: var(--color-black);
+}
+
+/* Dashboard cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  border: 1px solid var(--color-gray-muted);
+  padding: 1rem;
+}
+
+.cardNumber {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.cardLabel {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gray);
+  margin-top: 0.4rem;
+}
+
+.groupTitle {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray);
+  margin: 0 0 0.6rem;
+}
+
+/* Orders list */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.select {
+  padding: 0.4rem 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  border: 1px solid var(--color-gray-light);
+}
+
+.rowLink {
+  cursor: pointer;
+}
+
+.rowLink:hover td {
+  background: #fafafa;
+}
+
+/* Order detail */
+.section {
+  border-top: 1px solid var(--color-gray-muted);
+  padding: 1.25rem 0;
+}
+
+.sectionTitle {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray);
+  margin-bottom: 0.75rem;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.4rem 1rem;
+  font-size: 0.875rem;
+}
+
+.detailGrid dt {
+  color: var(--color-gray);
+}
+
+.detailGrid dd {
+  color: var(--color-black);
+}
+
+.fulfilRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Products list + detail */
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.productThumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  background: #f2f2f2;
+  flex-shrink: 0;
+}
+
+.productThumbEmpty {
+  width: 40px;
+  height: 40px;
+  background: #f2f2f2;
+  border: 1px solid var(--color-gray-muted);
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.pageActions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.pageActions .smallBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.savedNote {
+  font-size: 0.8rem;
+  color: #1c5c34;
+  margin-bottom: 1rem;
+}
+
 /* Login */
 .authMain {
   min-height: 100vh;

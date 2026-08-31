@@ -16,6 +16,7 @@ from app.models.mixins import TimestampMixin
 
 if TYPE_CHECKING:
     from app.models.order_item import OrderItem
+    from app.models.payment import Payment
 
 
 class Order(Base, TimestampMixin):
@@ -87,4 +88,11 @@ class Order(Base, TimestampMixin):
         back_populates="order",
         cascade="all, delete-orphan",
         order_by="OrderItem.id",
+    )
+    # Usually one row; a failed attempt followed by a retry leaves two. The
+    # "current" attempt is the last one.
+    payments: Mapped[list["Payment"]] = relationship(
+        back_populates="order",
+        cascade="all, delete-orphan",
+        order_by="Payment.id",
     )

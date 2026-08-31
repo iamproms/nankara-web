@@ -76,3 +76,15 @@ export function createOrder(payload) {
 export function getOrderConfirmation(reference) {
   return apiGet(`/orders/${encodeURIComponent(reference)}/confirmation`, { fresh: true });
 }
+
+// Payment (Milestone 4). The backend calls Paystack and returns a hosted-checkout
+// URL; the secret key never reaches the browser.
+export function initializePaystack(reference) {
+  return apiPost('/payments/paystack/initialize', { reference });
+}
+
+// On-demand verification — the fallback for when the webhook hasn't landed yet
+// (e.g. local dev). Safe to call repeatedly; the transition is idempotent.
+export function verifyPayment(reference) {
+  return apiPost('/payments/paystack/verify', { reference });
+}

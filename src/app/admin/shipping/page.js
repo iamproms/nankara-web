@@ -1,17 +1,13 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 
-import {
-  clearAdminToken,
-  getAdminToken,
-  getShippingZones,
-  updateShippingZone,
-} from '../../../lib/adminApi';
+import AdminNav from '../../../components/AdminNav/AdminNav';
+import { useAdminGuard } from '../../../hooks/useAdminGuard';
+import { getShippingZones, updateShippingZone } from '../../../lib/adminApi';
 import styles from '../admin.module.css';
 
-function ZoneRow({ zone, onSaved }) {
+function ZoneRow({ zone, onSaved, onAuthError }) {
   const [rate, setRate] = useState(String(zone.rate));
   const [active, setActive] = useState(zone.is_active);
   const [state, setState] = useState('idle'); // idle | saving | saved | error
@@ -27,8 +23,8 @@ function ZoneRow({ zone, onSaved }) {
       });
       onSaved(updated);
       setState('saved');
-    } catch {
-      setState('error');
+    } catch (err) {
+      if (!onAuthError(err)) setState('error');
     }
   };
 
@@ -70,7 +66,7 @@ function ZoneRow({ zone, onSaved }) {
 }
 
 export default function AdminShippingPage() {
-  const router = useRouter();
+  const { authReady, onAuthError } = useAdminGuard();
   const [zones, setZones] = useState(null);
   const [error, setError] = useState('');
 
@@ -78,69 +74,56 @@ export default function AdminShippingPage() {
     try {
       setZones(await getShippingZones());
     } catch (err) {
-      if (err?.status === 401) {
-        clearAdminToken();
-        router.replace('/admin/login');
-        return;
-      }
-      setError('Could not load shipping zones.');
+      if (!onAuthError(err)) setError('Could not load shipping zones.');
     }
-  }, [router]);
+  }, [onAuthError]);
 
   useEffect(() => {
-    if (!getAdminToken()) {
-      router.replace('/admin/login');
-      return;
-    }
-    load();
-  }, [router, load]);
+    if (authReady) load();
+  }, [authReady, load]);
 
   const onSaved = (updated) => {
-    setZones((prev) =>
-      prev.map((z) => (z.id === updated.id ? updated : z))
-    );
-  };
-
-  const logout = () => {
-    clearAdminToken();
-    router.replace('/admin/login');
+    setZones((prev) => prev.map((z) => (z.id === updated.id ? updated : z)));
   };
 
   return (
-    <main className={styles.main}>
-      <header className={styles.header}>
+    <>
+      <AdminNav />
+      <main className={styles.main}>
         <h1 className={styles.title}>Shipping zones</h1>
-        <button type="button" className={styles.smallBtn} onClick={logout} id="admin-logout">
-          Log out
-        </button>
-      </header>
 
-      <p className={styles.warning}>
-        Rates are placeholder figures. Replace them with real, approved rates before
-        accepting live orders.
-      </p>
+        <p className={styles.warning}>
+          Rates are placeholder figures. Replace them with real, approved rates before
+          accepting live orders.
+        </p>
 
-      {error && <p className={styles.error}>{error}</p>}
-      {!zones && !error && <p className={styles.muted}>Loading…</p>}
+        {error && <p className={styles.error}>{error}</p>}
+        {!zones && !error && <p className={styles.muted}>Loading…</p>}
 
-      {zones && (
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>Zone</th>
-              <th>Region</th>
-              <th>Rate (NGN)</th>
-              <th>Active</th>
-              <th />
-            </tr>
-          </thead>
-          <tbody>
-            {zones.map((zone) => (
-              <ZoneRow key={zone.id} zone={zone} onSaved={onSaved} />
-            ))}
-          </tbody>
-        </table>
-      )}
-    </main>
+        {zones && (
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Zone</th>
+                <th>Region</th>
+                <th>Rate (NGN)</th>
+                <th>Active</th>
+                <th />
+              </tr>
+            </thead>
+            <tbody>
+              {zones.map((zone) => (
+                <ZoneRow
+                  key={zone.id}
+                  zone={zone}
+                  onSaved={onSaved}
+                  onAuthError={onAuthError}
+                />
+              ))}
+            </tbody>
+          </table>
+        )}
+      </main>
+    </>
   );
 }

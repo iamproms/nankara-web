@@ -3,7 +3,7 @@
 FastAPI + PostgreSQL backend for the Nankara commerce MVP. Lives alongside the
 Next.js frontend in this monorepo. Spec: [`../NANKARA_SHOP_MVP.md`](../NANKARA_SHOP_MVP.md).
 
-## Status — Milestones 1–3
+## Status — Milestones 1–4
 
 **M1 — data + product administration**
 
@@ -14,6 +14,8 @@ Next.js frontend in this monorepo. Spec: [`../NANKARA_SHOP_MVP.md`](../NANKARA_S
 - Product image management via Cloudinary (upload endpoint + ordered replace)
 - Public read endpoints for the storefront (published products only)
 - Admin overview counts
+- Frontend `/admin/products` screens — create / edit / publish / stock / images /
+  inline category creation (added 2026-08-31; plan `../ADMIN_PRODUCT_UI_PLAN.md`)
 
 **M3 — checkout + shipping**
 
@@ -26,8 +28,30 @@ Next.js frontend in this monorepo. Spec: [`../NANKARA_SHOP_MVP.md`](../NANKARA_S
 - `GET / PATCH /api/v1/admin/shipping-zones` — admin rate + active-flag editing
 - `pytest` suite under `tests/`
 
-Not yet built: payments (Paystack init + webhook + verification), admin order management —
-Milestone 4.
+**M4 — payment + orders**
+
+- `payments` table + `payment_status` enum (`PENDING/SUCCESS/FAILED/ABANDONED`), migration `0003`.
+  `amount` is stored in **kobo** (`order.total * 100`).
+- `POST /api/v1/payments/paystack/initialize` — creates a `PENDING` payment, calls Paystack
+  `/transaction/initialize`, returns the hosted-checkout `authorization_url`. `409` if the
+  order isn't awaiting payment; `503` if `PAYSTACK_SECRET_KEY` is unset.
+- `POST /api/v1/payments/paystack/webhook` — HMAC-SHA512 signature check over the raw body
+  (`401` on mismatch), then applies `charge.success` **once** per `provider_reference`
+  (amount + currency re-checked) and moves the order `PENDING_PAYMENT → PAID`. Always `200`
+  on a valid signature so Paystack stops retrying.
+- `POST /api/v1/payments/paystack/verify` — on-demand verification against Paystack, the
+  fallback for when a webhook hasn't landed (local dev). Same idempotent transition.
+- `GET /api/v1/admin/orders`, `GET /api/v1/admin/orders/{id}`,
+  `PATCH /api/v1/admin/orders/{id}/status` — admin order list / detail / fulfilment.
+  Status moves are a forward-only whitelist (`PAID → IN_PRODUCTION → READY → SHIPPED →
+  DELIVERED`, or `CANCELLED`); `PAID`/`PENDING_PAYMENT` can't be set by hand — `409` otherwise.
+- `GET /api/v1/admin/overview` also returns order counts (pending payment / paid / in
+  production / awaiting shipment).
+- `python -m app.cli seed-demo-orders` — dev-only demo orders across statuses for the admin UI.
+- `httpx` is now a runtime dependency (the Paystack client).
+
+Milestones 1–4 are complete. Next: launch hardening (M5) — real Paystack test/live
+run, production env / HTTPS, replace the dummy shipping rates, DB backups, mobile QA.
 
 ## Requirements
 
@@ -63,8 +87,9 @@ python -m app.cli create-admin --email you@nankara.com --password 'a-strong-pass
 python -m app.cli seed-categories
 python -m app.cli seed-shipping-zones      # 9 zones, DUMMY rates — replace before launch (§11)
 
-# optional: a development-only sample catalogue for exercising the storefront
-python -m app.cli seed-demo-products
+# optional: development-only sample data for exercising the UI
+python -m app.cli seed-demo-products       # sample catalogue
+python -m app.cli seed-demo-orders         # a few orders across statuses (for /admin/orders)
 
 # run
 uvicorn app.main:app --reload --port 8000
@@ -91,6 +116,9 @@ Interactive docs: <http://localhost:8000/docs>
 | POST | `/api/v1/shipping/quote` | `{ country_code, state_region }` → `{ zone_code, zone_name, amount, currency }`; 422 if unshippable |
 | POST | `/api/v1/orders` | Guest checkout — creates a `PENDING_PAYMENT` order (see below) |
 | GET | `/api/v1/orders/{reference}/confirmation` | Public-safe order view, keyed on the unguessable reference |
+| POST | `/api/v1/payments/paystack/initialize` | `{ reference }` → `{ authorization_url, reference }`; 409 if not payable, 503 if unconfigured |
+| POST | `/api/v1/payments/paystack/webhook` | Paystack `charge.success` — signed, idempotent; moves the order to `PAID` |
+| POST | `/api/v1/payments/paystack/verify` | `{ reference }` → public-safe order view; on-demand verification fallback |
 | GET | `/health` | Liveness |
 
 ### Admin (bearer token required)
@@ -109,6 +137,9 @@ Interactive docs: <http://localhost:8000/docs>
 | POST | `/api/v1/admin/media/upload` | multipart `file` → `{ url, public_id }` |
 | GET | `/api/v1/admin/shipping-zones` | All zones + rates |
 | PATCH | `/api/v1/admin/shipping-zones/{id}` | `{ rate?, is_active? }` |
+| GET | `/api/v1/admin/orders` | Order list, newest first; `?status=` / `?payment=` filters |
+| GET | `/api/v1/admin/orders/{id}` | Full order detail (customer, address, payment) |
+| PATCH | `/api/v1/admin/orders/{id}/status` | `{ status }` — forward-only fulfilment moves; 409 otherwise |
 
 ### Typical "add a product" sequence
 
@@ -165,3 +196,10 @@ URL in `alembic.ini`.
   `slug` is explicitly passed, so shared product URLs stay stable.
 - **Multiple admins** are supported by the schema; only one is needed at launch.
 - **CORS** is restricted to `CORS_ORIGINS` (comma-separated) from `.env`.
+- **Payments** — `PAYSTACK_SECRET_KEY` (test or live) enables the payment endpoints;
+  without it they return `503`. `FRONTEND_ORIGIN` builds the Paystack `callback_url`
+  (`{FRONTEND_ORIGIN}/order/{reference}/success`). The webhook is verified with
+  HMAC-SHA512 over the raw body using the same secret key. Locally there is no public
+  webhook URL — the storefront's success page calls `/payments/paystack/verify` as a
+  fallback; use `ngrok` (or similar) to exercise the real webhook.
+- **Payment amounts** are stored in kobo (`payments.amount`); order money stays whole Naira.

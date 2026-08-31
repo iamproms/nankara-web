@@ -4,7 +4,9 @@
 
 This document defines the **minimum viable product (MVP)** required to
 add e-commerce functionality to the existing Nankara fashion website and
-launch as quickly as practical.
+launch a complete, correct first version of the Shop. There is no schedule
+pressure: scope is kept small deliberately, but everything inside that scope
+is expected to be finished and working — not stubbed or left half-built.
 
 The existing Home, About, Contact and other brand pages remain outside
 this scope. The MVP focuses on one outcome:
@@ -1190,9 +1192,13 @@ even when the customer never returns to the success page.
 
 # 29. Recommended Build Order
 
-The team is behind schedule, so implementation should optimize for the
-shortest path to a complete transaction rather than finishing entire
-subsystems in isolation.
+The milestones below are ordered so that a working end-to-end transaction
+comes together early — but there is no schedule pressure, and each milestone
+is finished completely before the next one starts. "Finished" means the
+milestone's backend, its storefront, **and its admin UI** are all in place,
+and its acceptance items pass through the real interface without developer
+intervention (no `curl`, no Swagger, no seed script standing in for a screen
+the spec calls for).
 
 ## Milestone 1 --- Data + Product Administration
 
@@ -1300,8 +1306,11 @@ The Shop MVP is launch-ready when all of the following are true:
 23. Payment and admin secrets are not exposed to the browser.
 24. The complete customer purchase flow works on mobile.
 
-If these criteria pass, the commerce MVP should **ship rather than wait
-for post-MVP features**.
+Once **all** of these criteria genuinely pass — through the real UI, not a
+workaround — the commerce MVP is complete and ready to launch. The post-MVP
+features in §3 are separate work: they are not launch blockers and should not
+be pulled forward, but launch should not happen before every criterion above
+is actually met.
 
 ------------------------------------------------------------------------
 

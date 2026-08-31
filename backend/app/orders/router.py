@@ -8,38 +8,12 @@ from app.orders.service import (
     EmptyCartError,
     OrderValidationError,
     create_order,
+    to_confirmation as _to_confirmation,
 )
-from app.schemas.order import (
-    OrderConfirmationOut,
-    OrderCreate,
-    OrderCustomerSummary,
-    OrderDeliverySummary,
-    OrderItemOut,
-)
+from app.schemas.order import OrderConfirmationOut, OrderCreate
 from app.shipping.service import ShippingUnavailable
 
 router = APIRouter()
-
-
-def _to_confirmation(order: Order) -> OrderConfirmationOut:
-    return OrderConfirmationOut(
-        reference=order.reference,
-        status=order.status,
-        currency=order.currency,
-        subtotal=order.subtotal,
-        shipping_amount=order.shipping_amount,
-        total=order.total,
-        items=[OrderItemOut.model_validate(item) for item in order.items],
-        delivery=OrderDeliverySummary(
-            city=order.delivery_city,
-            state_region=order.delivery_state_region,
-            country=order.delivery_country,
-        ),
-        customer=OrderCustomerSummary(
-            first_name=order.customer_first_name,
-            email=order.customer_email,
-        ),
-    )
 
 
 @router.post(
