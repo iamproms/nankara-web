@@ -39,7 +39,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# internal working docs (local only) — session recaps and milestone plans
+# internal working docs (local only) — session recaps, milestone plans, test guides
 SESSION_*_REPORT.md
 *_IMPLEMENTATION_PLAN.md
 ADMIN_PRODUCT_UI_PLAN.md
+*_TESTING_GUIDE.md
