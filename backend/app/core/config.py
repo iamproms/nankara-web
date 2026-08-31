@@ -41,6 +41,12 @@ class Settings(BaseSettings):
     # links in account emails.
     frontend_origin: str = "http://localhost:3000"
 
+    # Set when the API is on a sibling subdomain of the frontend (e.g.
+    # `api.nankara.com` + `www.nankara.com`) so session cookies are sent to both:
+    # COOKIE_DOMAIN=.nankara.com. Leave blank when the frontend proxies /api/v1/*
+    # (same-origin) — the local dev and default Vercel setups.
+    cookie_domain: str | None = None
+
     # Resend — transactional email (email verification, password reset). Optional;
     # when unset those flows still succeed and just don't send.
     resend_api_key: str | None = None

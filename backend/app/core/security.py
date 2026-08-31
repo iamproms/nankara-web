@@ -97,8 +97,11 @@ def set_session_cookie(
         secure=settings.is_production,
         samesite="lax",
         path="/",
+        domain=settings.cookie_domain or None,
     )
 
 
 def clear_session_cookie(response: Response, name: str) -> None:
-    response.delete_cookie(key=name, path="/", samesite="lax")
+    response.delete_cookie(
+        key=name, path="/", samesite="lax", domain=settings.cookie_domain or None
+    )
