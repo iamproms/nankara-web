@@ -1,9 +1,12 @@
 """Same-origin enforcement for cookie-authenticated, state-changing requests.
 
 Session cookies are `SameSite=Lax`, which already blocks the classic cross-site
-form-POST CSRF vector. This adds a defence-in-depth check: every non-safe method
-must carry an `Origin` (or `Referer`) that matches an allowed frontend origin.
-A double-submit CSRF token is the upgrade path if this ever needs strengthening.
+form-POST CSRF vector. This adds defence-in-depth: on a non-safe method, if an
+`Origin` (or `Referer`) header is present it MUST match an allowed frontend
+origin. Requests with no `Origin`/`Referer` at all (curl, server-to-server, API
+tooling) are allowed — a browser always sends `Origin` on a state-changing
+cross-origin request, so the CSRF vector is still covered. A double-submit CSRF
+token is the upgrade path if this ever needs strengthening.
 """
 
 from urllib.parse import urlsplit
@@ -15,20 +18,24 @@ from app.core.config import settings
 _SAFE_METHODS = {"GET", "HEAD", "OPTIONS", "TRACE"}
 
 
-def _origin_allowed(value: str | None) -> bool:
+def _origin_of(value: str | None) -> str | None:
     if not value:
-        return False
+        return None
     parts = urlsplit(value)
-    origin = f"{parts.scheme}://{parts.netloc}" if parts.scheme else value
-    return origin in settings.cors_origins
+    if not parts.scheme:
+        return None
+    return f"{parts.scheme}://{parts.netloc}"
 
 
 def require_trusted_origin(request: Request) -> None:
     if request.method in _SAFE_METHODS:
         return
-    origin = request.headers.get("origin")
-    referer = request.headers.get("referer")
-    if _origin_allowed(origin) or _origin_allowed(referer):
+    origin = _origin_of(request.headers.get("origin")) or _origin_of(
+        request.headers.get("referer")
+    )
+    if origin is None:
+        return  # no browser origin → not a browser CSRF vector
+    if origin in settings.cors_origins:
         return
     raise HTTPException(
         status_code=status.HTTP_403_FORBIDDEN,
