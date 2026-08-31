@@ -1,34 +1,10 @@
 // Client for the admin API — products, categories, media, shipping zones, orders,
 // dashboard overview.
 //
-// The JWT lives in localStorage (single-admin MVP, admin-only surface). Every call
-// goes through the same-origin /api/v1 proxy, so the backend host is never shipped.
-
-export const ADMIN_TOKEN_KEY = 'nankara.admin.token';
-
-export function getAdminToken() {
-  try {
-    return localStorage.getItem(ADMIN_TOKEN_KEY);
-  } catch {
-    return null;
-  }
-}
-
-export function setAdminToken(token) {
-  try {
-    localStorage.setItem(ADMIN_TOKEN_KEY, token);
-  } catch {
-    /* private mode / quota — the page will just re-prompt for login */
-  }
-}
-
-export function clearAdminToken() {
-  try {
-    localStorage.removeItem(ADMIN_TOKEN_KEY);
-  } catch {
-    /* ignore */
-  }
-}
+// Auth is a session cookie (HttpOnly, set by the backend on login) — the browser
+// can't read it, so we never touch a token here. Every call is same-origin
+// through the /api/v1 proxy and sends the cookie automatically; the backend also
+// checks the request Origin on state-changing calls.
 
 async function parse(res) {
   const data = await res.json().catch(() => null);
@@ -41,45 +17,49 @@ async function parse(res) {
   return data;
 }
 
-export async function adminLogin(email, password) {
-  const res = await fetch('/api/v1/admin/auth/login', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', accept: 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
-  const data = await parse(res);
-  setAdminToken(data.access_token);
-  return data;
-}
-
 async function adminFetch(path, { method = 'GET', body } = {}) {
-  const token = getAdminToken();
   const hasBody = body !== undefined;
   const res = await fetch(`/api/v1${path}`, {
     method,
+    credentials: 'same-origin',
     headers: {
       accept: 'application/json',
       ...(hasBody ? { 'content-type': 'application/json' } : {}),
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
     ...(hasBody ? { body: JSON.stringify(body) } : {}),
   });
   return parse(res);
 }
 
-// Multipart upload — adminFetch can't do this (it forces JSON). The browser sets
-// the multipart boundary, so we must NOT set content-type ourselves.
 async function adminUpload(path, formData) {
-  const token = getAdminToken();
   const res = await fetch(`/api/v1${path}`, {
     method: 'POST',
-    headers: {
-      accept: 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
+    credentials: 'same-origin',
+    headers: { accept: 'application/json' }, // browser sets the multipart boundary
     body: formData,
   });
   return parse(res);
+}
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+
+export async function adminLogin(email, password) {
+  return adminFetch('/admin/auth/login', {
+    method: 'POST',
+    body: { email, password },
+  });
+}
+
+export function adminLogout() {
+  return adminFetch('/admin/auth/logout', { method: 'POST' });
+}
+
+export function getAdminMe() {
+  return adminFetch('/admin/auth/me');
+}
+
+export function changeAdminPassword(body) {
+  return adminFetch('/admin/auth/password', { method: 'POST', body });
 }
 
 // ── Products ──────────────────────────────────────────────────────────────────

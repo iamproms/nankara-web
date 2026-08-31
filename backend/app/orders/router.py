@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
 from app.core.database import get_db
+from app.core.ratelimit import limiter
 from app.models import Order
 from app.orders.service import (
     EmptyCartError,
@@ -19,7 +20,10 @@ router = APIRouter()
 @router.post(
     "", response_model=OrderConfirmationOut, status_code=status.HTTP_201_CREATED
 )
-def place_order(payload: OrderCreate, db: Session = Depends(get_db)) -> OrderConfirmationOut:
+@limiter.limit("10/minute")
+def place_order(
+    request: Request, payload: OrderCreate, db: Session = Depends(get_db)
+) -> OrderConfirmationOut:
     try:
         order = create_order(db, payload)
     except EmptyCartError:
@@ -35,8 +39,9 @@ def place_order(payload: OrderCreate, db: Session = Depends(get_db)) -> OrderCon
 
 
 @router.get("/{reference}/confirmation", response_model=OrderConfirmationOut)
+@limiter.limit("30/minute")
 def order_confirmation(
-    reference: str, db: Session = Depends(get_db)
+    request: Request, reference: str, db: Session = Depends(get_db)
 ) -> OrderConfirmationOut:
     order = db.scalar(
         select(Order)

@@ -6,6 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
 from app.core.database import get_db
+from app.core.ratelimit import limiter
 from app.models import Order
 from app.orders.service import to_confirmation
 from app.payments.service import (
@@ -24,8 +25,9 @@ router = APIRouter()
 
 
 @router.post("/paystack/initialize", response_model=PaymentInitOut)
+@limiter.limit("10/minute")
 def initialize_payment(
-    payload: PaymentInitIn, db: Session = Depends(get_db)
+    request: Request, payload: PaymentInitIn, db: Session = Depends(get_db)
 ) -> PaymentInitOut:
     order = db.scalar(select(Order).where(Order.reference == payload.reference))
     if order is None:
@@ -60,8 +62,9 @@ async def paystack_webhook(request: Request, db: Session = Depends(get_db)) -> d
 
 
 @router.post("/paystack/verify", response_model=OrderConfirmationOut)
+@limiter.limit("20/minute")
 def verify_payment(
-    payload: PaymentVerifyIn, db: Session = Depends(get_db)
+    request: Request, payload: PaymentVerifyIn, db: Session = Depends(get_db)
 ) -> OrderConfirmationOut:
     order = verify_and_apply(db, payload.reference)
     if order is None:

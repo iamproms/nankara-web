@@ -3,6 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
 from app.auth.dependencies import get_current_admin
+from app.core.csrf import require_trusted_origin
 from app.core.database import get_db
 from app.models import Order, OrderStatus, Payment, PaymentStatus
 from app.orders.service import IllegalStatusTransition, transition_order_status
@@ -17,7 +18,9 @@ from app.schemas.admin_order import (
 )
 from app.schemas.order import OrderItemOut
 
-router = APIRouter(dependencies=[Depends(get_current_admin)])
+router = APIRouter(
+    dependencies=[Depends(get_current_admin), Depends(require_trusted_origin)]
+)
 
 _with_relations = (selectinload(Order.items), selectinload(Order.payments))
 

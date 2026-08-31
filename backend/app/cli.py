@@ -155,6 +155,25 @@ def list_admins() -> None:
         print(f"[{admin.id}] {admin.email} ({state})")
 
 
+def reset_admin_password(email: str, password: str | None) -> None:
+    email = email.strip().lower()
+    if password is None:
+        password = getpass.getpass("New password: ")
+        if password != getpass.getpass("Confirm new password: "):
+            sys.exit("Passwords do not match.")
+    if len(password) < 8:
+        sys.exit("Password must be at least 8 characters.")
+
+    with SessionLocal() as db:
+        admin = db.scalar(select(Admin).where(Admin.email == email))
+        if admin is None:
+            sys.exit(f"No admin with email {email}.")
+        admin.password_hash = hash_password(password)
+        admin.token_version += 1  # log out every existing session
+        db.commit()
+    print(f"Reset password for {email} (all sessions invalidated).")
+
+
 def seed_categories() -> None:
     with SessionLocal() as db:
         created = 0
@@ -328,6 +347,12 @@ def main() -> None:
     p_create.add_argument("--email", required=True)
     p_create.add_argument("--password", help="Prompted for if omitted")
 
+    p_reset = sub.add_parser(
+        "reset-admin-password", help="Reset an admin password (logs out all sessions)"
+    )
+    p_reset.add_argument("--email", required=True)
+    p_reset.add_argument("--password", help="Prompted for if omitted")
+
     sub.add_parser("list-admins", help="List admin accounts")
     sub.add_parser("seed-categories", help="Insert a starter set of categories")
     sub.add_parser(
@@ -343,6 +368,8 @@ def main() -> None:
     args = parser.parse_args()
     if args.command == "create-admin":
         create_admin(args.email, args.password)
+    elif args.command == "reset-admin-password":
+        reset_admin_password(args.email, args.password)
     elif args.command == "list-admins":
         list_admins()
     elif args.command == "seed-categories":
