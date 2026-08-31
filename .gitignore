@@ -39,5 +39,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# session reports (local only)
+# internal working docs (local only) — session recaps and milestone plans
 SESSION_*_REPORT.md
+*_IMPLEMENTATION_PLAN.md
+ADMIN_PRODUCT_UI_PLAN.md
