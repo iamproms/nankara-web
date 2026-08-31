@@ -1,76 +1,40 @@
-'use client';
-
-import Image from 'next/image';
-import Link from 'next/link';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
+import ShopCatalogue from '../../components/ShopCatalogue/ShopCatalogue';
+import { getCategories, getProducts } from '../../lib/api';
 import styles from './shop.module.css';
 
+export const metadata = {
+  title: 'Shop — The Identity Collection | Nankara',
+  description:
+    'The Identity Collection #1. Ankara pieces made to your fit, built around identities such as The Bold Statement Queen and The Quiet Power Queen.',
+};
 
+// Rendered per request (SSR) so the build doesn't depend on the backend being up and
+// the catalogue is always current. The list is tiny (<10 items) and the API is fast.
+export const dynamic = 'force-dynamic';
 
+export default async function ShopPage() {
+  const [products, categories] = await Promise.all([
+    getProducts({ fresh: true }),
+    getCategories({ fresh: true }),
+  ]);
 
-export default function ShopPage() {
   return (
     <>
       <Navbar />
       <main id="shop-main" className={styles.main}>
-        {/* Background image */}
-        <div className={styles.bg}>
-          <Image
-            src="/images/nankara-06.jpg"
-            alt="Nankara collection, coming soon"
-            fill
-            sizes="100vw"
-            style={{ objectFit: 'cover', objectPosition: 'center top', filter: 'var(--photo-tone)' }}
-            priority
-          />
-          <div className={styles.overlay} />
-        </div>
-
-        {/* Content */}
-        <div className={styles.content}>
-          <p className={styles.label}>The Shop</p>
-
-          <h1 className={styles.heading}>
-            Something<br />
-            <em>beautiful</em><br />
-            is coming.
+        <section className={styles.intro} id="shop-intro">
+          <p className="section-label">The Identity Collection #1</p>
+          <h1 className={`editorial-heading ${styles.heading}`}>
+            You haven&apos;t just found a piece of clothing, you&apos;ve discovered an{' '}
+            <em>expression of your story</em>.
           </h1>
+        </section>
 
-          <div className={styles.divider} />
-
-          <p className={styles.body}>
-            Our collection is being carefully curated for you. Each piece chosen with intention, crafted with care, and designed for the woman who deserves nothing less than extraordinary.
-          </p>
-
-          <p className={styles.launchNote}>
-            Launching soon. Be the first to know.
-          </p>
-
-          {/* Inline newsletter just for this page */}
-          <div className={styles.notifyWrap}>
-            <form
-              className={styles.notifyForm}
-              onSubmit={(e) => e.preventDefault()}
-              id="shop-notify-form"
-            >
-              <input
-                type="email"
-                className={styles.notifyInput}
-                placeholder="Your email address"
-                id="shop-notify-email"
-                aria-label="Email to be notified when shop launches"
-              />
-              <button type="submit" className={styles.notifyBtn} id="shop-notify-submit">
-                Notify Me
-              </button>
-            </form>
-          </div>
-
-          <Link href="/" className={styles.backLink} id="shop-back-home">
-            ← Return Home
-          </Link>
-        </div>
+        <section className={styles.catalogueSection} id="shop-catalogue">
+          <ShopCatalogue products={products} categories={categories} />
+        </section>
       </main>
       <Footer />
     </>

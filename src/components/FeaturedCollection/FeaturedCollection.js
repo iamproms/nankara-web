@@ -6,36 +6,29 @@ import styles from './FeaturedCollection.module.css';
 
 const collections = [
   {
-    id: 'silk-reverie',
-    title: 'Silk Reverie',
-    subtitle: 'The Evening Collection',
-    tag: 'New Arrival',
+    id: 'bold-statement-queen',
+    title: 'The Bold Statement Queen',
     image: '/images/nankara-07.jpg',
-    pieces: '12 Pieces',
   },
   {
-    id: 'quiet-power',
-    title: 'Quiet Power',
-    subtitle: 'Day to Evening',
-    tag: 'Editor’s Pick',
+    id: 'power-queen',
+    title: 'The Power Queen',
     image: '/images/nankara-02.jpg',
-    pieces: '8 Pieces',
   },
   {
-    id: 'soft-authority',
-    title: 'Soft Authority',
-    subtitle: 'The Power Dressing Edit',
-    tag: 'Bestseller',
+    id: 'soft-elegant-queen',
+    title: 'The Soft Elegant Queen',
     image: '/images/nankara-08.jpg',
-    pieces: '10 Pieces',
   },
   {
-    id: 'luminous',
-    title: 'Luminous',
-    subtitle: 'The Bridal Edit',
-    tag: 'Limited',
+    id: 'luminous-queen',
+    title: 'The Luminous Queen',
     image: '/images/nankara-11.jpg',
-    pieces: '6 Pieces',
+  },
+  {
+    id: 'quiet-power-queen',
+    title: 'The Quiet Power Queen',
+    image: '/images/nankara-04.jpg',
   },
 ];
 
@@ -46,10 +39,10 @@ export default function FeaturedCollection() {
     <section className={styles.section} id="featured-collection">
       <div className={styles.rule} />
       <div className={`${styles.header} ${isVisible ? 'reveal-visible' : 'reveal-hidden'}`} ref={revealRef}>
-        <p className="section-label">Shop Nankara</p>
+        <p className="section-label">The Identity Collection #1</p>
         <h2 className={styles.heading}>
-          Pieces worth<br />
-          <em>returning to.</em>
+          You haven&apos;t just found a piece of clothing.<br />
+          <em>You&apos;ve discovered an identity.</em>
         </h2>
       </div>
 
@@ -61,11 +54,10 @@ export default function FeaturedCollection() {
             className={`${styles.card} ${i === 0 ? styles.cardLarge : ''}`}
             id={`collection-card-${col.id}`}
           >
-            <span className={styles.cardTag}>{col.tag}</span>
             <div className={styles.imageWrap}>
               <Image
                 src={col.image}
-                alt={`${col.title}: ${col.subtitle}`}
+                alt={col.title}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)', transition: 'transform 0.8s cubic-bezier(0.16,1,0.3,1)' }}
@@ -73,10 +65,8 @@ export default function FeaturedCollection() {
             </div>
             <div className={styles.cardOverlay} />
             <div className={styles.cardContent}>
-              <p className={styles.cardSubtitle}>{col.subtitle}</p>
               <h3 className={styles.cardTitle}>{col.title}</h3>
-              <p className={styles.cardPieces}>{col.pieces}</p>
-              <span className={styles.cardViewLink}>View Piece &rarr;</span>
+              <span className={styles.cardViewLink}>Discover &rarr;</span>
             </div>
           </Link>
         ))}

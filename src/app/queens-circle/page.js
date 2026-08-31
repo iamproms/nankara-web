@@ -58,8 +58,8 @@ export default function QueensCirclePage() {
           <ScrollReveal className={`${styles.inner} ${styles.innerNarrow} ${styles.textCenter}`}>
             <p className={`section-label ${styles.labelCenter}`}>What It Is</p>
             <h2 className={styles.sectionHeading}>
-              A private circle for the<br />
-              <em>women who wear us first.</em>
+              Welcome to the exclusive<br />
+              <em>experience of the dress that is you.</em>
             </h2>
             <p className={`${styles.body} ${styles.bodyCenter}`}>
               Queens Circle is Nankara&apos;s membership for our most valued clients: early access, private styling, and members-only pieces for the women who return season after season.

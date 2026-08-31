@@ -1,0 +1,306 @@
+/* Utilitarian admin styling — deliberately plain, not the editorial system. */
+
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  font-family: var(--font-sans);
+  color: var(--color-black);
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-family: var(--font-sans);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.warning {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: #7a2318;
+  background: #fbeae7;
+  border: 1px solid #edc9c2;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--color-gray-muted);
+  vertical-align: middle;
+}
+
+.table th {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray);
+}
+
+.muted {
+  color: var(--color-gray);
+}
+
+.rateInput {
+  width: 7rem;
+  padding: 0.35rem 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  border: 1px solid var(--color-gray-light);
+}
+
+.smallBtn {
+  padding: 0.4rem 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--color-black);
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.smallBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.error {
+  color: #c0392b;
+  font-size: 0.8rem;
+}
+
+.link {
+  color: var(--color-black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.backLink {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: var(--color-gray);
+  margin-bottom: 1rem;
+}
+
+.backLink:hover {
+  color: var(--color-black);
+}
+
+/* Dashboard cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  border: 1px solid var(--color-gray-muted);
+  padding: 1rem;
+}
+
+.cardNumber {
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.cardLabel {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-gray);
+  margin-top: 0.4rem;
+}
+
+.groupTitle {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray);
+  margin: 0 0 0.6rem;
+}
+
+/* Orders list */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.select {
+  padding: 0.4rem 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  border: 1px solid var(--color-gray-light);
+}
+
+.rowLink {
+  cursor: pointer;
+}
+
+.rowLink:hover td {
+  background: #fafafa;
+}
+
+/* Order detail */
+.section {
+  border-top: 1px solid var(--color-gray-muted);
+  padding: 1.25rem 0;
+}
+
+.sectionTitle {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray);
+  margin-bottom: 0.75rem;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.4rem 1rem;
+  font-size: 0.875rem;
+}
+
+.detailGrid dt {
+  color: var(--color-gray);
+}
+
+.detailGrid dd {
+  color: var(--color-black);
+}
+
+.fulfilRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Products list + detail */
+.productCell {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.productThumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  background: #f2f2f2;
+  flex-shrink: 0;
+}
+
+.productThumbEmpty {
+  width: 40px;
+  height: 40px;
+  background: #f2f2f2;
+  border: 1px solid var(--color-gray-muted);
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.pageActions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.pageActions .smallBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.savedNote {
+  font-size: 0.8rem;
+  color: #1c5c34;
+  margin-bottom: 1rem;
+}
+
+/* Login */
+.authMain {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  font-family: var(--font-sans);
+}
+
+.authCard {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid var(--color-gray-muted);
+  padding: 2rem;
+}
+
+.authTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gray);
+  margin-top: 0.5rem;
+}
+
+.input {
+  padding: 0.55rem 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  border: 1px solid var(--color-gray-light);
+}
+
+.primaryBtn {
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-black);
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.primaryBtn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

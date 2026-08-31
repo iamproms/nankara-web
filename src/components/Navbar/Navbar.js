@@ -4,15 +4,19 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useCart } from '../../hooks/useCart';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { totalQuantity, isReady, openDrawer } = useCart();
+  const bagLabel = isReady && totalQuantity > 0 ? `Bag (${totalQuantity})` : 'Bag';
 
   const isHome = pathname === '/';
   const isSolid = scrolled || !isHome;
+  const isConsultSection = pathname === '/contact' || pathname === '/identity-consultation';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,8 +58,32 @@ export default function Navbar() {
           <Link href="/about" className={`${styles.navLink} ${pathname === '/about' ? styles.active : ''}`}>About</Link>
           <Link href="/queens-circle" className={`${styles.navLink} ${pathname === '/queens-circle' ? styles.active : ''}`} id="nav-queens-circle">Queens Circle</Link>
           <Link href="/nankara-silhouette" className={`${styles.navLink} ${pathname === '/nankara-silhouette' ? styles.active : ''}`} id="nav-silhouette">Nankara Silhouette</Link>
-          <Link href="/contact" className={`${styles.navLink} ${pathname === '/contact' ? styles.active : ''}`} id="nav-contact">Contact</Link>
+          <div className={styles.navDropdown}>
+            <button
+              type="button"
+              className={`${styles.navLink} ${styles.navDropdownTrigger} ${isConsultSection ? styles.active : ''}`}
+              aria-haspopup="true"
+              id="nav-identity-consultation"
+            >
+              Identity Consultation
+            </button>
+            <div className={styles.navDropdownMenu}>
+              <div className={styles.navDropdownLinks}>
+                <Link href="/identity-consultation" className={styles.navDropdownLink} id="nav-book-consultation">Book a Consultation</Link>
+                <Link href="/contact" className={styles.navDropdownLink} id="nav-general-contact">General Contact</Link>
+              </div>
+            </div>
+          </div>
           <Link href="/shop" className={styles.navLinkShop} id="nav-shop">Shop</Link>
+          <button
+            type="button"
+            className={styles.navCart}
+            onClick={openDrawer}
+            id="nav-cart-trigger"
+            aria-label={`Open bag, ${isReady ? totalQuantity : 0} item${totalQuantity === 1 ? '' : 's'}`}
+          >
+            {bagLabel}
+          </button>
         </nav>
 
         {/* Hamburger */}
@@ -79,8 +107,18 @@ export default function Navbar() {
           <Link href="/about" className={styles.mobileNavLink} id="mobile-nav-about">About</Link>
           <Link href="/queens-circle" className={styles.mobileNavLink} id="mobile-nav-queens-circle">Queens Circle</Link>
           <Link href="/nankara-silhouette" className={styles.mobileNavLink} id="mobile-nav-silhouette">Nankara Silhouette</Link>
-          <Link href="/contact" className={styles.mobileNavLink} id="mobile-nav-contact">Contact</Link>
+          <p className={styles.mobileNavGroupLabel}>Identity Consultation</p>
+          <Link href="/identity-consultation" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`} id="mobile-nav-book-consultation">Book a Consultation</Link>
+          <Link href="/contact" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`} id="mobile-nav-general-contact">General Contact</Link>
           <Link href="/shop" className={`${styles.mobileNavLink} ${styles.mobileNavLinkShop}`} id="mobile-nav-shop">Shop</Link>
+          <button
+            type="button"
+            className={`${styles.mobileNavLink} ${styles.mobileNavCart}`}
+            onClick={() => { setMenuOpen(false); openDrawer(); }}
+            id="mobile-nav-cart-trigger"
+          >
+            {bagLabel}
+          </button>
         </nav>
       </div>
     </header>

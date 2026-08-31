@@ -340,16 +340,16 @@ input, textarea, select {
 /* ============================================================
    CINEMATIC PAGE LOAD
    ============================================================ */
+/* Opacity only. A transform or filter here would persist on <body> after the
+   animation (fill-mode: forwards keeps them as translate(0)/blur(0), which are not
+   `none`) and make <body> the containing block for every position: fixed descendant
+   — breaking the fixed cart drawer. */
 @keyframes cinematicFadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
-    filter: blur(4px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
   }
 }
 

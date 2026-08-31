@@ -179,6 +179,57 @@
   line-height: 1.1;
 }
 
+/* Body type guide grid */
+.typeGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-2xl);
+}
+
+.typeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.typeImageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--color-off-white);
+  border: 1px solid var(--color-gray-muted);
+  overflow: hidden;
+}
+
+.typeImage {
+  object-fit: contain;
+  padding: var(--space-sm);
+}
+
+.typeImageEmpty {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-gray);
+  padding: var(--space-md);
+}
+
+.typeTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 300;
+  color: var(--color-black);
+  margin-top: var(--space-md);
+}
+
 /* Fit philosophy split */
 .fitSection {
   display: grid;
@@ -213,11 +264,16 @@
   .inner { padding: 0 var(--space-lg); }
 }
 
+@media (max-width: 1024px) {
+  .typeGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
 @media (max-width: 768px) {
   .heroContent { padding: 0 var(--space-md) var(--space-xl); }
   .inner { padding: 0 var(--space-md); }
   .grid { grid-template-columns: 1fr; }
   .cardLarge { grid-column: span 1; height: 460px; }
+  .typeGrid { grid-template-columns: repeat(2, 1fr); }
   .fitSection { grid-template-columns: 1fr; }
   .fitImage { height: 50vh; }
   .fitContent { padding: var(--space-2xl) var(--space-md); }
