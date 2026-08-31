@@ -44,10 +44,16 @@ export default function CheckoutForm({
   onDestinationChange,
   submitting = false,
   submitDisabledReason = null,
+  initialContact = null,
+  initialDelivery = null,
+  savedAddresses = [],
 }) {
   const countries = useMemo(() => listCountries(), []);
-  const [contact, setContact] = useState(EMPTY_CONTACT);
-  const [delivery, setDelivery] = useState(EMPTY_DELIVERY);
+  const [contact, setContact] = useState(initialContact ?? EMPTY_CONTACT);
+  const [delivery, setDelivery] = useState({
+    ...EMPTY_DELIVERY,
+    ...(initialDelivery ?? {}),
+  });
   const [errors, setErrors] = useState({ contact: {}, delivery: {} });
 
   const isNigeria = delivery.countryCode === 'NG';
@@ -145,6 +151,35 @@ export default function CheckoutForm({
 
       <fieldset className={styles.fieldset}>
         <legend className={styles.legend}>Delivery</legend>
+        {savedAddresses.length > 1 && (
+          <Field id="checkout-saved-address" label="Use a saved address">
+            <select
+              id="checkout-saved-address"
+              className={styles.select}
+              defaultValue=""
+              onChange={(e) => {
+                const a = savedAddresses.find((x) => String(x.id) === e.target.value);
+                if (!a) return;
+                setDelivery((prev) => ({
+                  ...prev,
+                  countryCode: a.country_code,
+                  address1: a.address_1,
+                  address2: a.address_2,
+                  city: a.city,
+                  stateRegion: a.state_region,
+                  postalCode: a.postal_code,
+                }));
+              }}
+            >
+              <option value="">Choose…</option>
+              {savedAddresses.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.label} — {a.address_1}, {a.city}
+                </option>
+              ))}
+            </select>
+          </Field>
+        )}
         <Field id="checkout-country" label="Country" error={errors.delivery.countryCode}>
           <select
             id="checkout-country"

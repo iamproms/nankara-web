@@ -79,3 +79,21 @@ def test_status_cannot_be_set_to_paid_by_hand(admin_client, make_order):
         json={"status": "PAID"},
     )
     assert res.status_code == 409
+
+
+def test_detail_shows_linked_account(admin_client, db, make_order):
+    from app.models import User
+
+    order = make_order()
+    user = User(
+        email="linked@example.com", password_hash="x",
+        first_name="L", last_name="K", email_verified=True,
+    )
+    db.add(user)
+    db.flush()
+    order.user_id = user.id
+    db.flush()
+
+    body = admin_client.get(f"/api/v1/admin/orders/{order.id}").json()
+    assert body["account"]["email"] == "linked@example.com"
+    assert body["account"]["email_verified"] is True

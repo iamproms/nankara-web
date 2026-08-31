@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Navbar from '../../../../components/Navbar/Navbar';
 import Footer from '../../../../components/Footer/Footer';
 import Price from '../../../../components/Price/Price';
+import CreateAccountPrompt from '../../../../components/CreateAccountPrompt/CreateAccountPrompt';
 import { useCart } from '../../../../hooks/useCart';
 import { getOrderConfirmation, verifyPayment } from '../../../../lib/api';
 import { isPaid } from '../../../../lib/payment';
@@ -166,6 +167,11 @@ export default function OrderSuccessPage({ params }) {
                   Contact us
                 </Link>
               </div>
+
+              <CreateAccountPrompt
+                email={order.customer.email}
+                firstName={order.customer.first_name}
+              />
             </div>
           )}
         </div>

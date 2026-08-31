@@ -60,6 +60,25 @@
   padding: var(--space-lg) 0 var(--space-4xl);
 }
 
+.authNote {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--color-gray);
+  margin-bottom: var(--space-lg);
+}
+
+.authNote a {
+  color: var(--color-black);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.authNote strong {
+  color: var(--color-black);
+  font-weight: 500;
+}
+
 .banner {
   font-family: var(--font-sans);
   font-size: var(--text-sm);

@@ -21,12 +21,14 @@ from app.core.config import settings
 from app.core.database import Base, get_db
 from app.core.security import (
     AUDIENCE_ADMIN,
+    AUDIENCE_CUSTOMER,
     SESSION_COOKIE_ADMIN,
+    SESSION_COOKIE_CUSTOMER,
     create_token,
     hash_password,
 )
 from app.main import app
-from app.models import Admin, Availability, Product, ShippingZone
+from app.models import Admin, Availability, Product, ShippingZone, User
 from app.orders.service import create_order
 from app.schemas.order import OrderCreate
 
@@ -117,6 +119,44 @@ def admin_client(client, admin):
     )
     client.cookies.set(SESSION_COOKIE_ADMIN, token)
     return client
+
+
+@pytest.fixture()
+def customer(db) -> User:
+    record = User(
+        email="ada@example.com",
+        password_hash=hash_password("customer-pass"),
+        first_name="Ada",
+        last_name="Obi",
+        phone="+2348012345678",
+        email_verified=True,
+    )
+    db.add(record)
+    db.flush()
+    return record
+
+
+@pytest.fixture()
+def customer_client(client, customer):
+    token = create_token(
+        str(customer.id),
+        audience=AUDIENCE_CUSTOMER,
+        token_version=customer.token_version,
+        ttl_minutes=60,
+    )
+    client.cookies.set(SESSION_COOKIE_CUSTOMER, token)
+    return client
+
+
+@pytest.fixture()
+def fake_resend(monkeypatch):
+    """Record outbound emails instead of sending."""
+    sent: list[dict] = []
+    monkeypatch.setattr(
+        "app.customers.emails.send_email",
+        lambda **kw: (sent.append(kw), True)[1],
+    )
+    return sent
 
 
 @pytest.fixture()

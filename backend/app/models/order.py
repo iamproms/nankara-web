@@ -17,6 +17,7 @@ from app.models.mixins import TimestampMixin
 if TYPE_CHECKING:
     from app.models.order_item import OrderItem
     from app.models.payment import Payment
+    from app.models.user import User
 
 
 class Order(Base, TimestampMixin):
@@ -38,9 +39,11 @@ class Order(Base, TimestampMixin):
     reference: Mapped[str] = mapped_column(
         String(20), unique=True, index=True, nullable=False
     )
-    # Nullable, reserved for future customer accounts (spec §31). No FK yet — the
-    # users table does not exist; a later migration adds the constraint.
-    user_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # NULL for a guest order; set when the buyer is signed in, or when a guest
+    # later claims the order by registering with the same email (spec §31).
+    user_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), index=True, nullable=True
+    )
 
     customer_first_name: Mapped[str] = mapped_column(String(120), nullable=False)
     customer_last_name: Mapped[str] = mapped_column(String(120), nullable=False)
@@ -96,3 +99,4 @@ class Order(Base, TimestampMixin):
         cascade="all, delete-orphan",
         order_by="Payment.id",
     )
+    user: Mapped["User | None"] = relationship(back_populates="orders")

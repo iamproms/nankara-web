@@ -8,6 +8,7 @@ from app.core.database import get_db
 from app.models import Order, OrderStatus, Payment, PaymentStatus
 from app.orders.service import IllegalStatusTransition, transition_order_status
 from app.schemas.admin_order import (
+    AdminOrderAccount,
     AdminOrderCustomer,
     AdminOrderDelivery,
     AdminOrderDetailOut,
@@ -22,7 +23,11 @@ router = APIRouter(
     dependencies=[Depends(get_current_admin), Depends(require_trusted_origin)]
 )
 
-_with_relations = (selectinload(Order.items), selectinload(Order.payments))
+_with_relations = (
+    selectinload(Order.items),
+    selectinload(Order.payments),
+    selectinload(Order.user),
+)
 
 
 def _latest_payment(order: Order) -> Payment | None:
@@ -77,6 +82,15 @@ def _detail(order: Order) -> AdminOrderDetailOut:
         currency=order.currency,
         items=[OrderItemOut.model_validate(item) for item in order.items],
         payment=AdminPaymentOut.model_validate(payment) if payment else None,
+        account=(
+            AdminOrderAccount(
+                id=order.user.id,
+                email=order.user.email,
+                email_verified=order.user.email_verified,
+            )
+            if order.user is not None
+            else None
+        ),
     )
 
 

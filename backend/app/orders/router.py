@@ -4,7 +4,8 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.core.database import get_db
 from app.core.ratelimit import limiter
-from app.models import Order
+from app.customers.dependencies import get_current_customer_optional
+from app.models import Order, User
 from app.orders.service import (
     EmptyCartError,
     OrderValidationError,
@@ -22,10 +23,13 @@ router = APIRouter()
 )
 @limiter.limit("10/minute")
 def place_order(
-    request: Request, payload: OrderCreate, db: Session = Depends(get_db)
+    request: Request,
+    payload: OrderCreate,
+    db: Session = Depends(get_db),
+    current_user: User | None = Depends(get_current_customer_optional),
 ) -> OrderConfirmationOut:
     try:
-        order = create_order(db, payload)
+        order = create_order(db, payload, user=current_user)
     except EmptyCartError:
         raise HTTPException(status_code=422, detail="Your bag is empty.")
     except ShippingUnavailable as exc:

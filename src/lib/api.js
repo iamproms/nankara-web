@@ -34,6 +34,9 @@ async function apiGet(path, { revalidate = 60, fresh = false } = {}) {
 async function apiPost(path, body) {
   const res = await fetch(`${baseUrl()}/api/v1${path}`, {
     method: 'POST',
+    // Carries the optional customer session cookie so an order placed while
+    // signed in is linked to the account. Harmless for guests.
+    credentials: 'same-origin',
     headers: { 'content-type': 'application/json', accept: 'application/json' },
     body: JSON.stringify(body),
   });

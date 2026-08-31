@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import Price from '../Price/Price';
+import CreateAccountPrompt from '../CreateAccountPrompt/CreateAccountPrompt';
 import { initializePaystack } from '../../lib/api';
 import styles from './OrderPlacedSummary.module.css';
 
@@ -90,6 +91,11 @@ export default function OrderPlacedSummary({ order }) {
           measurements required to tailor your piece.
         </p>
       </div>
+
+      <CreateAccountPrompt
+        email={order.customer.email}
+        firstName={order.customer.first_name}
+      />
     </div>
   );
 }

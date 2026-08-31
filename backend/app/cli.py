@@ -155,6 +155,30 @@ def list_admins() -> None:
         print(f"[{admin.id}] {admin.email} ({state})")
 
 
+def create_customer(
+    email: str, password: str, first_name: str, last_name: str
+) -> None:
+    from app.models import User
+
+    email = email.strip().lower()
+    if len(password) < 8:
+        sys.exit("Password must be at least 8 characters.")
+    with SessionLocal() as db:
+        if db.scalar(select(User).where(User.email == email)) is not None:
+            sys.exit(f"A customer with email {email} already exists.")
+        db.add(
+            User(
+                email=email,
+                password_hash=hash_password(password),
+                first_name=first_name,
+                last_name=last_name,
+                email_verified=True,
+            )
+        )
+        db.commit()
+    print(f"Created customer {email}")
+
+
 def reset_admin_password(email: str, password: str | None) -> None:
     email = email.strip().lower()
     if password is None:
@@ -353,6 +377,14 @@ def main() -> None:
     p_reset.add_argument("--email", required=True)
     p_reset.add_argument("--password", help="Prompted for if omitted")
 
+    p_cust = sub.add_parser(
+        "create-customer", help="Create a customer account (dev; email pre-verified)"
+    )
+    p_cust.add_argument("--email", required=True)
+    p_cust.add_argument("--password", required=True)
+    p_cust.add_argument("--first-name", default="Test")
+    p_cust.add_argument("--last-name", default="Customer")
+
     sub.add_parser("list-admins", help="List admin accounts")
     sub.add_parser("seed-categories", help="Insert a starter set of categories")
     sub.add_parser(
@@ -370,6 +402,8 @@ def main() -> None:
         create_admin(args.email, args.password)
     elif args.command == "reset-admin-password":
         reset_admin_password(args.email, args.password)
+    elif args.command == "create-customer":
+        create_customer(args.email, args.password, args.first_name, args.last_name)
     elif args.command == "list-admins":
         list_admins()
     elif args.command == "seed-categories":

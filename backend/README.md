@@ -50,8 +50,19 @@ Next.js frontend in this monorepo. Spec: [`../NANKARA_SHOP_MVP.md`](../NANKARA_S
 - `python -m app.cli seed-demo-orders` — dev-only demo orders across statuses for the admin UI.
 - `httpx` is now a runtime dependency (the Paystack client).
 
-Milestones 1–4 are complete. Next: launch hardening (M5) — real Paystack test/live
-run, production env / HTTPS, replace the dummy shipping rates, DB backups, mobile QA.
+**Customer accounts** — `users` / `user_addresses` / `measurement_profiles`
+(migration `0005`), `orders.user_id` now an FK. `/api/v1/account/*`: register /
+login / logout (session cookie `nk_customer`), `me`, password change + forgot +
+reset, email verification, order history, address book, measurement profile.
+Guest checkout is unchanged and still the default; a signed-in buyer's order is
+linked to their account, and registering claims prior guest orders on the same
+email. Email goes through Resend (`RESEND_API_KEY`, optional in dev — flows still
+succeed and just skip sending). Admin: `GET /api/v1/admin/customers[/{id}]`, and
+the order detail shows the linked account.
+
+Milestones 1–4 + auth hardening + customer accounts are done. Next: launch
+hardening finish (real Paystack run, prod env / HTTPS, real shipping rates,
+DB backups, mobile QA).
 
 ## Requirements
 

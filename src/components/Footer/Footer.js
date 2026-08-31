@@ -50,6 +50,12 @@ export default function Footer() {
               <Link href="/about#craftsmanship" className={styles.footerLink}>Craftsmanship</Link>
             </div>
             <div className={styles.navCol}>
+              <h3 className={styles.colTitle}>Account</h3>
+              <Link href="/login" className={styles.footerLink}>Sign in</Link>
+              <Link href="/register" className={styles.footerLink}>Create an account</Link>
+              <Link href="/account/orders" className={styles.footerLink}>My orders</Link>
+            </div>
+            <div className={styles.navCol}>
               <h3 className={styles.colTitle}>Contact</h3>
               <a href="mailto:hello@nankara.com" className={styles.footerLink} id="footer-email">hello@nankara.com</a>
               <Link href="/contact" className={styles.footerLink}>Business Inquiries</Link>
