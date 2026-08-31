@@ -50,8 +50,19 @@ Next.js frontend in this monorepo. Spec: [`../NANKARA_SHOP_MVP.md`](../NANKARA_S
 - `python -m app.cli seed-demo-orders` — dev-only demo orders across statuses for the admin UI.
 - `httpx` is now a runtime dependency (the Paystack client).
 
-Milestones 1–4 are complete. Next: launch hardening (M5) — real Paystack test/live
-run, production env / HTTPS, replace the dummy shipping rates, DB backups, mobile QA.
+**Customer accounts** — `users` / `user_addresses` / `measurement_profiles`
+(migration `0005`), `orders.user_id` now an FK. `/api/v1/account/*`: register /
+login / logout (session cookie `nk_customer`), `me`, password change + forgot +
+reset, email verification, order history, address book, measurement profile.
+Guest checkout is unchanged and still the default; a signed-in buyer's order is
+linked to their account, and registering claims prior guest orders on the same
+email. Email goes through Resend (`RESEND_API_KEY`, optional in dev — flows still
+succeed and just skip sending). Admin: `GET /api/v1/admin/customers[/{id}]`, and
+the order detail shows the linked account.
+
+Milestones 1–4 + auth hardening + customer accounts are done. Next: launch
+hardening finish (real Paystack run, prod env / HTTPS, real shipping rates,
+DB backups, mobile QA).
 
 ## Requirements
 
@@ -97,12 +108,23 @@ uvicorn app.main:app --reload --port 8000
 
 Interactive docs: <http://localhost:8000/docs>
 
-## Auth flow
+## Auth flow (admin)
 
-1. `POST /api/v1/admin/auth/login` with `{ "email", "password" }` → `{ access_token, admin }`.
-2. Send `Authorization: Bearer <access_token>` on every `/api/v1/admin/*` request.
-3. Tokens are stateless; "logout" is discarding the token client-side.
-   `POST /api/v1/admin/auth/logout` exists for symmetry and returns 204.
+1. `POST /api/v1/admin/auth/login` with `{ "email", "password" }` → **sets an
+   `nk_admin` session cookie** (`HttpOnly; Secure` in prod; `SameSite=Lax`). The
+   response body is just the admin record — no token is exposed to JavaScript.
+2. The browser sends the cookie automatically on every same-origin `/api/v1/*`
+   call. State-changing requests are additionally checked against an allowed
+   `Origin` (a lightweight same-origin CSRF guard).
+3. The session JWT carries `aud` (`nankara-admin`) and `tv` (the admin's
+   `token_version`). `POST /api/v1/admin/auth/password` and
+   `python -m app.cli reset-admin-password` bump `token_version`, which
+   immediately invalidates every other session. `logout` clears the cookie.
+4. Login and password change are rate-limited (5/min/IP). Order creation and the
+   payment/confirmation endpoints are rate-limited too.
+5. In `ENVIRONMENT=production` the app **refuses to start** with the default
+   `SECRET_KEY`, a key shorter than 32 chars, or a `localhost` CORS origin; and
+   `/docs`, `/redoc`, `/openapi.json` are disabled.
 
 ## API surface
 
@@ -125,9 +147,10 @@ Interactive docs: <http://localhost:8000/docs>
 
 | Method | Path | Notes |
 | --- | --- | --- |
-| POST | `/api/v1/admin/auth/login` | |
-| POST | `/api/v1/admin/auth/logout` | 204 |
+| POST | `/api/v1/admin/auth/login` | Sets the `nk_admin` session cookie |
+| POST | `/api/v1/admin/auth/logout` | Clears the cookie; 204 |
 | GET | `/api/v1/admin/auth/me` | Current admin |
+| POST | `/api/v1/admin/auth/password` | `{ current_password, new_password }` — bumps `token_version` |
 | GET | `/api/v1/admin/overview` | Dashboard counts |
 | GET/POST | `/api/v1/admin/categories` | |
 | PATCH/DELETE | `/api/v1/admin/categories/{id}` | Delete nulls the FK on products |

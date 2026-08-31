@@ -8,7 +8,7 @@ from app.models import Order
 # Crockford base32 without I, L, O, U — unambiguous when read aloud or typed.
 _ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 _PREFIX = "NK-"
-_BODY_LEN = 8
+_BODY_LEN = 12  # ~60 bits of entropy; the reference is also the public access token
 
 
 def generate_reference() -> str:

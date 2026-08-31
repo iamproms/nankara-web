@@ -53,6 +53,12 @@ class AdminOrderShipping(BaseModel):
     amount: int
 
 
+class AdminOrderAccount(BaseModel):
+    id: int
+    email: str
+    email_verified: bool
+
+
 class AdminOrderDetailOut(BaseModel):
     id: int
     reference: str
@@ -67,6 +73,7 @@ class AdminOrderDetailOut(BaseModel):
     currency: str
     items: list[OrderItemOut]
     payment: AdminPaymentOut | None
+    account: AdminOrderAccount | None
 
 
 class AdminOrderStatusUpdate(BaseModel):

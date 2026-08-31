@@ -3,11 +3,14 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.auth.dependencies import get_current_admin
+from app.core.csrf import require_trusted_origin
 from app.core.database import get_db
 from app.models import ShippingZone
 from app.schemas.shipping import ShippingZoneOut, ShippingZoneUpdate
 
-router = APIRouter(dependencies=[Depends(get_current_admin)])
+router = APIRouter(
+    dependencies=[Depends(get_current_admin), Depends(require_trusted_origin)]
+)
 
 
 @router.get("", response_model=list[ShippingZoneOut])

@@ -19,11 +19,21 @@ from sqlalchemy.orm import sessionmaker
 from app.cli import DEFAULT_SHIPPING_ZONES
 from app.core.config import settings
 from app.core.database import Base, get_db
-from app.core.security import create_access_token, hash_password
+from app.core.security import (
+    AUDIENCE_ADMIN,
+    AUDIENCE_CUSTOMER,
+    SESSION_COOKIE_ADMIN,
+    SESSION_COOKIE_CUSTOMER,
+    create_token,
+    hash_password,
+)
 from app.main import app
-from app.models import Admin, Availability, Product, ShippingZone
+from app.models import Admin, Availability, Product, ShippingZone, User
 from app.orders.service import create_order
 from app.schemas.order import OrderCreate
+
+# The real frontend always sends an Origin; the same-origin CSRF guard requires it.
+_TRUSTED_ORIGIN = settings.cors_origins[0]
 
 _TEST_DB = "nankara_test"
 
@@ -70,10 +80,20 @@ def db(engine):
         connection.close()
 
 
+@pytest.fixture(autouse=True)
+def _reset_rate_limiter():
+    """Rate-limit state is process-wide; clear it between tests."""
+    from app.core.ratelimit import limiter
+
+    limiter.reset()
+    yield
+    limiter.reset()
+
+
 @pytest.fixture()
 def client(db):
     app.dependency_overrides[get_db] = lambda: db
-    with TestClient(app) as test_client:
+    with TestClient(app, headers={"origin": _TRUSTED_ORIGIN}) as test_client:
         yield test_client
     app.dependency_overrides.clear()
 
@@ -81,7 +101,7 @@ def client(db):
 @pytest.fixture()
 def admin(db) -> Admin:
     record = Admin(
-        email="admin@nankara.test", password_hash=hash_password("test-password")
+        email="admin@nankara.example", password_hash=hash_password("test-password")
     )
     db.add(record)
     db.flush()
@@ -89,13 +109,54 @@ def admin(db) -> Admin:
 
 
 @pytest.fixture()
-def admin_token(admin) -> str:
-    return create_access_token(str(admin.id))
+def admin_client(client, admin):
+    """A TestClient carrying a valid admin session cookie."""
+    token = create_token(
+        str(admin.id),
+        audience=AUDIENCE_ADMIN,
+        token_version=admin.token_version,
+        ttl_minutes=60,
+    )
+    client.cookies.set(SESSION_COOKIE_ADMIN, token)
+    return client
 
 
 @pytest.fixture()
-def auth_headers(admin_token) -> dict:
-    return {"Authorization": f"Bearer {admin_token}"}
+def customer(db) -> User:
+    record = User(
+        email="ada@example.com",
+        password_hash=hash_password("customer-pass"),
+        first_name="Ada",
+        last_name="Obi",
+        phone="+2348012345678",
+        email_verified=True,
+    )
+    db.add(record)
+    db.flush()
+    return record
+
+
+@pytest.fixture()
+def customer_client(client, customer):
+    token = create_token(
+        str(customer.id),
+        audience=AUDIENCE_CUSTOMER,
+        token_version=customer.token_version,
+        ttl_minutes=60,
+    )
+    client.cookies.set(SESSION_COOKIE_CUSTOMER, token)
+    return client
+
+
+@pytest.fixture()
+def fake_resend(monkeypatch):
+    """Record outbound emails instead of sending."""
+    sent: list[dict] = []
+    monkeypatch.setattr(
+        "app.customers.emails.send_email",
+        lambda **kw: (sent.append(kw), True)[1],
+    )
+    return sent
 
 
 @pytest.fixture()

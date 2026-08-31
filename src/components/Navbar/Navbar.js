@@ -3,16 +3,24 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useCart } from '../../hooks/useCart';
+import { useCustomerAuth } from '../../hooks/useCustomerAuth';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const { totalQuantity, isReady, openDrawer } = useCart();
+  const { user, logout } = useCustomerAuth();
   const bagLabel = isReady && totalQuantity > 0 ? `Bag (${totalQuantity})` : 'Bag';
+
+  const signOut = async () => {
+    await logout();
+    router.push('/');
+  };
 
   const isHome = pathname === '/';
   const isSolid = scrolled || !isHome;
@@ -75,6 +83,23 @@ export default function Navbar() {
             </div>
           </div>
           <Link href="/shop" className={styles.navLinkShop} id="nav-shop">Shop</Link>
+          {user ? (
+            <div className={styles.navDropdown}>
+              <button type="button" className={`${styles.navLink} ${styles.navDropdownTrigger}`} aria-haspopup="true" id="nav-account">
+                Account
+              </button>
+              <div className={styles.navDropdownMenu}>
+                <div className={styles.navDropdownLinks}>
+                  <Link href="/account/orders" className={styles.navDropdownLink}>My orders</Link>
+                  <Link href="/account/addresses" className={styles.navDropdownLink}>Addresses</Link>
+                  <Link href="/account/measurements" className={styles.navDropdownLink}>Measurements</Link>
+                  <button type="button" className={styles.navDropdownLink} onClick={signOut} style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer' }}>Sign out</button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <Link href="/login" className={styles.navLink} id="nav-signin">Sign in</Link>
+          )}
           <button
             type="button"
             className={styles.navCart}
@@ -111,6 +136,16 @@ export default function Navbar() {
           <Link href="/identity-consultation" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`} id="mobile-nav-book-consultation">Book a Consultation</Link>
           <Link href="/contact" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`} id="mobile-nav-general-contact">General Contact</Link>
           <Link href="/shop" className={`${styles.mobileNavLink} ${styles.mobileNavLinkShop}`} id="mobile-nav-shop">Shop</Link>
+          <p className={styles.mobileNavGroupLabel}>Account</p>
+          {user ? (
+            <>
+              <Link href="/account" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`}>My account</Link>
+              <Link href="/account/orders" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`}>My orders</Link>
+              <button type="button" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`} onClick={() => { setMenuOpen(false); signOut(); }} style={{ background: 'none', border: 'none', textAlign: 'left', cursor: 'pointer' }}>Sign out</button>
+            </>
+          ) : (
+            <Link href="/login" className={`${styles.mobileNavLink} ${styles.mobileNavSubLink}`} id="mobile-nav-signin">Sign in</Link>
+          )}
           <button
             type="button"
             className={`${styles.mobileNavLink} ${styles.mobileNavCart}`}

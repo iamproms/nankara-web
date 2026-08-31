@@ -5,6 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
 from app.auth.dependencies import get_current_admin
+from app.core.csrf import require_trusted_origin
 from app.core.config import settings
 from app.core.database import get_db
 from app.core.slugs import ensure_unique_slug, slugify_text
@@ -20,7 +21,9 @@ from app.schemas.product import (
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(dependencies=[Depends(get_current_admin)])
+router = APIRouter(
+    dependencies=[Depends(get_current_admin), Depends(require_trusted_origin)]
+)
 
 _with_relations = (selectinload(Product.images), selectinload(Product.category))
 

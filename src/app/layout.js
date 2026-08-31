@@ -1,4 +1,5 @@
 import SmoothScroll from '../components/SmoothScroll/SmoothScroll';
+import CustomerAuthProvider from '../components/CustomerAuthProvider/CustomerAuthProvider';
 import CartProvider from '../components/CartProvider/CartProvider';
 import CartDrawer from '../components/CartDrawer/CartDrawer';
 import '../styles/globals.css';
@@ -23,12 +24,14 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body>
-        <CartProvider>
-          <SmoothScroll>
-            {children}
-            <CartDrawer />
-          </SmoothScroll>
-        </CartProvider>
+        <CustomerAuthProvider>
+          <CartProvider>
+            <SmoothScroll>
+              {children}
+              <CartDrawer />
+            </SmoothScroll>
+          </CartProvider>
+        </CustomerAuthProvider>
       </body>
     </html>
   );

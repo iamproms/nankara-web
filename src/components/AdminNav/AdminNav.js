@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { clearAdminToken } from '../../lib/adminApi';
+import { adminLogout } from '../../lib/adminApi';
 import styles from './AdminNav.module.css';
 
 const LINKS = [
@@ -11,6 +11,7 @@ const LINKS = [
   { href: '/admin/products', label: 'Products' },
   { href: '/admin/orders', label: 'Orders' },
   { href: '/admin/shipping', label: 'Shipping' },
+  { href: '/admin/settings', label: 'Settings' },
 ];
 
 export default function AdminNav() {
@@ -20,8 +21,12 @@ export default function AdminNav() {
   const isActive = (href) =>
     href === '/admin' ? pathname === '/admin' : pathname.startsWith(href);
 
-  const logout = () => {
-    clearAdminToken();
+  const logout = async () => {
+    try {
+      await adminLogout();
+    } catch {
+      /* clear anyway */
+    }
     router.replace('/admin/login');
   };
 

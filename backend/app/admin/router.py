@@ -3,11 +3,14 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.auth.dependencies import get_current_admin
+from app.core.csrf import require_trusted_origin
 from app.core.database import get_db
 from app.models import Availability, Category, Order, OrderStatus, Product
 from app.schemas.admin import OverviewOut
 
-router = APIRouter(dependencies=[Depends(get_current_admin)])
+router = APIRouter(
+    dependencies=[Depends(get_current_admin), Depends(require_trusted_origin)]
+)
 
 
 def _count_orders(db: Session, status: OrderStatus) -> int:

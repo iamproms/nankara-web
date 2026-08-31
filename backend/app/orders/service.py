@@ -85,11 +85,12 @@ def _check_products(payload: OrderCreate, products: dict[int, Product]) -> None:
         raise OrderValidationError(problems)
 
 
-def create_order(db: Session, payload: OrderCreate) -> Order:
+def create_order(db: Session, payload: OrderCreate, *, user=None) -> Order:
     """Turn a validated cart into a PENDING_PAYMENT order (spec §12, §13).
 
     Every money value is recomputed here from the database — the payload's job is
-    only to say *which* products and *how many* (spec §24).
+    only to say *which* products and *how many* (spec §24). `user` links the order
+    to a signed-in customer; guest orders pass `user=None`.
     """
     if not payload.items:
         raise EmptyCartError()
@@ -127,6 +128,7 @@ def create_order(db: Session, payload: OrderCreate) -> Order:
 
     order = Order(
         reference=unique_reference(db),
+        user_id=user.id if user is not None else None,
         customer_first_name=payload.contact.first_name,
         customer_last_name=payload.contact.last_name,
         customer_email=str(payload.contact.email),

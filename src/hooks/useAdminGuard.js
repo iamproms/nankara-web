@@ -3,27 +3,32 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { clearAdminToken, getAdminToken } from '../lib/adminApi';
+import { getAdminMe } from '../lib/adminApi';
 
-// Shared auth boilerplate for the admin pages: bounce to /admin/login when there
-// is no token, and give callers an `onAuthError` to run when an admin request
-// comes back 401. `authReady` is true once the token check has run on the client.
+// Shared auth boilerplate for the admin pages. Auth is an HttpOnly session cookie
+// the browser can't read, so we probe `GET /admin/auth/me` on mount: 200 → in;
+// 401 → bounce to /admin/login. `onAuthError` handles a 401 from any later call.
 export function useAdminGuard() {
   const router = useRouter();
   const [authReady, setAuthReady] = useState(false);
 
   useEffect(() => {
-    if (!getAdminToken()) {
-      router.replace('/admin/login');
-      return;
-    }
-    setAuthReady(true);
+    let cancelled = false;
+    getAdminMe()
+      .then(() => {
+        if (!cancelled) setAuthReady(true);
+      })
+      .catch(() => {
+        if (!cancelled) router.replace('/admin/login');
+      });
+    return () => {
+      cancelled = true;
+    };
   }, [router]);
 
   const onAuthError = useCallback(
     (err) => {
       if (err?.status === 401) {
-        clearAdminToken();
         router.replace('/admin/login');
         return true;
       }

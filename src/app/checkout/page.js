@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import Navbar from '../../components/Navbar/Navbar';
@@ -10,8 +10,10 @@ import CheckoutSummary from '../../components/CheckoutSummary/CheckoutSummary';
 import OrderPlacedSummary from '../../components/OrderPlacedSummary/OrderPlacedSummary';
 import { useResolvedCart } from '../../hooks/useResolvedCart';
 import { useShippingQuote } from '../../hooks/useShippingQuote';
+import { useCustomerAuth } from '../../hooks/useCustomerAuth';
 import { buildOrderPayload, hasUnfulfillableRows } from '../../lib/checkout';
 import { createOrder } from '../../lib/api';
+import { getAddresses } from '../../lib/accountApi';
 import styles from './checkout.module.css';
 
 export default function CheckoutPage() {
@@ -26,6 +28,35 @@ export default function CheckoutPage() {
   const [order, setOrder] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null); // { kind, items?, message? }
+
+  const { user } = useCustomerAuth();
+  const [savedAddresses, setSavedAddresses] = useState([]);
+
+  useEffect(() => {
+    if (user) getAddresses().then(setSavedAddresses).catch(() => setSavedAddresses([]));
+  }, [user]);
+
+  const initialContact = user
+    ? {
+        firstName: user.first_name,
+        lastName: user.last_name,
+        email: user.email,
+        phone: user.phone || '',
+      }
+    : null;
+
+  const defaultAddress = savedAddresses.find((a) => a.is_default) || savedAddresses[0];
+  const initialDelivery = defaultAddress
+    ? {
+        countryCode: defaultAddress.country_code,
+        address1: defaultAddress.address_1,
+        address2: defaultAddress.address_2,
+        city: defaultAddress.city,
+        stateRegion: defaultAddress.state_region,
+        postalCode: defaultAddress.postal_code,
+        notes: '',
+      }
+    : null;
 
   const onDestinationChange = useCallback((next) => setDestination(next), []);
 
@@ -100,6 +131,18 @@ export default function CheckoutPage() {
                 ← Back to bag
               </Link>
 
+              <p className={styles.authNote}>
+                {user ? (
+                  <>Checking out as <strong>{user.email}</strong>.</>
+                ) : (
+                  <>
+                    Have an account?{' '}
+                    <Link href="/login?next=/checkout">Sign in</Link> for faster
+                    checkout — or continue below as a guest.
+                  </>
+                )}
+              </p>
+
               {blockedByBag && (
                 <div className={styles.banner} role="alert" id="checkout-bag-blocked">
                   <p>
@@ -141,10 +184,14 @@ export default function CheckoutPage() {
 
               <div className={styles.layout}>
                 <CheckoutForm
+                  key={user ? user.id : 'guest'}
                   onSubmit={handleSubmit}
                   onDestinationChange={onDestinationChange}
                   submitting={submitting}
                   submitDisabledReason={submitDisabledReason}
+                  initialContact={initialContact}
+                  initialDelivery={initialDelivery}
+                  savedAddresses={savedAddresses}
                 />
                 <aside className={styles.summary}>
                   <CheckoutSummary

@@ -19,7 +19,8 @@ export default function AdminLoginPage() {
     setError('');
     try {
       await adminLogin(email.trim(), password);
-      router.replace('/admin/shipping');
+      const params = new URLSearchParams(window.location.search);
+      router.replace(params.get('next') || '/admin');
     } catch (err) {
       setError(
         err?.status === 401
