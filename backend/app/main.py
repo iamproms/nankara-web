@@ -40,6 +40,13 @@ async def lifespan(_: FastAPI):
             logger.warning("PAYSTACK_SECRET_KEY is not set — payments will 503.")
         if not settings.email_configured:
             logger.warning("RESEND_API_KEY is not set — account emails won't send.")
+        elif settings.email_sender_is_testing:
+            logger.warning(
+                "RESEND_FROM is %r — Resend only delivers from onboarding@resend.dev "
+                "to your own account address (everyone else gets a 403). Verify a "
+                "sending domain and set RESEND_FROM before launch.",
+                settings.resend_from,
+            )
     yield
 
 

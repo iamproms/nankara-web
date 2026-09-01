@@ -56,9 +56,12 @@ login / logout (session cookie `nk_customer`), `me`, password change + forgot +
 reset, email verification, order history, address book, measurement profile.
 Guest checkout is unchanged and still the default; a signed-in buyer's order is
 linked to their account, and registering claims prior guest orders on the same
-email. Email goes through Resend (`RESEND_API_KEY`, optional in dev — flows still
-succeed and just skip sending). Admin: `GET /api/v1/admin/customers[/{id}]`, and
-the order detail shows the linked account.
+email. When a signed-in customer checks out, `create_order` also adds the
+delivery address to their address book (deduped) and backfills an empty profile
+phone — best-effort, in a SAVEPOINT, never blocks the order. Email goes through
+Resend (`RESEND_API_KEY`, optional in dev — flows still succeed and just skip
+sending; a non-2xx logs Resend's response body). Admin:
+`GET /api/v1/admin/customers[/{id}]`, and the order detail shows the linked account.
 
 Milestones 1–4 + auth hardening + customer accounts are done. Next: launch
 hardening finish (real Paystack run, prod env / HTTPS, real shipping rates,

@@ -30,6 +30,8 @@ export default function AdminDashboardPage() {
       });
   }, [authReady, onAuthError]);
 
+  if (!authReady) return null;
+
   return (
     <>
       <AdminNav />
