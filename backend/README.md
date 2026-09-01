@@ -145,6 +145,9 @@ Interactive docs: <http://localhost:8000/docs>
 | POST | `/api/v1/payments/paystack/initialize` | `{ reference }` → `{ authorization_url, reference }`; 409 if not payable, 503 if unconfigured |
 | POST | `/api/v1/payments/paystack/webhook` | Paystack `charge.success` — signed, idempotent; moves the order to `PAID` |
 | POST | `/api/v1/payments/paystack/verify` | `{ reference }` → public-safe order view; on-demand verification fallback |
+| POST | `/api/v1/inbox/contact` | Brand-page contact form → stored + emails the admin. Rate-limited 5/min; a filled `website` honeypot is silently dropped. |
+| POST | `/api/v1/inbox/consultation` | Identity-consultation request → same. |
+| POST | `/api/v1/inbox/newsletter` | `{ email }` → `newsletter_subscribers` (idempotent). |
 | GET | `/health` | Liveness |
 
 ### Admin (bearer token required)
@@ -167,6 +170,13 @@ Interactive docs: <http://localhost:8000/docs>
 | GET | `/api/v1/admin/orders` | Order list, newest first; `?status=` / `?payment=` filters |
 | GET | `/api/v1/admin/orders/{id}` | Full order detail (customer, address, payment) |
 | PATCH | `/api/v1/admin/orders/{id}/status` | `{ status }` — forward-only fulfilment moves; 409 otherwise |
+| GET | `/api/v1/admin/inbox` | Contact + consultation submissions; `?kind=` / `?handled=` filters |
+| GET/PATCH | `/api/v1/admin/inbox/{id}` | Detail / `{ is_handled }` |
+| GET | `/api/v1/admin/newsletter` | Newsletter subscriber list + count |
+
+Form notifications are emailed to the **oldest active admin's address** (see
+`app/inbox/service.admin_notification_email`) — deliberately the Resend account
+owner, so they land even before a Resend sending domain is verified.
 
 ### Typical "add a product" sequence
 

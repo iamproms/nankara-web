@@ -14,6 +14,8 @@ from app.core.config import settings
 from app.core.ratelimit import limiter
 from app.customers.admin_router import router as admin_customers_router
 from app.customers.router import router as account_router
+from app.inbox.admin_router import router as admin_inbox_router
+from app.inbox.router import router as inbox_router
 from app.media.router import router as media_router
 from app.orders.admin_router import router as admin_orders_router
 from app.orders.router import router as orders_router
@@ -88,6 +90,7 @@ app.include_router(shipping_router, prefix=f"{API_V1}/shipping", tags=["shipping
 app.include_router(orders_router, prefix=f"{API_V1}/orders", tags=["orders"])
 app.include_router(payments_router, prefix=f"{API_V1}/payments", tags=["payments"])
 app.include_router(account_router, prefix=f"{API_V1}/account", tags=["account"])
+app.include_router(inbox_router, prefix=f"{API_V1}/inbox", tags=["inbox"])
 
 # Admin
 app.include_router(auth_router, prefix=f"{API_V1}/admin/auth", tags=["admin: auth"])
@@ -115,6 +118,9 @@ app.include_router(
     admin_customers_router,
     prefix=f"{API_V1}/admin/customers",
     tags=["admin: customers"],
+)
+app.include_router(
+    admin_inbox_router, prefix=f"{API_V1}/admin", tags=["admin: inbox"]
 )
 
 

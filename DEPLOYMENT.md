@@ -187,6 +187,15 @@ still contains `resend.dev` in production.
 Just the three keys + folder in the backend env. The image manager in
 `/admin/products` uploads straight to `POST /api/v1/admin/media/upload`.
 
+### Brand-page forms
+
+The contact, consultation, and newsletter forms persist to the DB (visible in
+`/admin/inbox`) and — for contact/consultation — email a notification to the
+**oldest active admin's address**. That address is used deliberately because
+Resend delivers to its own account owner even without a verified sending domain,
+so notifications work the moment `RESEND_API_KEY` is set. Once the domain is
+verified (see Resend above), everything else also reaches customers.
+
 ---
 
 ## 6. Custom domains (recommended before launch)
