@@ -9,7 +9,9 @@ import styles from './AdminNav.module.css';
 const LINKS = [
   { href: '/admin', label: 'Overview' },
   { href: '/admin/products', label: 'Products' },
+  { href: '/admin/categories', label: 'Categories' },
   { href: '/admin/orders', label: 'Orders' },
+  { href: '/admin/inbox', label: 'Inbox' },
   { href: '/admin/shipping', label: 'Shipping' },
   { href: '/admin/settings', label: 'Settings' },
 ];

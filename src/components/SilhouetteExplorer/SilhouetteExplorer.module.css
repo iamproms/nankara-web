@@ -1,0 +1,236 @@
+.explorer {
+  --explorer-margin: clamp(1rem, 3vw, 2.75rem);
+  padding: clamp(7rem, 12vw, 11rem) var(--explorer-margin);
+  background: var(--color-white);
+}
+
+.headingRow {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  align-items: end;
+  gap: 2rem;
+}
+
+.headingRow h2 {
+  max-width: 10ch;
+  font-family: var(--font-serif);
+  font-size: clamp(3.25rem, 7vw, 7.25rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.headingRow p {
+  max-width: 30ch;
+  justify-self: end;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.shapeNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 4rem;
+}
+
+.shapeNav button {
+  min-height: 46px;
+  padding: 0.7rem 1rem;
+  background: var(--color-off-white);
+  color: var(--color-black);
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.shapeNav button:hover,
+.shapeNav button:focus-visible,
+.shapeNav .navActive {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.guideLayout {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  gap: clamp(3rem, 8vw, 9rem);
+  margin-top: clamp(4rem, 8vw, 8rem);
+  align-items: start;
+}
+
+.stickyVisual {
+  position: sticky;
+  top: 12vh;
+  height: 78svh;
+  min-height: 34rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageFrame {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: #ededed;
+}
+
+.shapeImage {
+  object-fit: contain;
+  animation: imageArrive 420ms var(--ease-out) both;
+}
+
+.appleImage {
+  width: 245% !important;
+  max-width: none !important;
+  left: 50% !important;
+  top: -12% !important;
+  right: auto !important;
+  bottom: auto !important;
+  height: auto !important;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+}
+
+.chapters {
+  min-width: 0;
+}
+
+.mobileImage {
+  display: none;
+}
+
+.chapter {
+  min-height: 96svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.2rem;
+  padding: 5rem 0;
+  color: var(--color-gray);
+  transition: color var(--duration-base) ease;
+}
+
+.chapterActive {
+  color: var(--color-black);
+}
+
+.chapter h3 {
+  max-width: 12ch;
+  font-family: var(--font-serif);
+  font-size: clamp(2.75rem, 5.5vw, 5.5rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  color: var(--color-black);
+  text-wrap: balance;
+}
+
+.definition {
+  display: grid;
+  grid-template-columns: minmax(8rem, 1fr) 2fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.definition h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.definition p,
+.definition li {
+  font-size: 1rem;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+
+.definition ul {
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.definition li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.definition li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--color-orange);
+}
+
+@keyframes imageArrive {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 900px) {
+  .guideLayout {
+    grid-template-columns: 5fr 6fr;
+    gap: 2.5rem;
+  }
+
+  .stickyVisual {
+    top: 15vh;
+    height: 66svh;
+    min-height: 28rem;
+  }
+
+  .definition {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .headingRow {
+    grid-template-columns: 1fr;
+  }
+
+  .headingRow p {
+    justify-self: start;
+  }
+
+  .shapeNav {
+    flex-wrap: wrap;
+  }
+
+  .guideLayout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .stickyVisual {
+    display: none;
+  }
+
+  .mobileImage {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #ededed;
+  }
+
+  .chapter {
+    min-height: auto;
+    padding: 3rem 0 5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shapeImage { animation: none; }
+  .shapeNav button { scroll-behavior: auto; }
+}

@@ -41,6 +41,12 @@ class Settings(BaseSettings):
     # links in account emails.
     frontend_origin: str = "http://localhost:3000"
 
+    # Set when the API is on a sibling subdomain of the frontend (e.g.
+    # `api.nankara.com` + `www.nankara.com`) so session cookies are sent to both:
+    # COOKIE_DOMAIN=.nankara.com. Leave blank when the frontend proxies /api/v1/*
+    # (same-origin) — the local dev and default Vercel setups.
+    cookie_domain: str | None = None
+
     # Resend — transactional email (email verification, password reset). Optional;
     # when unset those flows still succeed and just don't send.
     resend_api_key: str | None = None
@@ -77,6 +83,12 @@ class Settings(BaseSettings):
     @property
     def email_configured(self) -> bool:
         return bool(self.resend_api_key)
+
+    @property
+    def email_sender_is_testing(self) -> bool:
+        """`RESEND_FROM` still points at Resend's shared testing address, which
+        only delivers to the Resend account owner (any other recipient 403s)."""
+        return "resend.dev" in self.resend_from.lower()
 
     def production_config_errors(self) -> list[str]:
         """Fatal misconfigurations to refuse to start on in production."""

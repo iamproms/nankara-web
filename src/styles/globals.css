@@ -80,7 +80,6 @@ body {
   background: var(--color-white);
   line-height: 1.7;
   overflow-x: hidden;
-  animation: cinematicFadeIn 1s var(--ease-breathy) forwards;
 }
 
 img, video {
@@ -373,6 +372,12 @@ input, textarea, select {
   }
   .container { padding: 0 var(--space-md); }
   .section-pad { padding: var(--space-2xl) 0; }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --nav-height: 64px;
+  }
 }
 
 @media (max-width: 480px) {

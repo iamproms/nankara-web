@@ -94,6 +94,10 @@ export function createCategory(body) {
   return adminFetch('/admin/categories', { method: 'POST', body });
 }
 
+export function deleteCategory(id) {
+  return adminFetch(`/admin/categories/${id}`, { method: 'DELETE' });
+}
+
 export function uploadMedia(file) {
   const fd = new FormData();
   fd.append('file', file);
@@ -128,4 +132,29 @@ export function updateAdminOrderStatus(id, status) {
     method: 'PATCH',
     body: { status },
   });
+}
+
+// ── Inbox (brand-page forms) ──────────────────────────────────────────────────
+
+export function getInboxMessages({ kind, handled } = {}) {
+  const params = new URLSearchParams();
+  if (kind) params.set('kind', kind);
+  if (handled !== undefined) params.set('handled', String(handled));
+  const qs = params.toString();
+  return adminFetch(`/admin/inbox${qs ? `?${qs}` : ''}`);
+}
+
+export function getInboxMessage(id) {
+  return adminFetch(`/admin/inbox/${id}`);
+}
+
+export function setInboxHandled(id, isHandled) {
+  return adminFetch(`/admin/inbox/${id}`, {
+    method: 'PATCH',
+    body: { is_handled: isHandled },
+  });
+}
+
+export function getNewsletterSubscribers() {
+  return adminFetch('/admin/newsletter');
 }

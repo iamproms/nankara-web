@@ -64,9 +64,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divider */}
-        <div className={styles.divider} />
-
         {/* Bottom */}
         <div className={styles.bottom}>
           <p className={styles.copy}>© {year} Nankara. All rights reserved.</p>
