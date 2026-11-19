@@ -2,133 +2,128 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
-import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
+import SilhouetteExplorer from '../../components/SilhouetteExplorer/SilhouetteExplorer';
 import styles from './nankara-silhouette.module.css';
 
 export const metadata = {
   title: 'Nankara Silhouette Guide | Nankara',
-  description: 'The Nankara Silhouette Guide helps you identify your natural body shape, so every fit and every recommendation works with your body, not against it.',
+  description:
+    'Understand your body proportions and discover the silhouettes that complement you, so you can choose every Nankara piece with confidence.',
 };
-
-const bodyTypes = [
-  { id: 'hourglass', title: 'Hourglass', image: '/images/silhouette-guide/hourglass.png' },
-  { id: 'inverted-triangle', title: 'Inverted Triangle', image: '/images/silhouette-guide/inverted-triangle.png' },
-  { id: 'rectangle', title: 'Rectangular', image: '/images/silhouette-guide/rectangle.png' },
-  { id: 'pear', title: 'Pear', image: '/images/silhouette-guide/pear.png' },
-  { id: 'apple', title: 'Apple', image: null },
-];
 
 export default function NankaraSilhouettePage() {
   return (
     <>
       <Navbar />
-      <main id="silhouette-main">
-
-        {/* Hero */}
+      <main id="silhouette-main" className={styles.page}>
         <section className={styles.hero} id="silhouette-hero">
-          <div className={styles.heroImage}>
-            <Image
-              src="/images/nankara-14.jpg"
-              alt="Nankara Silhouette signature collection"
-              fill
-              sizes="100vw"
-              style={{ objectFit: 'cover', objectPosition: 'center 15%', filter: 'var(--photo-tone)' }}
-              priority
-            />
-            <div className={styles.heroOverlay} />
-          </div>
-          <div className={styles.heroContent}>
-            <p className={styles.heroLabel}>Nankara Silhouette Guide</p>
-            <h1 className={styles.heroHeading}>
-              The shape<br />
-              <em>we were built on.</em>
-            </h1>
-          </div>
-        </section>
-
-        {/* Intro */}
-        <section className={styles.section} id="intro">
-          <ScrollReveal className={`${styles.inner} ${styles.innerNarrow} ${styles.textCenter}`}>
-            <p className={`section-label ${styles.labelCenter}`}>Body Types</p>
-            <h2 className={styles.sectionHeading}>
-              Know your shape.<br />
-              <em>Dress with intention.</em>
-            </h2>
-            <p className={`${styles.body} ${styles.bodyCenter}`}>
-              Every woman&apos;s body tells a different story. The Nankara Silhouette Guide helps you understand your natural shape, so every fit we create works with your body, not against it.
+          <Image
+            src="/images/nankara-14.jpg"
+            alt="A Nankara woman wearing a sculpted silhouette"
+            fill
+            sizes="100vw"
+            className={styles.heroImage}
+            priority
+          />
+          <div className={styles.heroScrim} />
+          <h1 className={styles.heroTitle}>Silhouette Guide</h1>
+          <div className={styles.heroIntroduction}>
+            <p>
+              Understand your proportions and choose outfits that feel comfortable,
+              flattering and authentically you.
             </p>
-          </ScrollReveal>
+            <a href="#find-your-shape" className={styles.heroAction}>
+              Find your shape
+            </a>
+          </div>
         </section>
 
-        {/* Body Types */}
-        <section className={styles.piecesSection} id="body-types">
-          <ScrollReveal className={styles.inner}>
-            <p className="section-label">Find Your Shape</p>
-            <h2 className={styles.sectionHeading}>
-              Five shapes.<br />
-              <em>One silhouette guide.</em>
-            </h2>
-            <div className={styles.typeGrid}>
-              {bodyTypes.map((t) => (
-                <div key={t.id} className={styles.typeCard} id={`silhouette-type-${t.id}`}>
-                  <div className={styles.typeImageWrap}>
-                    {t.image ? (
-                      <Image
-                        src={t.image}
-                        alt={`${t.title} body type silhouette`}
-                        fill
-                        sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                        className={styles.typeImage}
-                      />
-                    ) : (
-                      <span className={styles.typeImageEmpty}>Guide coming soon</span>
-                    )}
-                  </div>
-                  <h3 className={styles.typeTitle}>{t.title}</h3>
-                </div>
-              ))}
+        <section className={styles.intro} aria-labelledby="silhouette-meaning">
+          <div className={styles.introCopy}>
+            <h2 id="silhouette-meaning">What a silhouette means</h2>
+            <p className={styles.statement}>
+              A silhouette is the shape a garment creates around the body: its width,
+              length, structure and proportions.
+            </p>
+            <div className={styles.introBody}>
+              <p>
+                The way a dress looks on a model does not always tell you how it will
+                look on your body. Understanding your proportions helps you choose
+                pieces that flatter your figure before you shop them.
+              </p>
+              <p>
+                Your body may sit between two or more shapes, and every shape can wear
+                almost every silhouette with thoughtful styling. This guide is a tool,
+                never a restriction.
+              </p>
             </div>
-          </ScrollReveal>
-        </section>
-
-        {/* Fit Philosophy */}
-        <section className={styles.fitSection} id="fit-philosophy">
-          <div className={styles.fitImage}>
-            <Image
-              src="/images/nankara-09.jpg"
-              alt="Nankara Silhouette fit and structure"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              style={{ objectFit: 'cover', objectPosition: 'center top', filter: 'var(--photo-tone)' }}
-            />
           </div>
-          <div className={styles.fitContent}>
-            <p className="section-label">Fit Philosophy</p>
-            <h2 className={styles.sectionHeading}>
-              Built around the body.<br />
-              <em>Not the trend.</em>
-            </h2>
-            <p className={styles.body}>
-              Every Nankara piece is designed first around structure: where a seam sits, how a shoulder falls, the way fabric moves with you rather than around you. Knowing your silhouette is the first step toward a fit that feels made for you.
-            </p>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className={styles.section} id="silhouette-cta">
-          <div className={`${styles.inner} ${styles.innerNarrow} ${styles.textCenter}`}>
-            <p className={`section-label ${styles.labelCenter}`}>Shop the Line</p>
-            <h2 className={styles.sectionHeading}>
-              Find your<br />
-              <em>silhouette.</em>
-            </h2>
-            <div className={styles.ctas}>
-              <Link href="/shop" className="btn btn-dark" id="silhouette-shop-now">Shop the Collection</Link>
-              <Link href="/queens-circle" className="btn btn-orange" id="silhouette-queens-circle">Explore Queens Circle</Link>
+          <div className={styles.introPictures} aria-hidden="true">
+            <div className={styles.introPortrait}>
+              <Image src="/images/nankara-09.jpg" alt="" fill sizes="34vw" />
+            </div>
+            <div className={styles.introDetail}>
+              <Image src="/images/nankara-05.jpg" alt="" fill sizes="24vw" />
             </div>
           </div>
         </section>
 
+        <SilhouetteExplorer />
+
+        <section className={styles.rule} aria-labelledby="nankara-rule">
+          <div className={styles.ruleImage}>
+            <Image
+              src="/images/nankara-06.jpg"
+              alt="A Nankara garment shaped through careful construction"
+              fill
+              sizes="(max-width: 760px) 100vw, 42vw"
+            />
+          </div>
+          <div className={styles.ruleCopy}>
+            <h2 id="nankara-rule">The Nankara rule</h2>
+            <blockquote>
+              Your silhouette is a guide, not a restriction. The best fit honours your
+              body and your expression.
+            </blockquote>
+            <p>
+              Nankara uses construction, not excessive tightness, to create a beautiful
+              sense of shape.
+            </p>
+          </div>
+        </section>
+
+        <section className={styles.personalHelp} aria-labelledby="stylist-help">
+          <div>
+            <h2 id="stylist-help">Still deciding?</h2>
+            <p>
+              Get personalised guidance on what to choose from the collection and shop
+              with greater confidence.
+            </p>
+          </div>
+          <Link href="/contact" className={styles.helpLink}>
+            Ask a stylist
+          </Link>
+        </section>
+
+        <section className={styles.queenCircle} aria-labelledby="queen-circle-heading">
+          <div className={styles.queenImage}>
+            <Image
+              src="/images/nankara-15.jpg"
+              alt="The private Queens Circle experience"
+              fill
+              sizes="(max-width: 760px) 100vw, 50vw"
+            />
+          </div>
+          <div className={styles.queenCopy}>
+            <h2 id="queen-circle-heading">Created around you</h2>
+            <p>
+              The pieces you see on Nankara are created for women like you. Queens Circle
+              is a more personal experience where your style, lifestyle and the woman you
+              are becoming are understood more deeply.
+            </p>
+            <Link href="/queens-circle">Discover Queens Circle</Link>
+          </div>
+        </section>
       </main>
       <Footer />
     </>

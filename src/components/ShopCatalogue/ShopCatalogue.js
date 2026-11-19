@@ -11,14 +11,6 @@ import styles from './ShopCatalogue.module.css';
 export default function ShopCatalogue({ products, categories }) {
   const [activeCategory, setActiveCategory] = useState('all');
 
-  // Only show tabs for categories that actually have a product behind them.
-  const usedCategories = useMemo(() => {
-    const slugs = new Set(
-      products.map((p) => p.category?.slug).filter(Boolean)
-    );
-    return (categories || []).filter((c) => slugs.has(c.slug));
-  }, [products, categories]);
-
   const visible = useMemo(() => {
     if (activeCategory === 'all') return products;
     return products.filter((p) => p.category?.slug === activeCategory);
@@ -35,7 +27,7 @@ export default function ShopCatalogue({ products, categories }) {
   return (
     <div className={styles.catalogue}>
       <CategoryTabs
-        categories={usedCategories}
+        categories={categories || []}
         active={activeCategory}
         onChange={setActiveCategory}
       />

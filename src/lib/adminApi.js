@@ -94,6 +94,10 @@ export function createCategory(body) {
   return adminFetch('/admin/categories', { method: 'POST', body });
 }
 
+export function deleteCategory(id) {
+  return adminFetch(`/admin/categories/${id}`, { method: 'DELETE' });
+}
+
 export function uploadMedia(file) {
   const fd = new FormData();
   fd.append('file', file);

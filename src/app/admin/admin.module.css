@@ -81,6 +81,26 @@
   cursor: default;
 }
 
+.dangerBtn {
+  padding: 0.35rem 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  border: 1px solid #b83022;
+  background: transparent;
+  color: #9f291d;
+  cursor: pointer;
+}
+
+.dangerBtn:hover {
+  background: #9f291d;
+  color: var(--color-white);
+}
+
+.dangerBtn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
 .error {
   color: #c0392b;
   font-size: 0.8rem;

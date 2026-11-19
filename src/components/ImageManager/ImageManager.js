@@ -25,36 +25,48 @@ export default function ImageManager({ value, onChange, slug }) {
 
   const update = (next) => onChange(next);
 
-  const handleFile = async (e) => {
-    const file = e.target.files?.[0];
+  const handleFiles = async (e) => {
+    const files = Array.from(e.target.files || []);
     e.target.value = ''; // allow re-selecting the same file
-    if (!file) return;
+    if (files.length === 0) return;
     setUploading(true);
     setUploadError('');
-    try {
-      const { url, public_id } = await uploadMedia(file);
-      update(
-        addImage(list, {
+    const results = await Promise.allSettled(files.map((file) => uploadMedia(file)));
+    const successful = results
+      .filter((result) => result.status === 'fulfilled')
+      .map((result) => result.value);
+    const failed = results
+      .filter((result) => result.status === 'rejected')
+      .map((result) => result.reason);
+
+    if (successful.length > 0) {
+      let next = list;
+      successful.forEach(({ url, public_id }) => {
+        next = addImage(next, {
           tmpId: nextTmpId(),
           url,
           public_id,
           alt_text: '',
-          is_primary: list.length === 0,
-        })
-      );
-    } catch (err) {
-      if (err?.status === 503) {
-        setUploadBlocked(true);
-      } else if (err?.status === 415) {
-        setUploadError('That image type isn’t supported (use JPEG, PNG, WebP or AVIF).');
-      } else if (err?.status === 413) {
-        setUploadError('That image is over the 10 MB limit.');
-      } else {
-        setUploadError('Upload failed. Please try again.');
-      }
-    } finally {
-      setUploading(false);
+          is_primary: next.length === 0,
+        });
+      });
+      update(next);
     }
+
+    if (failed.length > 0) {
+      if (failed.some((err) => err?.status === 503)) {
+        setUploadBlocked(true);
+      } else if (failed.some((err) => err?.status === 415)) {
+        setUploadError('One or more image types aren’t supported (use JPEG, PNG, WebP or AVIF).');
+      } else if (failed.some((err) => err?.status === 413)) {
+        setUploadError('One or more images are over the 10 MB limit.');
+      } else {
+        setUploadError(
+          `${failed.length} ${failed.length === 1 ? 'image' : 'images'} failed to upload. Please try again.`
+        );
+      }
+    }
+    setUploading(false);
   };
 
   const addUrl = () => {
@@ -90,11 +102,12 @@ export default function ImageManager({ value, onChange, slug }) {
       <div className={styles.addRow}>
         {!uploadBlocked && (
           <label className={styles.uploadBtn}>
-            {uploading ? 'Uploading…' : 'Upload image'}
+            {uploading ? 'Uploading…' : 'Upload images'}
             <input
               type="file"
               accept="image/jpeg,image/png,image/webp,image/avif"
-              onChange={handleFile}
+              multiple
+              onChange={handleFiles}
               disabled={uploading}
               hidden
             />

@@ -80,7 +80,6 @@ body {
   background: var(--color-white);
   line-height: 1.7;
   overflow-x: hidden;
-  animation: cinematicFadeIn 1s var(--ease-breathy) forwards;
 }
 
 img, video {
